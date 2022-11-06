@@ -4,15 +4,15 @@ import Link from 'next/link';
 export default function Nav() {
   return (
     <Navigation>
-      <NavItem>
-        <Link href="#none">개발 질문하기</Link>
-      </NavItem>
-      <NavItem>
-        <Link href="#none">태그</Link>
-      </NavItem>
-      <NavItem>
-        <Link href="#none">유저</Link>
-      </NavItem>
+      <Link href="#none">
+        <NavItem>개발 질문하기</NavItem>
+      </Link>
+      <Link href="#none">
+        <NavItem>태그별</NavItem>
+      </Link>
+      <Link href="#none">
+        <NavItem>유저 찾기</NavItem>
+      </Link>
     </Navigation>
   );
 }
