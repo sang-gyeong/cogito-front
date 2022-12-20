@@ -6,19 +6,22 @@ import {GetServerSideProps} from 'next';
 import {getBoards} from '../src/api';
 import {QUERY_KEY} from '../src/queries/useBoardsQuery';
 
-export default function HomePage() {
-  return <></>;
+export default function QuestionsPage() {
+  return <HomeTemplate />;
 }
 
-HomePage.getLayout = function getLayout(page: ReactElement) {
+QuestionsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery([QUERY_KEY], getBoards);
+
   return {
-    redirect: {
-      destination: '/questions',
-      permanent: false,
+    props: {
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

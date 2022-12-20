@@ -37,3 +37,7 @@ export const getBoards = (): Promise<Board[]> => request.get<Board[]>(`/boards`)
 
 export const getBoardById = (id: number): Promise<Board> =>
   request.get<Board>(`/board/${id}`).then(response => response.data);
+
+export const getTags = (): Promise<Tag[]> => request.get<Tag[]>(`/tags`).then(response => response.data);
+
+export const getUsers = (): Promise<User[]> => request.get<User[]>(`/users`).then(response => response.data);

@@ -1,17 +1,20 @@
 import * as S from './style';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 export default function Nav() {
+  const router = useRouter();
+  console.log(router);
   return (
     <S.NavWrapper>
-      <Link href="/">
-        <S.NavItem>Questions</S.NavItem>
+      <Link href="/questions">
+        <S.NavItem isActive={router.pathname.indexOf('/questions') !== -1}>Questions</S.NavItem>
       </Link>
-      <Link href="/board/10">
-        <S.NavItem>Tags</S.NavItem>
+      <Link href="/tags">
+        <S.NavItem isActive={router.pathname.indexOf('/tags') !== -1}>Tags</S.NavItem>
       </Link>
-      <Link href="/board/3">
-        <S.NavItem>Users</S.NavItem>
+      <Link href="/users">
+        <S.NavItem isActive={router.pathname.indexOf('/users') !== -1}>Users</S.NavItem>
       </Link>
     </S.NavWrapper>
   );

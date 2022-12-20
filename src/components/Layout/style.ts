@@ -2,19 +2,21 @@ import styled from 'styled-components';
 import {media} from '../../utils/mediaQuery';
 
 export const NavWrapper = styled.nav`
-  width: 400px;
-  height: 100%;
+  background-color: #f2f2f2;
+  /* width: 20%; */
+  min-width: 140px;
   border-right: 1px solid lightgray;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  overflow-y: scroll;
   padding: 72px 24px;
   text-align: right;
 `;
 
-export const NavItem = styled.a`
+export const NavItem = styled.a<{isActive?: boolean}>`
   font-size: 1.4rem;
+  color: ${props => (props.isActive ? '#0d6efd' : 'black')};
+  font-weight: ${props => (props.isActive ? 'bold' : 'normal')};
 `;
 
 export const Header = styled.header`
@@ -43,24 +45,24 @@ export const InputSearch = styled.input`
 
 export const Footer = styled.footer`
   width: 100%;
-  height: 400px;
-  background-color: #f2f2f2;
 
   ${media.tablet} {
-    background-color: red;
   }
 
   ${media.mobile} {
-    background-color: blue;
   }
 `;
 
 export const Main = styled.main`
   display: flex;
-  border: 3px solid green;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
+  min-height: calc(100vh - 60px);
 `;
 
 export const MainWrapper = styled.div`
-  height: 1500px;
-  border: 3px solid blue;
+  display: flex;
+  max-width: 800px;
+  width: 100%;
 `;

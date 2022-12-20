@@ -8,6 +8,9 @@ ${reset}
   :root {
     font-size: 62.5%;
   }
+  html, body {
+    width: 100%;
+  }
   body {
     overscroll-behavior: none;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -20,8 +23,8 @@ ${reset}
   body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, textarea, p, th, td, input, select, span, button {
     box-sizing: border-box;
     font-family: "SF Pro Display";
-    line-height: 120%;
-    font-size: 1.4rem;
+    line-height: 130%;
+    font-size: 1.45rem;
   }
   a {
     color: inherit;
@@ -36,6 +39,9 @@ ${reset}
     outline: none;
     padding: 0;
     margin: 0;
+  }
+  button {
+    cursor: pointer;
   }
   button:disabled,
   button[disabled]{
