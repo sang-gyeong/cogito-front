@@ -7,7 +7,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useState} from 'react';
 import Nav from './Nav';
 import {useSetRecoilState} from 'recoil';
-import {modalShowState, modalState} from '../../atoms';
+import {modalShowState, modalState} from '../../atoms/modal';
 import Image from 'next/image';
 import logoImage from 'public/logo.png';
 import LoginModal from '../Modal/loginModal';

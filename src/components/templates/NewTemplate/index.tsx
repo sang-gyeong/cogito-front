@@ -4,7 +4,7 @@ import {Button, Card, Placeholder} from 'react-bootstrap';
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton';
 import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
-import {modalShowState, modalState} from '../../../atoms';
+import {modalShowState, modalState} from '../../../atoms/modal';
 import GuideModal from '../../Modal/guideModal';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {

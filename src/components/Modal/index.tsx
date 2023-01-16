@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Modal as BSModal, Button} from 'react-bootstrap';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {modalShowState, modalState} from '../../atoms';
+import {modalShowState, modalState} from '../../atoms/modal';
 
 export default function Modal() {
   const [showModal, setShowModal] = useRecoilState(modalShowState);

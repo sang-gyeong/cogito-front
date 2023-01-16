@@ -4,7 +4,6 @@ import {useRouter} from 'next/router';
 
 export default function Nav() {
   const router = useRouter();
-  console.log(router);
   return (
     <S.NavWrapper>
       <Link href="/questions">

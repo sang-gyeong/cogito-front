@@ -1,25 +1,23 @@
-import Badge from 'react-bootstrap/Badge';
-
-import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 import {dateFormatter} from '../../utils/date';
 import {getScoreImage} from '../../utils/score';
 
-export default function CommentItem({comment}: {comment: Board.Comment}) {
+export default function CommentItem({comment}: {comment: Comment}) {
   return (
     <Wrapper>
       <LikesWrapper>
         <Button>up</Button>
-        <Likes>{comment.likes}</Likes>
+        <Likes>{comment.score}</Likes>
         <Button>down</Button>
       </LikesWrapper>
 
       <CommentWrapper>{comment.content}</CommentWrapper>
 
       <ProfileWrapper>
-        <Image alt="profileImg" src={comment.author.profileImgUrl}></Image>
+        <Image alt="profileImg" src={comment.profileImgUrl}></Image>
         <span>
-          {getScoreImage(comment.author.score)} {comment.author.nickname}
+          {/* {getScoreImage(comment.score)} {comment.author.nickname} */}
+          {comment.nickname}
         </span>
         <Date>{dateFormatter(comment.createdAt)}</Date>
       </ProfileWrapper>

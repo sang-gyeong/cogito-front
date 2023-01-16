@@ -1,29 +1,29 @@
-import * as S from './style';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Badge from 'react-bootstrap/Badge';
-import {dateFormatter} from '../../utils/date';
 import {getScoreImage} from '../../utils/score';
 
-export default function BoardItem({board}: {board: Board}) {
+export default function PostListItem({post}: {post: Post.ListItem}) {
   return (
     <Wrapper>
-      <Link href={`/questions/${board.id}`} passHref>
-        <Title>{board.title}</Title>
+      {/* postId값으로 교체 */}
+      <Link href={`/questions/${1}`} passHref>
+        <Title>{post.title}</Title>
       </Link>
-      <Content>{board.content}</Content>
+      <Content>{post.content}</Content>
       <BadgeWrapper>
-        {board.tags.map(tag => (
-          <Badge key={tag.id} bg="secondary">
-            {tag.name}
+        {/* tagId값으로 교체 */}
+        {post.tags.map((tag, idx) => (
+          <Badge key={idx} bg="secondary">
+            {tag}
           </Badge>
         ))}
 
         <Date>
           <span>
-            {getScoreImage(board.author.score)} {board.author.nickname}
+            {getScoreImage(post.score)} {post.nickname}
           </span>{' '}
-          {dateFormatter(board.createdAt)}
+          {post.createdAt}
         </Date>
       </BadgeWrapper>
     </Wrapper>

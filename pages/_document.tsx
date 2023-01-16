@@ -1,17 +1,26 @@
 import Document, {Html, Head, Main, NextScript, DocumentContext} from 'next/document';
 import {ServerStyleSheet} from 'styled-components';
+import axios from 'axios';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  static async getInitialProps(context: DocumentContext) {
     const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
+    const cookie = context.req ? context.req.headers.cookie : '';
+
+    axios.defaults.headers.cookie = '';
+
+    if (context.req && cookie) {
+      axios.defaults.headers.cookie = cookie;
+    }
+
+    const originalRenderPage = context.renderPage;
     try {
-      ctx.renderPage = () =>
+      context.renderPage = () =>
         originalRenderPage({
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
 
-      const initialProps = await Document.getInitialProps(ctx);
+      const initialProps = await Document.getInitialProps(context);
       return {
         ...initialProps,
         styles: (

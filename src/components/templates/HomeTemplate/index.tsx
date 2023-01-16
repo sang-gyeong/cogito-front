@@ -1,14 +1,12 @@
-import useBoardsQuery from '../../../queries/useBoardsQuery';
-import BoardItem from '../../BoardItem';
+import usePostsQuery from '../../../queries/usePostsQuery';
+import PostListItem from '../../PostListItem';
 import styled from 'styled-components';
 import {Button, ButtonGroup, Pagination, ToggleButton} from 'react-bootstrap';
-import SideBar from '../../Layout/SideBar';
 import TitleSection from '../../TitleSection';
 import {useState} from 'react';
-import {redirect} from 'next/dist/server/api-utils';
 
 export default function HomeTemplate() {
-  const {data: boards, isLoading} = useBoardsQuery();
+  const {data, isLoading} = usePostsQuery({});
   const [radioValue, setRadioValue] = useState('1');
 
   const radios = [
@@ -17,9 +15,11 @@ export default function HomeTemplate() {
     {name: 'Radio', value: '3'},
   ];
 
-  if (isLoading || !boards) {
+  if (isLoading || !data) {
     return <>Loading...</>;
   }
+
+  const {posts} = data;
 
   return (
     <Wrapper>
@@ -51,11 +51,8 @@ export default function HomeTemplate() {
         </ButtonGroup>
       </div>
       <div>
-        <BoardListWrapper>
-          {boards.map(board => (
-            <BoardItem key={board.id} board={board} />
-          ))}
-        </BoardListWrapper>
+        {/* @TODO: key는 유니크한 id값으로 대체 */}
+        <BoardListWrapper>{posts && posts.map((post, idx) => <PostListItem key={idx} post={post} />)}</BoardListWrapper>
 
         <Pagination>
           <Pagination.First />

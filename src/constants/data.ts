@@ -126,7 +126,7 @@ export const MOCK_UP_BOARDS: Board[] = [
     createdAt: '20220102231050',
     title: 'ABCD',
     content:
-      'Creating a facade for the Storage object is an awesome solution. That way, you can implement your own get and set methods. For my API, I have created a facade for localStorage and then check if it is an object or not while setting and getting.',
+      'Creating a facade for the Storage object is an awesome solution. That way, you can implement your own get and set methods. For my API, I have created a facade for  and then check if it is an object or not while setting and getting.',
     likes: 12,
     comments: MOCK_UP_COMMENTS,
     tags: [

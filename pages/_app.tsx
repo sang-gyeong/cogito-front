@@ -2,14 +2,17 @@ import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/style.css';
-import {ReactElement, ReactNode, useState} from 'react';
+
+import {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
 import Head from 'next/head';
 import {Hydrate, DehydratedState, QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import ThemedGlobalStyle from '../src/theme/ThemedGlobalStyle';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {RecoilRoot, atom, selector, useRecoilState, useRecoilValue} from 'recoil';
+import {RecoilRoot} from 'recoil';
 import Modal from '../src/components/Modal';
+import {useRouter} from 'next/router';
+import {getSessionStorageItem, setSessionStorageItem} from '../src/utils/storage';
 
 type NextPageWithLayout = AppProps & {
   getLayout: (page: ReactElement) => ReactNode;
@@ -25,14 +28,30 @@ type AppPropsWithLayout = AppProps & {
 };
 
 function MyApp({Component, pageProps}: AppPropsWithLayout) {
+  const router = useRouter();
+
+  useEffect(
+    () => () => {
+      const prevPath = getSessionStorageItem('currentPath') ?? router.pathname;
+
+      setSessionStorageItem('prevPath', prevPath);
+      setSessionStorageItem('currentPath', globalThis.location.pathname);
+    },
+    [router.asPath]
+  );
+
+  // queryClient는 lifeCycle 주기당 인스턴스가 1번만 생성되도록 App 외부, state, 혹은 ref 등으로 저장한다.
   const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: {
           queries: {
-            onError: error => console.log(error),
+            onError: error => console.log('queryClient error : ', error),
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
+            // SSR 이후 useQuery()로 refetch가 일어나는 것을 비활성화고자 한다면, refetchOnMount를 false로 설정하거나 staleTime을 Infinity로 주는 등 방법이 있다.
+            refetchOnMount: false,
+            retry: false,
           },
         },
       })

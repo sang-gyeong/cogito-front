@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic';
 import {Badge, Button} from 'react-bootstrap';
 import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
-import {modalShowState, modalState} from '../../../atoms';
-import useBoardQuery from '../../../queries/useBoardQuery';
+import {modalShowState, modalState} from '../../../atoms/modal';
+import useBoardQuery from '../../../queries/usePostQuery';
 import {dateFormatter} from '../../../utils/date';
 import {getScoreImage} from '../../../utils/score';
 import CommentItem from '../../CommentItem';
@@ -15,8 +15,6 @@ export default function BoardTemplate({id}: {id: number}) {
 
   const setShowModal = useSetRecoilState(modalShowState);
   const setModalState = useSetRecoilState(modalState);
-
-  console.log(data);
 
   const handleModal = () => {
     setModalState({
@@ -33,7 +31,19 @@ export default function BoardTemplate({id}: {id: number}) {
     return <>Loading</>;
   }
 
-  const {title, content, tags, comments, author} = data;
+  // const _data = {
+  //   title: '안녕',
+  //   content: '안녕',
+  //   tags: ['태그1'],
+  //   files: [],
+  //   score: 3,
+  //   commentResponses: [],
+  //   profileImgUrl: '',
+  //   nickname: '삐릿뽀',
+  //   createdAt: '2022-01-31',
+  // };
+
+  const {title, content, tags, files, score, createdAt, commentResponses, profileImgUrl, nickname} = data;
 
   return (
     <Wrapper>
@@ -42,7 +52,7 @@ export default function BoardTemplate({id}: {id: number}) {
       </Button>
 
       <Title>{title}</Title>
-      <Date>{dateFormatter(data.createdAt)}</Date>
+      <Date>{createdAt}</Date>
       <SCButton onClick={handleModal}>신고하기</SCButton>
 
       <ContentWrapper>
@@ -50,20 +60,23 @@ export default function BoardTemplate({id}: {id: number}) {
       </ContentWrapper>
 
       <TagWrapper>
-        {tags.map(tag => (
-          <Badge bg="secondary" key={tag.id}>
-            {tag.name}
+        {tags.map((tag, idx) => (
+          // @TODO: tagId
+          <Badge bg="secondary" key={idx}>
+            {tag}
           </Badge>
         ))}
       </TagWrapper>
 
       <AuthorWrapper>
-        <Image alt="profileImg" src={author.profileImgUrl}></Image>
-        {getScoreImage(author.score)} {author.nickname}
+        <Image alt="profileImg" src={profileImgUrl}></Image>
+        {/* @TODO: 유저 스코어에 따른 ui제어 */}
+        {/* {getScoreImage(author.score)} {nickname} */}
+        {nickname}
       </AuthorWrapper>
       <CommentListWrapper>
-        {comments.map(comment => (
-          <CommentItem key={comment.id} comment={comment} />
+        {commentResponses.map((comment, idx) => (
+          <CommentItem key={idx} comment={comment} />
         ))}
       </CommentListWrapper>
     </Wrapper>
