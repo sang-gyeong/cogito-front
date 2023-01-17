@@ -8,12 +8,12 @@
   "/api/users": "pages/api/users.js",
   "/new": "pages/new.html",
   "/test": "pages/test.html",
-  "/": "pages/index.js",
   "/questions": "pages/questions.js",
-  "/tags": "pages/tags.js",
   "/questions/[id]": "pages/questions/[id].js",
+  "/tags": "pages/tags.js",
   "/users": "pages/users.js",
-  "/login": "pages/login.js",
   "/auth": "pages/auth.js",
+  "/": "pages/index.js",
+  "/login": "pages/login.js",
   "/404": "pages/404.html"
 }
