@@ -49,6 +49,11 @@ class MyDocument extends Document {
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
             crossOrigin="anonymous"
           />
+          <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=optional"
+            rel="stylesheet"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />

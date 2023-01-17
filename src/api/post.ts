@@ -7,8 +7,11 @@ interface Body {
   tags: string[];
 }
 
-export const getPosts = (query?: string, page?: number, size?: number): Promise<Post.ListItemResponse> => {
-  return request.get<Post.ListItemResponse>(`/posts`, {params: {query, page, size}}).then(response => response?.data);
+export const getPosts = ({query, page}: {query: string; page: number}): Promise<Post.ListItemResponse> => {
+  return request.get<Post.ListItemResponse>(`/posts`, {params: {query, page}}).then(response => {
+    console.log(response?.data);
+    return response?.data;
+  });
 };
 
 export const getPostById = (id: number): Promise<Post.Item> =>

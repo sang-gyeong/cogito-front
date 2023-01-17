@@ -5,7 +5,7 @@ import {Nav as RBNav, NavDropdown} from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useState} from 'react';
-import Nav from './Nav';
+import Nav from './TopBar';
 import {useSetRecoilState} from 'recoil';
 import {modalShowState, modalState} from '../../atoms/modal';
 import Image from 'next/image';

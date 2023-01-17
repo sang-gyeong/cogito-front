@@ -21,14 +21,13 @@ QuestionsPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
-  const query = (params?.query ?? '') as string;
-  const page = params?.page ? Number(params?.page) : 0;
-  const size = params?.size ? Number(params?.page) : 15;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const query = (context.query?.query ?? '') as string;
+  const page = context.query?.page ? Number(context.query?.page) : 0;
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery([QUERY_KEY, query, page, size], () => getPosts(query, page, size));
+  await queryClient.prefetchQuery([QUERY_KEY, query, page], () => getPosts({query, page}));
 
   return {
     props: {

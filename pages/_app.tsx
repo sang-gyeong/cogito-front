@@ -2,6 +2,8 @@ import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/style.css';
+import '../styles/sb-admin-2.min.css';
+// import '../vendor/fontawesome-free/css/all.min.css';
 
 import {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
@@ -67,7 +69,7 @@ function MyApp({Component, pageProps}: AppPropsWithLayout) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <ThemedGlobalStyle />
+          {/* <ThemedGlobalStyle /> */}
           <RecoilRoot>
             {getLayout(<Component {...pageProps} />)}
             <Modal />
