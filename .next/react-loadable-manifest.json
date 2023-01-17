@@ -1,0 +1,35 @@
+{
+  "../node_modules/next/dist/client/index.js -> ../pages/_app": {
+    "id": 16176,
+    "files": [
+      "static/chunks/176.9de76bac83295300.js"
+    ]
+  },
+  "../node_modules/next/dist/client/index.js -> ../pages/_error": {
+    "id": 55496,
+    "files": [
+      "static/chunks/496.c36621b9a426c23b.js"
+    ]
+  },
+  "../src/components/templates/BoardTemplate/index.tsx -> @uiw/react-markdown-preview": {
+    "id": 82621,
+    "files": [
+      "static/chunks/522.685af4a6701776d3.js",
+      "static/chunks/621.23c62d0ef179a2c3.js"
+    ]
+  },
+  "../src/components/templates/NewTemplate/index.tsx -> @uiw/react-markdown-preview": {
+    "id": 82621,
+    "files": [
+      "static/chunks/522.685af4a6701776d3.js",
+      "static/chunks/621.23c62d0ef179a2c3.js"
+    ]
+  },
+  "../src/components/templates/NewTemplate/index.tsx -> @uiw/react-md-editor": {
+    "id": 57044,
+    "files": [
+      "static/chunks/522.685af4a6701776d3.js",
+      "static/chunks/44.abd30af85c59167b.js"
+    ]
+  }
+}
