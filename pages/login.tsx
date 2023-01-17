@@ -4,22 +4,33 @@ import styled from 'styled-components';
 import {useRouter, withRouter} from 'next/router';
 import {GetServerSideProps} from 'next';
 
+const KAKAO_LOGIN_URL = 'https://kauth.kakao.com/oauth/authorize';
+const GITHUB_LOGIN_URL = 'https://github.com/login/oauth/authorize';
+const REDIRECT_URI = `${process.env.NEXT_PUBLIC_API_URL}/auth`;
+
 export default function LoginPage() {
-  const clickHandler = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=fdd05f39c2f7d125cbc44a59911390b7&redirect_uri=http://localhost:3000/auth&response_type=code`;
+  const clickKakaoLogin = () => {
+    window.location.href =
+      KAKAO_LOGIN_URL +
+      `?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  };
+
+  const clickGithubLogin = () => {
+    window.location.href =
+      GITHUB_LOGIN_URL + `?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
   };
 
   return (
     <Wrapper>
-      <Button style={{backgroundColor: 'gold'}} onClick={clickHandler}>
+      <Button style={{backgroundColor: 'gold'}} onClick={clickKakaoLogin}>
         카카오로 로그인하기
       </Button>
-      <Button style={{backgroundColor: '#2DB400', color: 'white'}}>네이버로 로그인하기</Button>
-      <Button style={{backgroundColor: 'black', color: 'white'}}>Github로 로그인하기</Button>
+      <Button style={{backgroundColor: 'black', color: 'white'}} onClick={clickGithubLogin}>
+        Github로 로그인하기
+      </Button>
     </Wrapper>
   );
 }
-
 LoginPage.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
