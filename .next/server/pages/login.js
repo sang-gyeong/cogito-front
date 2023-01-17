@@ -25,9 +25,16 @@ _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependenc
 
 
 
+const KAKAO_LOGIN_URL = 'https://kauth.kakao.com/oauth/authorize';
+const GITHUB_LOGIN_URL = 'https://github.com/login/oauth/authorize';
+const REDIRECT_URI = `${"https://dev.cogito.shop"}/auth`;
 function LoginPage() {
-  const clickHandler = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=fdd05f39c2f7d125cbc44a59911390b7&redirect_uri=http://localhost:3000/auth&response_type=code`;
+  const clickKakaoLogin = () => {
+    window.location.href = KAKAO_LOGIN_URL + `?client_id=${"fdd05f39c2f7d125cbc44a59911390b7"}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  };
+
+  const clickGithubLogin = () => {
+    window.location.href = GITHUB_LOGIN_URL + `?client_id=${"69c08158b74f219d8041"}&redirect_uri=${REDIRECT_URI}`;
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(Wrapper, {
@@ -35,19 +42,14 @@ function LoginPage() {
       style: {
         backgroundColor: 'gold'
       },
-      onClick: clickHandler,
+      onClick: clickKakaoLogin,
       children: "\uCE74\uCE74\uC624\uB85C \uB85C\uADF8\uC778\uD558\uAE30"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx(Button, {
-      style: {
-        backgroundColor: '#2DB400',
-        color: 'white'
-      },
-      children: "\uB124\uC774\uBC84\uB85C \uB85C\uADF8\uC778\uD558\uAE30"
     }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx(Button, {
       style: {
         backgroundColor: 'black',
         color: 'white'
       },
+      onClick: clickGithubLogin,
       children: "Github\uB85C \uB85C\uADF8\uC778\uD558\uAE30"
     })]
   });
