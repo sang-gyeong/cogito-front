@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
 /* harmony export */ });
 /* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3991);
-/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6095);
+/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6866);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9752);
 /* harmony import */ var _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5500);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
@@ -192,7 +192,7 @@ const PostListItem_Date = external_styled_components_default().p.withConfig({
 
 /***/ }),
 
-/***/ 6095:
+/***/ 6866:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
