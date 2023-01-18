@@ -16,15 +16,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3991);
+/* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1833);
 /* harmony import */ var _src_components_templates_BoardTemplate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(394);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9752);
 /* harmony import */ var _src_api_post__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9513);
 /* harmony import */ var _src_queries_usePostQuery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2380);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_src_components_Layout__WEBPACK_IMPORTED_MODULE_1__, _src_components_templates_BoardTemplate__WEBPACK_IMPORTED_MODULE_2__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_4__, _src_queries_usePostQuery__WEBPACK_IMPORTED_MODULE_5__]);
-([_src_components_Layout__WEBPACK_IMPORTED_MODULE_1__, _src_components_templates_BoardTemplate__WEBPACK_IMPORTED_MODULE_2__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_4__, _src_queries_usePostQuery__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_src_components_templates_BoardTemplate__WEBPACK_IMPORTED_MODULE_2__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_4__, _src_queries_usePostQuery__WEBPACK_IMPORTED_MODULE_5__]);
+([_src_components_templates_BoardTemplate__WEBPACK_IMPORTED_MODULE_2__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_4__, _src_queries_usePostQuery__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -81,20 +81,19 @@ const getPosts = ({
   query,
   page
 }) => {
-  return _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].get */ .ZP.get(`/posts`, {
+  return _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts`, {
     params: {
       query,
       page
     }
   }).then(response => {
-    console.log(response?.data);
     return response?.data;
   });
 };
-const getPostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].get */ .ZP.get(`/posts/${id}`).then(response => response?.data);
-const createPost = body => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].post */ .ZP.post('/posts', body).then(response => response?.data);
-const modifyPost = (id, body) => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].patch */ .ZP.patch(`/posts/${id}`, body);
-const deletePostById = id => request.delete(`/posts/${id}`);
+const getPostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts/${id}`).then(response => response?.data);
+const createPost = body => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/posts', body).then(response => response?.data);
+const modifyPost = (id, body) => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.patch */ .D2.patch(`/posts/${id}`, body);
+const deletePostById = id => axiosInstanceForCSR.delete(`/posts/${id}`);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -682,7 +681,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676,664,152,33,991], () => (__webpack_exec__(8942)));
+var __webpack_exports__ = __webpack_require__.X(0, [676,664,152,833,786], () => (__webpack_exec__(8942)));
 module.exports = __webpack_exports__;
 
 })();

@@ -14,8 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ QuestionsPage),
 /* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
 /* harmony export */ });
-/* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3991);
-/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6095);
+/* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1833);
+/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6866);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9752);
 /* harmony import */ var _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5500);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
@@ -23,8 +23,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_api_post__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9513);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_src_components_Layout__WEBPACK_IMPORTED_MODULE_0__, _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__, _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_5__]);
-([_src_components_Layout__WEBPACK_IMPORTED_MODULE_0__, _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__, _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__, _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_5__]);
+([_src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__, _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__, _src_api_post__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -87,20 +87,19 @@ const getPosts = ({
   query,
   page
 }) => {
-  return _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].get */ .ZP.get(`/posts`, {
+  return _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts`, {
     params: {
       query,
       page
     }
   }).then(response => {
-    console.log(response?.data);
     return response?.data;
   });
 };
-const getPostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].get */ .ZP.get(`/posts/${id}`).then(response => response?.data);
-const createPost = body => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].post */ .ZP.post('/posts', body).then(response => response?.data);
-const modifyPost = (id, body) => _index__WEBPACK_IMPORTED_MODULE_0__/* ["default"].patch */ .ZP.patch(`/posts/${id}`, body);
-const deletePostById = id => request.delete(`/posts/${id}`);
+const getPostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts/${id}`).then(response => response?.data);
+const createPost = body => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/posts', body).then(response => response?.data);
+const modifyPost = (id, body) => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.patch */ .D2.patch(`/posts/${id}`, body);
+const deletePostById = id => axiosInstanceForCSR.delete(`/posts/${id}`);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -150,7 +149,7 @@ function PostListItem({
 }) {
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)(Wrapper, {
     children: [/*#__PURE__*/jsx_runtime_.jsx((link_default()), {
-      href: `/questions/${1}`,
+      href: `/questions/${post.postId}`,
       passHref: true,
       children: /*#__PURE__*/jsx_runtime_.jsx(Title, {
         children: post.title
@@ -192,7 +191,7 @@ const PostListItem_Date = external_styled_components_default().p.withConfig({
 
 /***/ }),
 
-/***/ 6095:
+/***/ 6866:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -645,7 +644,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676,664,33,991,778], () => (__webpack_exec__(9721)));
+var __webpack_exports__ = __webpack_require__.X(0, [676,664,833,786,778], () => (__webpack_exec__(9721)));
 module.exports = __webpack_exports__;
 
 })();
