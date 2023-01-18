@@ -27,14 +27,15 @@ _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependenc
 
 const KAKAO_LOGIN_URL = 'https://kauth.kakao.com/oauth/authorize';
 const GITHUB_LOGIN_URL = 'https://github.com/login/oauth/authorize';
-const REDIRECT_URI = `${"https://dev.cogito.shop"}/auth`;
+const KAKAO_REDIRECT_URI = `${"https://dev.cogito.shop"}/auth/kakao`;
+const GITHUB_REDIRECT_URI = `${"https://dev.cogito.shop"}/auth/github`;
 function LoginPage() {
   const clickKakaoLogin = () => {
-    window.location.href = KAKAO_LOGIN_URL + `?client_id=${"fdd05f39c2f7d125cbc44a59911390b7"}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = KAKAO_LOGIN_URL + `?client_id=${"fdd05f39c2f7d125cbc44a59911390b7"}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   };
 
   const clickGithubLogin = () => {
-    window.location.href = GITHUB_LOGIN_URL + `?client_id=${"69c08158b74f219d8041"}&redirect_uri=${REDIRECT_URI}`;
+    window.location.href = GITHUB_LOGIN_URL + `?client_id=${"69c08158b74f219d8041"}&redirect_uri=${GITHUB_REDIRECT_URI}`;
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(Wrapper, {
