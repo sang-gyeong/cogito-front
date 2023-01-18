@@ -7,7 +7,7 @@ export default function PostListItem({post}: {post: Post.ListItem}) {
   return (
     <Wrapper>
       {/* postId값으로 교체 */}
-      <Link href={`/questions/${1}`} passHref>
+      <Link href={`/questions/${post.postId}`} passHref>
         <Title>{post.title}</Title>
       </Link>
       <Content>{post.content}</Content>

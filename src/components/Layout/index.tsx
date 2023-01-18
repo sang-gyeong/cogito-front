@@ -1,15 +1,9 @@
-import Header from './Header';
-
-import * as S from './style';
 import {ReactNode} from 'react';
 
 import SideBar from './SideBar';
-import {useAxiosInterceptor} from '../../hooks/useAxiosInterceptor';
 import TopBar from './TopBar';
 
 export default function Layout({children}: {children?: ReactNode}) {
-  useAxiosInterceptor(); // AxiosInterceptor 선언
-
   // return (
   //   <>
   //     <Header />

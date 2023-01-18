@@ -1,4 +1,4 @@
-import request from './index';
+import {axiosInstanceForCSR} from './index';
 
 interface tokenResponse {
   accessToken: string;
@@ -6,7 +6,9 @@ interface tokenResponse {
 }
 
 export const getAccessToken = (host: string, authToken: string): Promise<tokenResponse> =>
-  request.get<tokenResponse>(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
+  axiosInstanceForCSR
+    .get<tokenResponse>(`/auth/${host}/login/token?code=${authToken}`)
+    .then(response => response?.data);
 
 export const reissueToken = (): Promise<tokenResponse> =>
-  request.get<tokenResponse>('/auth/reissue').then(response => response?.data);
+  axiosInstanceForCSR.get<tokenResponse>('/auth/reissue').then(response => response?.data);

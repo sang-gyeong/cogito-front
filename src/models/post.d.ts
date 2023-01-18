@@ -4,12 +4,14 @@ declare namespace Post {
   }
 
   interface ListItem {
+    postId: number;
     title: string;
     content: string;
     tags: string[];
     // files: string[];
+    commentCnt: number;
     nickname: string;
-    // profileImgUrl: string;
+    profileImgUrl: string;
     score: number;
     createdAt: string;
   }
