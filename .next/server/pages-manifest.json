@@ -9,11 +9,11 @@
   "/new": "pages/new.html",
   "/test": "pages/test.html",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/questions": "pages/questions.js",
-  "/tags": "pages/tags.js",
-  "/login": "pages/login.js",
-  "/users": "pages/users.js",
   "/questions/[id]": "pages/questions/[id].js",
+  "/": "pages/index.js",
+  "/login": "pages/login.js",
+  "/tags": "pages/tags.js",
+  "/users": "pages/users.js",
+  "/questions": "pages/questions.js",
   "/404": "pages/404.html"
 }
