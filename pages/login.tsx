@@ -16,8 +16,7 @@ export default function LoginPage() {
   };
 
   const clickGithubLogin = () => {
-    window.location.href =
-      GITHUB_LOGIN_URL + `?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
+    window.location.href = GITHUB_LOGIN_URL + `?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`;
   };
 
   return (
