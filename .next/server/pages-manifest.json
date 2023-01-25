@@ -2,18 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/board/[id]": "pages/api/board/[id].js",
-  "/api/boards": "pages/api/boards.js",
-  "/api/tags": "pages/api/tags.js",
-  "/api/users": "pages/api/users.js",
-  "/auth/[host]": "pages/auth/[host].html",
-  "/new": "pages/new.html",
-  "/test": "pages/test.html",
-  "/": "pages/index.js",
-  "/questions": "pages/questions.js",
-  "/questions/[id]": "pages/questions/[id].js",
-  "/users": "pages/users.js",
-  "/tags": "pages/tags.js",
-  "/login": "pages/login.js",
-  "/404": "pages/404.html"
+  "/questions": "pages/questions.js"
 }

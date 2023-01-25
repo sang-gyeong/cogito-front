@@ -1,7 +1,7 @@
 declare interface User {
-  uid: number;
+  userId: number;
   nickname: string;
+  profileImgUrl: string | null;
   score: number;
-  profileImgUrl: string;
-  badgeImgUrl: string;
+  introduce: string | null;
 }

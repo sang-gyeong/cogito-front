@@ -8,8 +8,7 @@ import {QUERY_KEY} from '../src/queries/useTagsQuery';
 import UserTemplate from '../src/components/templates/UserTemplate';
 import axios from 'axios';
 import styled from 'styled-components';
-import {deletePostById} from '../src/api/commnet';
-import {createPost, modifyPost} from '../src/api/post';
+import {createPost, deletePostById, modifyPost} from '../src/api/post';
 
 const dummyData = {
   title: '질문있습니다',

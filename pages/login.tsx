@@ -53,7 +53,6 @@ const Button = styled.div`
 `;
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  console.log('referrer : ', ctx.req.headers.referrer);
   return {
     props: {},
   };

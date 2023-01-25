@@ -1,6 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 import cookies from 'react-cookies';
+import {REFRESH_TOKEN_KEY} from '../constants/key';
 import {getLocalStorageItem, setLocalStorageItem} from '../utils/storage';
 import {reissueToken} from './auth';
 
@@ -14,7 +15,7 @@ const axiosInstanceForCSR = axios.create({
 });
 
 axiosInstanceForCSR.interceptors.request.use(async request => {
-  const refreshToken = cookies.load('refreshToken');
+  const refreshToken = cookies.load(REFRESH_TOKEN_KEY);
   const expiresAt = getLocalStorageItem('expiresAt', moment().format('yyyy-MM-DD HH:mm:ss'));
 
   // 토큰이 만료되었고, refreshToken 이 저장되어 있을 때
@@ -23,20 +24,15 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
 
     const data = await reissueToken();
 
-    console.log('-----requestInterceptor reissueToken response : ', data);
-
     if (data) {
       setLocalStorageItem('accessToken', data.accessToken);
       setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
       // @TODO: 쿠키 만료시간 지정
-      cookies.save('refreshToken', data.refreshToken, {httpOnly: true});
+      cookies.save(REFRESH_TOKEN_KEY, data.refreshToken, {httpOnly: true});
     }
   }
 
   const accessToken = getLocalStorageItem('accessToken', '');
-
-  console.log('-----requestInterceptor refreshToken : ', refreshToken);
-  console.log('-----requestInterceptor accessToken : ', accessToken);
 
   if (request.headers && accessToken) {
     request.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -49,7 +45,7 @@ axiosInstanceForCSR.interceptors.response.use(
   response => response,
   error => {
     if (['A008', 'A011', 'A012', 'A013'].includes(error?.response?.data?.code)) {
-      cookies.remove('refreshToken');
+      cookies.remove(REFRESH_TOKEN_KEY);
       globalThis?.localStorage.clear();
     }
     console.log('csr axios error : ', error);

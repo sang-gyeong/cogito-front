@@ -1,66 +1,57 @@
 import Link from 'next/link';
+import {Button} from 'react-bootstrap';
 import styled from 'styled-components';
 
 export default function SideBar() {
-  // <S.NavWrapper>
-  //     <Link href="/questions">
-  //       <S.NavItem isActive={router.pathname.indexOf('/questions') !== -1}>Questions</S.NavItem>
-  //     </Link>
-  //     <Link href="/tags">
-  //       <S.NavItem isActive={router.pathname.indexOf('/tags') !== -1}>Tags</S.NavItem>
-  //     </Link>
-  //     <Link href="/users">
-  //       <S.NavItem isActive={router.pathname.indexOf('/users') !== -1}>Users</S.NavItem>
-  //     </Link>
-  //   </S.NavWrapper>
   return (
     <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-      {/* Sidebar - Brand */}
       <Link href="/">
         <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
           <div className="sidebar-brand-icon rotate-n-15">
-            <i className="fas fa-laugh-wink" />
+            <LogoIcon>🔥</LogoIcon>
           </div>
-          <div className="sidebar-brand-text mx-3">
-            COGITO <sup>0.1</sup>
-          </div>
+          <LogoTitle className="">
+            COGITO <LogoSup>0.1v</LogoSup>
+          </LogoTitle>
         </a>
       </Link>
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
-
-      <li className="nav-item">
-        <Link href="/">
-          <a className="nav-link" href="#">
-            <i className="fas fa-fw fa-tachometer-alt"></i>
-            <span>Home</span>
-          </a>
-        </Link>
-      </li>
+      <ButtonWrapper>
+        <Button variant="primary" href="/new">
+          + 새 질문 생성하기
+        </Button>
+      </ButtonWrapper>
       {/* Divider */}
       <hr className="sidebar-divider" />
       {/* Heading */}
-      <div className="sidebar-heading">Interface</div>
+      <div className="sidebar-heading">페이지</div>
       {/* Nav Item - Pages Collapse Menu */}
       <li className="nav-item active">
         <Link href="/questions">
-          <a className="nav-link" href="#">
-            <span>Questions</span>
-          </a>
+          <Tab className="nav-link" href="#">
+            <i className="fa-fw"></i>
+            <span className="material-symbols-outlined">live_help</span>
+            <span className="label">Questions</span>
+          </Tab>
         </Link>
       </li>
       {/* Nav Item - Utilities Collapse Menu */}
       <li className="nav-item">
-        <Link href="/tags">
-          <a className="nav-link" href="#">
-            <span>Tags</span>
-          </a>
+        <Link href="#">
+          <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
+            <i className="fa-fw"></i>
+            <span className="material-symbols-outlined">bookmarks</span>
+            <span className="label">Tags</span>
+          </Tab>
         </Link>
 
-        <Link href="/users">
-          <a className="nav-link" href="#">
-            <span>Users</span>
-          </a>
+        <Link href="#">
+          <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
+            <i className="fa-fw"></i>
+            <span className="material-symbols-outlined">group</span>
+            <span className="label">Users</span>
+          </Tab>
         </Link>
       </li>
       {/* Divider */}
@@ -69,30 +60,12 @@ export default function SideBar() {
       <div className="sidebar-heading">기타기능</div>
       {/* Nav Item - Pages Collapse Menu */}
       <li className="nav-item">
-        <a className="nav-link" href="#">
-          <i className="fas fa-fw fa-folder" />
-          <span>기타 기능 (미오픈)</span>
-        </a>
-        <div
-          id="collapsePages"
-          className="collapse show"
-          aria-labelledby="headingPages"
-          data-parent="#accordionSidebar">
-          <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Login Screens:</h6>
-            <a className="collapse-item" href="#">
-              페이지 1 (미오픈)
-            </a>
-            <a className="collapse-item" href="#">
-              페이지 2 (미오픈)
-            </a>
-            <a className="collapse-item" href="#">
-              페이지 3 (미오픈)
-            </a>
-          </div>
-        </div>
+        <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
+          <i className="fa-fw"></i>
+          <span className="material-symbols-outlined">add_circle</span>
+          <span className="label">기타 기능 (미오픈)</span>
+        </Tab>
       </li>
-
       {/* Divider */}
       <hr className="sidebar-divider d-none d-md-block" />
       {/* Sidebar Toggler (Sidebar) */}
@@ -108,4 +81,49 @@ const Wrapper = styled.div`
   width: 40%;
   background-color: beige;
   padding-left: 30px;
+`;
+
+const ButtonWrapper = styled.div`
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > a {
+    background-color: white;
+    color: #303d62;
+    font-size: 0.97rem;
+    font-weight: 600;
+    width: 180px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const Tab = styled.a`
+  display: flex;
+  align-items: center;
+
+  & > .label {
+    position: relative;
+    bottom: 2px;
+    left: 5px;
+  }
+`;
+
+const LogoIcon = styled.span`
+  font-size: 1.8rem;
+`;
+
+const LogoTitle = styled.div`
+  margin-left: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+`;
+
+const LogoSup = styled.sup`
+  font-weight: 400;
+  font-size: 0.01rem;
 `;

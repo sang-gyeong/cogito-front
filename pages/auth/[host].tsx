@@ -1,12 +1,16 @@
 import {getAccessToken} from '../../src/api/auth';
 import {useEffect} from 'react';
 import {useRouter} from 'next/router';
-import {getSessionStorageItem, setLocalStorageItem} from '../../src/utils/storage';
+import {setLocalStorageItem} from '../../src/utils/storage';
 import moment from 'moment';
 import cookies from 'react-cookies';
+import {REFRESH_TOKEN_KEY} from '../../src/constants/key';
+import {useSetRecoilState} from 'recoil';
+import {userState} from '../../src/atoms/user';
 
 export default function AuthPage() {
   const router = useRouter();
+
   const host = router.query?.host as string;
   const authToken = router.query?.code as string;
 
@@ -26,13 +30,12 @@ export default function AuthPage() {
 
     const {accessToken, refreshToken} = data;
 
-    cookies.save('refreshToken', refreshToken, {});
+    cookies.save(REFRESH_TOKEN_KEY, refreshToken, {});
 
     setLocalStorageItem('accessToken', accessToken);
     setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
 
-    const currentPath = getSessionStorageItem('currentPath') || '/';
-    router.replace(currentPath);
+    router.replace('/');
   };
 
   useEffect(() => {

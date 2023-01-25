@@ -21,7 +21,6 @@ export default function TitleSection({
 
 export const Wrapper = styled.div`
   width: 100%;
-  border-top: 1px solid lightgray;
   padding: 24px 6px 24px 32px;
   position: relative;
 `;

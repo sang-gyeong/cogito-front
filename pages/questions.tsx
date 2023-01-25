@@ -9,9 +9,9 @@ import {getPosts} from '../src/api/post';
 
 export default function QuestionsPage() {
   const router = useRouter();
+
   return (
     <div>
-      <button onClick={() => router.push('/login')}>로그인 이동 버튼</button>
       <HomeTemplate />
     </div>
   );

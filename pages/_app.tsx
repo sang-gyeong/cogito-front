@@ -3,7 +3,7 @@ import '@uiw/react-markdown-preview/markdown.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/style.css';
 import '../styles/sb-admin-2.min.css';
-// import '../vendor/fontawesome-free/css/all.min.css';
+import '../vendor/fontawesome-free/css/all.min.css';
 
 import {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {AppProps} from 'next/app';
@@ -65,6 +65,7 @@ function MyApp({Component, pageProps}: AppPropsWithLayout) {
       <Head>
         <title>Cogito : 코기토</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         {/* <link rel="preload" href="/api/data" as="fetch" crossorigin="anonymous" /> */}
       </Head>
       <QueryClientProvider client={queryClient}>

@@ -12,3 +12,6 @@ export const getAccessToken = (host: string, authToken: string): Promise<tokenRe
 
 export const reissueToken = (): Promise<tokenResponse> =>
   axiosInstanceForCSR.get<tokenResponse>('/auth/reissue').then(response => response?.data);
+
+export const logout = (): Promise<void> =>
+  axiosInstanceForCSR.post<void>('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));

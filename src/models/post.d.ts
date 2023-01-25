@@ -8,15 +8,15 @@ declare namespace Post {
     title: string;
     content: string;
     tags: string[];
-    // files: string[];
-    commentCnt: number;
     nickname: string;
     profileImgUrl: string;
     score: number;
+    commentCnt: number;
     createdAt: string;
   }
 
   interface Item {
+    postId: number;
     title: string;
     content: string;
     tags: string[];
@@ -26,6 +26,6 @@ declare namespace Post {
     score: number;
     createdAt: string;
     commentResponses: Comment[];
-    isMe: true;
+    isMe: boolean;
   }
 }

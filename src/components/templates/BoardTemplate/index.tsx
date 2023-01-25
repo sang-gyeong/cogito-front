@@ -31,18 +31,6 @@ export default function BoardTemplate({id}: {id: number}) {
     return <>Loading</>;
   }
 
-  // const _data = {
-  //   title: '안녕',
-  //   content: '안녕',
-  //   tags: ['태그1'],
-  //   files: [],
-  //   score: 3,
-  //   commentResponses: [],
-  //   profileImgUrl: '',
-  //   nickname: '삐릿뽀',
-  //   createdAt: '2022-01-31',
-  // };
-
   const {title, content, tags, files, score, createdAt, commentResponses, profileImgUrl, nickname} = data;
 
   return (

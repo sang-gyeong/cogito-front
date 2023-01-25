@@ -20,16 +20,17 @@ ${reset}
       display: none;
     }
   }
-  body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, textarea, p, th, td, input, select, span, button {
+  *, body, div, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, textarea, p, th, td, input, select, span, button {
     box-sizing: border-box;
     font-family: "SF Pro Display";
     line-height: 130%;
-    font-size: 1.45rem;
+    font-size: 1rem;
   }
   a {
     color: inherit;
     text-decoration: none;
   }
+
   button, a {
     cursor: pointer;
   }

@@ -2,6 +2,9 @@
 
 const removeImports = require('next-remove-imports')();
 const nextConfig = {
+  images: {
+    remotePatterns: [{protocol: 'https', hostname: '**'}],
+  },
   reactStrictMode: true,
   swcMinify: true,
   env: {
