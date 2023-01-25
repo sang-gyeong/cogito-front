@@ -1,6 +1,16 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/questions": "pages/questions.js"
+  "/auth/[host]": "pages/auth/[host].html",
+  "/_error": "pages/_error.js",
+  "/error/[code]": "pages/error/[code].html",
+  "/new": "pages/new.html",
+  "/test": "pages/test.html",
+  "/questions/[id]": "pages/questions/[id].js",
+  "/": "pages/index.js",
+  "/users": "pages/users.js",
+  "/questions": "pages/questions.js",
+  "/login": "pages/login.js",
+  "/tags": "pages/tags.js",
+  "/404": "pages/404.html"
 }

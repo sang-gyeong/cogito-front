@@ -6,7 +6,7 @@ export default function UserItem({user}: {user: User}) {
   console.log(user);
   return (
     <Card style={{width: '18rem'}}>
-      <Card.Img variant="top" src={user.profileImgUrl} />
+      <Card.Img variant="top" src={user.profileImgUrl ?? ''} />
       <span>
         <Badge bg="secondary">{user.nickname}</Badge>
       </span>

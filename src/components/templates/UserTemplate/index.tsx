@@ -14,11 +14,11 @@ export default function UserTemplate() {
 
   return (
     <Wrapper>
-      <div>
+      {/* <div>
         <TitleSection title={'Users'} content={''} />
         <UserListWrapper>
-          {users.map(user => (
-            <UserItem key={user.uid} user={user} />
+          {users.map((user, idx) => (
+            <UserItem key={idx} user={user} />
           ))}
         </UserListWrapper>
 
@@ -39,7 +39,7 @@ export default function UserTemplate() {
           <Pagination.Next />
           <Pagination.Last />
         </Pagination>
-      </div>
+      </div> */}
     </Wrapper>
   );
 }
