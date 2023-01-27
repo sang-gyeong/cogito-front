@@ -1,26 +1,36 @@
 import Link from 'next/link';
 import {Button} from 'react-bootstrap';
+import {useRecoilState} from 'recoil';
 import styled from 'styled-components';
+import {navShowState} from '../../atoms/nav';
 
 export default function SideBar() {
+  const [isShowNav, setIsShowNav] = useRecoilState(navShowState);
+
   return (
-    <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul
+      className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isShowNav ? '' : 'toggled'}`}
+      id="accordionSidebar">
       <Link href="/">
         <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
           <div className="sidebar-brand-icon rotate-n-15">
             <LogoIcon>🔥</LogoIcon>
           </div>
-          <LogoTitle className="">
-            COGITO <LogoSup>0.1v</LogoSup>
-          </LogoTitle>
+          {isShowNav && (
+            <LogoTitle className="">
+              COGITO <LogoSup>0.1v</LogoSup>
+            </LogoTitle>
+          )}
         </a>
       </Link>
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
       <ButtonWrapper>
-        <Button variant="primary" href="/new">
-          + 새 질문 생성하기
-        </Button>
+        <Link href="/new">
+          <Button variant="primary" href="#">
+            {isShowNav ? '+ 새 질문 생성하기' : '질문하기'}
+          </Button>
+        </Link>
       </ButtonWrapper>
       {/* Divider */}
       <hr className="sidebar-divider" />
@@ -70,7 +80,7 @@ export default function SideBar() {
       <hr className="sidebar-divider d-none d-md-block" />
       {/* Sidebar Toggler (Sidebar) */}
       <div className="text-center d-none d-md-inline">
-        <button className="rounded-circle border-0" id="sidebarToggle" />
+        <button className="rounded-circle border-0" id="sidebarToggle" onClick={() => setIsShowNav(!isShowNav)} />
       </div>
     </ul>
   );
@@ -95,6 +105,7 @@ const ButtonWrapper = styled.div`
     font-size: 0.97rem;
     font-weight: 600;
     width: 180px;
+    max-width: 80%;
     height: 50px;
     display: flex;
     align-items: center;

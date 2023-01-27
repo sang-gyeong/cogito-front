@@ -6,8 +6,8 @@ interface CommentParams {
   content: string;
 }
 
-export const createComment = (body: Body): Promise<CommentParams> =>
-  axiosInstanceForSSR.post<CommentParams>(`/comments`, body).then(response => response?.data);
+export const createComment = (postId: number, parentId: number | null, content: string): Promise<{}> =>
+  axiosInstanceForCSR.post<{}>(`/comments`, {postId, parentId, content}).then(response => response?.data);
 
 export const modifyComment = (id: number, content: string): Promise<{}> =>
   axiosInstanceForCSR.patch(`/comments/${id}`, content);

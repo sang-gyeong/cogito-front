@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
 /* harmony export */ });
 /* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3991);
-/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6866);
+/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6095);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9752);
 /* harmony import */ var _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5500);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
@@ -64,44 +64,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 9513:
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Jq": () => (/* binding */ getPosts),
-/* harmony export */   "YO": () => (/* binding */ modifyPost),
-/* harmony export */   "qb": () => (/* binding */ createPost),
-/* harmony export */   "tz": () => (/* binding */ deletePostById),
-/* harmony export */   "u_": () => (/* binding */ getPostById)
-/* harmony export */ });
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3618);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_index__WEBPACK_IMPORTED_MODULE_0__]);
-_index__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
-
-const getPosts = ({
-  query,
-  page
-}) => {
-  return _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts`, {
-    params: {
-      query,
-      page
-    }
-  }).then(response => {
-    return response?.data;
-  });
-};
-const getPostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForSSR.get */ .We.get(`/posts/${id}`).then(response => response?.data);
-const createPost = body => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/posts', body).then(response => response?.data);
-const modifyPost = (id, body) => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.patch */ .D2.patch(`/posts/${id}`, body);
-const deletePostById = id => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR["delete"] */ .D2["delete"](`/posts/${id}`);
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
-
-/***/ }),
-
-/***/ 6468:
+/***/ 2715:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -110,7 +73,7 @@ __webpack_require__.d(__webpack_exports__, {
   "ZP": () => (/* binding */ PostListItem)
 });
 
-// UNUSED EXPORTS: BadgeWrapper, Content, Date, Title, Wrapper
+// UNUSED EXPORTS: BottomWrapper, Content, ContentWrapper, CreatedAt, ProfileImage, ProfileWrapper, Status, StatusItem, StatusLabel, StatusWrapper, TagWrapper, Title, Wrapper
 
 // EXTERNAL MODULE: external "styled-components"
 var external_styled_components_ = __webpack_require__(7518);
@@ -118,19 +81,8 @@ var external_styled_components_default = /*#__PURE__*/__webpack_require__.n(exte
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(1664);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
-// EXTERNAL MODULE: external "react-bootstrap/Badge"
-var Badge_ = __webpack_require__(7790);
-var Badge_default = /*#__PURE__*/__webpack_require__.n(Badge_);
-;// CONCATENATED MODULE: ./src/utils/score.ts
-const getScoreImage = score => {
-  if (score >= 50) {
-    return '🥇';
-  } else if (score >= 30) {
-    return '🥈';
-  } else {
-    return '🥉';
-  }
-};
+// EXTERNAL MODULE: ./src/utils/score.ts
+var utils_score = __webpack_require__(3028);
 // EXTERNAL MODULE: external "react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(997);
 ;// CONCATENATED MODULE: ./src/constants/text.tsx
@@ -154,7 +106,19 @@ const highlightIncludedText = (text, value) => {
 
   return text;
 };
+// EXTERNAL MODULE: ./src/utils/mediaQuery.ts + 1 modules
+var mediaQuery = __webpack_require__(3049);
+// EXTERNAL MODULE: ./node_modules/next/image.js
+var next_image = __webpack_require__(5675);
+var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
+// EXTERNAL MODULE: ./public/img/undraw_profile.svg
+var undraw_profile = __webpack_require__(2955);
+// EXTERNAL MODULE: ./src/components/Common/Tag.tsx
+var Tag = __webpack_require__(1868);
 ;// CONCATENATED MODULE: ./src/components/PostListItem/index.tsx
+
+
+
 
 
 
@@ -166,51 +130,128 @@ function PostListItem({
   post,
   query
 }) {
+  const {
+    postId,
+    title,
+    content,
+    tags,
+    nickname,
+    profileImgUrl,
+    score,
+    commentCnt,
+    createdAt
+  } = post;
+  const statusList = [{
+    label: 'views',
+    value: 0
+  }, {
+    label: 'answers',
+    value: commentCnt
+  }, {
+    label: 'votes',
+    value: 0
+  }];
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)(Wrapper, {
-    children: [/*#__PURE__*/jsx_runtime_.jsx((link_default()), {
-      href: `/questions/${post.postId}`,
-      passHref: true,
-      children: /*#__PURE__*/jsx_runtime_.jsx(Title, {
-        children: highlightIncludedText(post.title, query)
-      })
-    }), /*#__PURE__*/jsx_runtime_.jsx(Content, {
-      children: highlightIncludedText(post.content, query)
-    }), /*#__PURE__*/(0,jsx_runtime_.jsxs)(BadgeWrapper, {
-      children: [post.tags.map((tag, idx) => /*#__PURE__*/jsx_runtime_.jsx((Badge_default()), {
-        bg: "secondary",
-        children: tag
-      }, idx)), /*#__PURE__*/(0,jsx_runtime_.jsxs)(PostListItem_Date, {
-        children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)("span", {
-          children: [getScoreImage(post.score), " ", post.nickname]
-        }), ' ', post.createdAt]
+    children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ContentWrapper, {
+      children: [/*#__PURE__*/jsx_runtime_.jsx((link_default()), {
+        href: `/questions/${postId}`,
+        passHref: true,
+        children: /*#__PURE__*/jsx_runtime_.jsx(Title, {
+          children: highlightIncludedText(title, query)
+        })
+      }), /*#__PURE__*/jsx_runtime_.jsx(Content, {
+        children: highlightIncludedText(content, query)
+      }), /*#__PURE__*/jsx_runtime_.jsx(TagWrapper, {
+        children: tags.map((tag, idx) => /*#__PURE__*/jsx_runtime_.jsx(Tag/* default */.Z, {
+          tag: tag
+        }, idx))
+      }), /*#__PURE__*/(0,jsx_runtime_.jsxs)(BottomWrapper, {
+        children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ProfileWrapper, {
+          children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ProfileImage, {
+            children: [/*#__PURE__*/jsx_runtime_.jsx((image_default()), {
+              src: profileImgUrl ?? undraw_profile/* default */.Z,
+              alt: "profile-image",
+              width: 30,
+              height: 30
+            }), /*#__PURE__*/jsx_runtime_.jsx(ScoreImage, {
+              children: (0,utils_score/* getScoreImage */.h)(score)
+            })]
+          }), nickname]
+        }), "|", /*#__PURE__*/jsx_runtime_.jsx(CreatedAt, {
+          children: createdAt
+        })]
       })]
+    }), /*#__PURE__*/jsx_runtime_.jsx(StatusWrapper, {
+      children: statusList.map(status => /*#__PURE__*/(0,jsx_runtime_.jsxs)(StatusItem, {
+        children: [/*#__PURE__*/jsx_runtime_.jsx(Status, {
+          children: status.value
+        }), /*#__PURE__*/jsx_runtime_.jsx(StatusLabel, {
+          children: status.label
+        })]
+      }, status.label))
     })]
   });
 }
+const ScoreImage = external_styled_components_default().span.withConfig({
+  displayName: "PostListItem__ScoreImage",
+  componentId: "sc-1e1x6a4-0"
+})(["position:absolute;right:-8px;bottom:-3px;"]);
+const Status = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__Status",
+  componentId: "sc-1e1x6a4-1"
+})(["border-radius:50%;width:50px;height:50px;display:flex;justify-content:center;align-items:center;border:1px solid lightgray;", "{width:40px;height:40px;}"], mediaQuery/* media.tablet */.B.tablet);
+const StatusLabel = external_styled_components_default().span.withConfig({
+  displayName: "PostListItem__StatusLabel",
+  componentId: "sc-1e1x6a4-2"
+})(["font-size:0.75rem;", "{display:none;}"], mediaQuery/* media.tablet */.B.tablet);
+const StatusItem = external_styled_components_default().span.withConfig({
+  displayName: "PostListItem__StatusItem",
+  componentId: "sc-1e1x6a4-3"
+})(["text-align:center;"]);
 const Wrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__Wrapper",
-  componentId: "sc-1e1x6a4-0"
-})(["width:100%;border-bottom:1px solid lightgray;padding:24px 6px 24px 32px;"]);
+  componentId: "sc-1e1x6a4-4"
+})(["width:100%;border-bottom:1px solid lightgray;padding:18px 30px;display:flex;min-height:180px;", "{padding:16px 24px;}"], mediaQuery/* media.mobile */.B.mobile);
+const ContentWrapper = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__ContentWrapper",
+  componentId: "sc-1e1x6a4-5"
+})(["display:flex;flex-direction:column;width:100%;font-size:0.9rem;color:#6f7d95;padding-right:32px;"]);
+const StatusWrapper = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__StatusWrapper",
+  componentId: "sc-1e1x6a4-6"
+})(["display:flex;gap:24px;align-items:center;", "{flex-direction:column;gap:4px;}"], mediaQuery/* media.tablet */.B.tablet);
 const Title = external_styled_components_default().a.withConfig({
   displayName: "PostListItem__Title",
-  componentId: "sc-1e1x6a4-1"
-})(["font-weight:600;font-size:1.35rem;color:#303d62;"]);
+  componentId: "sc-1e1x6a4-7"
+})(["font-weight:600;font-size:1.25rem;color:#303d62;"]);
+const TagWrapper = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__TagWrapper",
+  componentId: "sc-1e1x6a4-8"
+})(["margin-bottom:12px;"]);
 const Content = external_styled_components_default().p.withConfig({
   displayName: "PostListItem__Content",
-  componentId: "sc-1e1x6a4-2"
-})(["margin:6px 0;font-size:0.9rem;"]);
-const BadgeWrapper = external_styled_components_default().div.withConfig({
-  displayName: "PostListItem__BadgeWrapper",
-  componentId: "sc-1e1x6a4-3"
-})(["display:flex;gap:4px;position:relative;"]);
-const PostListItem_Date = external_styled_components_default().p.withConfig({
-  displayName: "PostListItem__Date",
-  componentId: "sc-1e1x6a4-4"
-})(["position:absolute;right:0;color:gray;"]);
+  componentId: "sc-1e1x6a4-9"
+})(["font-size:0.9rem;color:#6f7d95;line-height:1.4rem;min-height:1.6rem;max-height:2.8rem;text-overflow:ellipsis;word-wrap:break-word;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:12px;"]);
+const BottomWrapper = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__BottomWrapper",
+  componentId: "sc-1e1x6a4-10"
+})(["display:flex;gap:10px;align-items:center;justify-content:flex-end;font-size:0.88rem;"]);
+const CreatedAt = external_styled_components_default().span.withConfig({
+  displayName: "PostListItem__CreatedAt",
+  componentId: "sc-1e1x6a4-11"
+})([""]);
+const ProfileWrapper = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__ProfileWrapper",
+  componentId: "sc-1e1x6a4-12"
+})(["display:flex;gap:10px;align-items:center;width:180px;justify-content:flex-end;"]);
+const ProfileImage = external_styled_components_default().div.withConfig({
+  displayName: "PostListItem__ProfileImage",
+  componentId: "sc-1e1x6a4-13"
+})(["border-radius:50%;width:30px;height:30px;position:relative;margin-right:4px;"]);
 
 /***/ }),
 
-/***/ 6866:
+/***/ 6095:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -218,7 +259,7 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */   "Z": () => (/* binding */ HomeTemplate)
 /* harmony export */ });
 /* harmony import */ var _queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5500);
-/* harmony import */ var _PostListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6468);
+/* harmony import */ var _PostListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2715);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7518);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6689);
@@ -291,115 +332,112 @@ function HomeTemplate() {
   }
 
   const {
-    posts
+    posts,
+    total
   } = data;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(Wrapper, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(QuestionsWrapper, {
-      children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Row, {
-        children: "All Questions"
-      }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Filter, {
-        children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(UL, {
-          children: radios.map(radio => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(FilterButton, {
-              type: "radio",
-              name: "tab",
-              value: radio.value,
-              id: 'tabmenu' + radio.value,
-              checked: radio.value === radioValue,
-              onChange: e => setRadioValue(e.target.value)
-            }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(FilterLabel, {
-              htmlFor: 'tabmenu' + radio.value,
-              children: radio.name
-            })]
-          }, radio.value))
+    children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Row, {
+      children: "All Questions"
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Filter, {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(UL, {
+        children: radios.map(radio => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(FilterButton, {
+            type: "radio",
+            name: "tab",
+            value: radio.value,
+            id: 'tabmenu' + radio.value,
+            checked: radio.value === radioValue,
+            onChange: e => setRadioValue(e.target.value)
+          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(FilterLabel, {
+            htmlFor: 'tabmenu' + radio.value,
+            children: radio.name
+          })]
+        }, radio.value))
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(BoardListWrapper, {
+        children: posts.length ? posts.map((post, idx) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(_PostListItem__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP, {
+          post: post,
+          query: query
+        }, idx)) : /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(EmptyResult, {
+          children: "\uAC80\uC0C9 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(BoardListWrapper, {
-          children: posts && posts.map((post, idx) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(_PostListItem__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP, {
-            post: post,
-            query: query
-          }, idx))
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "row",
-          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
-            className: "col-sm-12 col-md-5",
-            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
-              className: "dataTables_info",
-              id: "dataTable_info",
-              role: "status",
-              "aria-live": "polite",
-              children: "Showing 1 to 10 of 57 entries"
+        className: "row",
+        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
+          className: "col-sm-12 col-md-5",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            className: "dataTables_info",
+            id: "dataTable_info",
+            role: "status",
+            "aria-live": "polite",
+            children: ["Showing 1 to 10 of ", total, " entries"]
+          })
+        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
+          className: "col-sm-12 col-md-7",
+          children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
+            className: "dataTables_paginate paging_simple_numbers",
+            id: "dataTable_paginate",
+            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("ul", {
+              className: "pagination",
+              children: ['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
+                className: `paginate_button page-item ${page === index ? 'active' : ''}`,
+                onClick: () => {
+                  router.push({
+                    pathname: '/questions',
+                    query: _objectSpread(_objectSpread({}, router.query), {}, {
+                      page: index
+                    })
+                  });
+                },
+                children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
+                  href: "#",
+                  "aria-controls": "dataTable",
+                  "data-dt-idx": index,
+                  tabIndex: index,
+                  className: "page-link",
+                  children: label
+                })
+              }, label))
             })
-          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
-            className: "col-sm-12 col-md-7",
-            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
-              className: "dataTables_paginate paging_simple_numbers",
-              id: "dataTable_paginate",
-              children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("ul", {
-                className: "pagination",
-                children: ['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
-                  className: `paginate_button page-item ${page === index ? 'active' : ''}`,
-                  onClick: () => {
-                    router.push({
-                      pathname: '/questions',
-                      query: _objectSpread(_objectSpread({}, router.query), {}, {
-                        page: index
-                      })
-                    });
-                  },
-                  children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
-                    href: "#",
-                    "aria-controls": "dataTable",
-                    "data-dt-idx": index,
-                    tabIndex: index,
-                    className: "page-link",
-                    children: label
-                  })
-                }, label))
-              })
-            })
-          })]
+          })
         })]
       })]
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(SideWrapper, {})]
+    })]
   });
 }
+const EmptyResult = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
+  displayName: "HomeTemplate__EmptyResult",
+  componentId: "sc-1gz0pha-0"
+})(["margin:50px;width:100%;text-align:center;"]);
 const FilterButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default().input.withConfig({
   displayName: "HomeTemplate__FilterButton",
-  componentId: "sc-1gz0pha-0"
+  componentId: "sc-1gz0pha-1"
 })([""]);
 const FilterLabel = styled_components__WEBPACK_IMPORTED_MODULE_2___default().label.withConfig({
   displayName: "HomeTemplate__FilterLabel",
-  componentId: "sc-1gz0pha-1"
+  componentId: "sc-1gz0pha-2"
 })([""]);
 const UL = styled_components__WEBPACK_IMPORTED_MODULE_2___default().ul.withConfig({
   displayName: "HomeTemplate__UL",
-  componentId: "sc-1gz0pha-2"
+  componentId: "sc-1gz0pha-3"
 })(["display:flex;align-items:center;padding:0;margin:0;list-style:none;"]);
 const Row = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__Row",
-  componentId: "sc-1gz0pha-3"
+  componentId: "sc-1gz0pha-4"
 })(["width:100%;min-height:69px;border-bottom:1px solid rgba(0,0,0,0.175);display:flex;align-items:center;color:black;font-size:1.4rem;padding:0 16px;"]);
 const Filter = styled_components__WEBPACK_IMPORTED_MODULE_2___default()(Row).withConfig({
   displayName: "HomeTemplate__Filter",
-  componentId: "sc-1gz0pha-4"
-})(["min-height:44px;"]);
-const SideWrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
-  displayName: "HomeTemplate__SideWrapper",
   componentId: "sc-1gz0pha-5"
-})(["background-color:#eef1f7;height:100vh;width:350px;min-width:350px;"]);
+})(["min-height:44px;"]);
 const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__Wrapper",
   componentId: "sc-1gz0pha-6"
-})(["display:flex;"]);
-const QuestionsWrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
-  displayName: "HomeTemplate__QuestionsWrapper",
-  componentId: "sc-1gz0pha-7"
-})(["display:flex;flex-direction:column;width:100%;"]);
+})(["display:flex;flex-direction:column;width:100%;min-width:100%;"]);
 const BoardListWrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__BoardListWrapper",
-  componentId: "sc-1gz0pha-8"
-})(["width:100%;display:flex;flex-direction:column;gap:12px;"]);
+  componentId: "sc-1gz0pha-7"
+})(["width:100%;display:flex;flex-direction:column;"]);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -458,10 +496,31 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
+/***/ 4957:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/head.js");
+
+/***/ }),
+
 /***/ 4014:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
+
+/***/ }),
+
+/***/ 744:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-config-context.js");
+
+/***/ }),
+
+/***/ 5843:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
@@ -633,13 +692,6 @@ module.exports = require("react-bootstrap");
 
 /***/ }),
 
-/***/ 7790:
-/***/ ((module) => {
-
-module.exports = require("react-bootstrap/Badge");
-
-/***/ }),
-
 /***/ 542:
 /***/ ((module) => {
 
@@ -689,7 +741,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676,664,786,991], () => (__webpack_exec__(9721)));
+var __webpack_exports__ = __webpack_require__.X(0, [676,61,786,991,18], () => (__webpack_exec__(9721)));
 module.exports = __webpack_exports__;
 
 })();

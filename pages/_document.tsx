@@ -63,7 +63,7 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
         </Head>
-        <body>
+        <body id="page-top">
           <Main />
           <NextScript />
           <script
@@ -79,10 +79,10 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
             async></script>
 
-          <script src="vendor/jquery/jquery.min.js" async></script>
-          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" async></script>
+          {/* <script src="vendor/jquery/jquery.min.js" async></script> */}
+          {/* <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" async></script>
 
-          <script src="vendor/jquery-easing/jquery.easing.min.js" async></script>
+          <script src="vendor/jquery-easing/jquery.easing.min.js" async></script> */}
         </body>
       </Html>
     );

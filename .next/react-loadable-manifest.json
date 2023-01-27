@@ -14,22 +14,29 @@
   "../src/components/templates/BoardTemplate/index.tsx -> @uiw/react-markdown-preview": {
     "id": 82621,
     "files": [
-      "static/chunks/522.685af4a6701776d3.js",
-      "static/chunks/621.23c62d0ef179a2c3.js"
+      "static/chunks/522.054e0188dfe44916.js",
+      "static/chunks/621.b366fd80afc1f90d.js"
+    ]
+  },
+  "../src/components/templates/BoardTemplate/index.tsx -> @uiw/react-md-editor": {
+    "id": 57044,
+    "files": [
+      "static/chunks/522.054e0188dfe44916.js",
+      "static/chunks/44.9c16e5ec558ad2e8.js"
     ]
   },
   "../src/components/templates/NewTemplate/index.tsx -> @uiw/react-markdown-preview": {
     "id": 82621,
     "files": [
-      "static/chunks/522.685af4a6701776d3.js",
-      "static/chunks/621.23c62d0ef179a2c3.js"
+      "static/chunks/522.054e0188dfe44916.js",
+      "static/chunks/621.b366fd80afc1f90d.js"
     ]
   },
   "../src/components/templates/NewTemplate/index.tsx -> @uiw/react-md-editor": {
     "id": 57044,
     "files": [
-      "static/chunks/522.685af4a6701776d3.js",
-      "static/chunks/44.abd30af85c59167b.js"
+      "static/chunks/522.054e0188dfe44916.js",
+      "static/chunks/44.9c16e5ec558ad2e8.js"
     ]
   }
 }

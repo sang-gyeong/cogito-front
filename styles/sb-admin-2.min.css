@@ -9378,6 +9378,12 @@ a:focus {
 .topbar.navbar-light .navbar-nav .nav-item .nav-link {
   color: #d1d3e2;
 }
+
+.topbar.navbar-light .navbar-nav .nav-item .nav-link.dark {
+  color: #303d62;
+}
+
+
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
   color: #b7b9cc;
 }
@@ -10254,6 +10260,6 @@ footer.sticky-footer .copyright {
   line-height: 1;
   font-size: 0.8rem;
 }
-body.sidebar-toggled footer.sticky-footer {
+.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }

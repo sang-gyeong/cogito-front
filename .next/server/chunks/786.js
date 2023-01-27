@@ -9,16 +9,16 @@ exports.modules = {
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_J": () => (/* binding */ reissueToken),
-/* harmony export */   "hP": () => (/* binding */ getAccessToken)
+/* harmony export */   "hP": () => (/* binding */ getAccessToken),
+/* harmony export */   "kS": () => (/* binding */ logout)
 /* harmony export */ });
-/* unused harmony export logout */
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3618);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_index__WEBPACK_IMPORTED_MODULE_0__]);
 _index__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.get */ .D2.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
 const reissueToken = () => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.get */ .D2.get('/auth/reissue').then(response => response?.data);
-const logout = () => axiosInstanceForCSR.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
+const logout = () => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -54,9 +54,7 @@ const axiosInstanceForCSR = axios__WEBPACK_IMPORTED_MODULE_0__["default"].create
   baseURL: `${"https://dev.cogito.shop"}/api`,
   timeout: 3000,
   withCredentials: true,
-  headers: {
-    'Content-type': 'application/json'
-  }
+  headers: {}
 });
 axiosInstanceForCSR.interceptors.request.use(async request => {
   const refreshToken = react_cookies__WEBPACK_IMPORTED_MODULE_2___default().load(_constants_key__WEBPACK_IMPORTED_MODULE_4__/* .REFRESH_TOKEN_KEY */ .w);
@@ -64,15 +62,15 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
 
   if (moment__WEBPACK_IMPORTED_MODULE_1___default()(expiresAt).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()()) < 0 && refreshToken && request.headers) {
     request.headers['Authorization'] = `Bearer ${refreshToken}`;
-    const data = await (0,_auth__WEBPACK_IMPORTED_MODULE_3__/* .reissueToken */ ._J)();
+    const {
+      token
+    } = await (0,_auth__WEBPACK_IMPORTED_MODULE_3__/* .reissueToken */ ._J)();
 
-    if (data) {
-      (0,_utils_storage__WEBPACK_IMPORTED_MODULE_5__/* .setLocalStorageItem */ .D$)('accessToken', data.accessToken);
+    if (token) {
+      (0,_utils_storage__WEBPACK_IMPORTED_MODULE_5__/* .setLocalStorageItem */ .D$)('accessToken', token.accessToken);
       (0,_utils_storage__WEBPACK_IMPORTED_MODULE_5__/* .setLocalStorageItem */ .D$)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss')); // @TODO: 쿠키 만료시간 지정
 
-      react_cookies__WEBPACK_IMPORTED_MODULE_2___default().save(_constants_key__WEBPACK_IMPORTED_MODULE_4__/* .REFRESH_TOKEN_KEY */ .w, data.refreshToken, {
-        httpOnly: true
-      });
+      react_cookies__WEBPACK_IMPORTED_MODULE_2___default().save(_constants_key__WEBPACK_IMPORTED_MODULE_4__/* .REFRESH_TOKEN_KEY */ .w, token.refreshToken, {});
     }
   }
 
@@ -88,6 +86,8 @@ axiosInstanceForCSR.interceptors.response.use(response => response, error => {
   if (['A008', 'A011', 'A012', 'A013'].includes(error?.response?.data?.code)) {
     react_cookies__WEBPACK_IMPORTED_MODULE_2___default().remove(_constants_key__WEBPACK_IMPORTED_MODULE_4__/* .REFRESH_TOKEN_KEY */ .w);
     globalThis?.localStorage.clear();
+    window.alert('로그인이 필요합니다.');
+    return;
   }
 
   console.log('csr axios error : ', error);

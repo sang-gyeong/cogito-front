@@ -1,6 +1,7 @@
 declare namespace Post {
   interface ListItemResponse {
     posts: ListItem[];
+    total: number;
   }
 
   interface ListItem {

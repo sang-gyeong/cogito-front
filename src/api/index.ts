@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+import {useRouter} from 'next/router';
 import cookies from 'react-cookies';
 import {REFRESH_TOKEN_KEY} from '../constants/key';
 import {getLocalStorageItem, setLocalStorageItem} from '../utils/storage';
@@ -9,9 +10,7 @@ const axiosInstanceForCSR = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
   timeout: 3000,
   withCredentials: true,
-  headers: {
-    'Content-type': 'application/json',
-  },
+  headers: {},
 });
 
 axiosInstanceForCSR.interceptors.request.use(async request => {
@@ -22,13 +21,13 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
   if (moment(expiresAt).diff(moment()) < 0 && refreshToken && request.headers) {
     request.headers['Authorization'] = `Bearer ${refreshToken}`;
 
-    const data = await reissueToken();
+    const {token} = await reissueToken();
 
-    if (data) {
-      setLocalStorageItem('accessToken', data.accessToken);
+    if (token) {
+      setLocalStorageItem('accessToken', token.accessToken);
       setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
       // @TODO: 쿠키 만료시간 지정
-      cookies.save(REFRESH_TOKEN_KEY, data.refreshToken, {httpOnly: true});
+      cookies.save(REFRESH_TOKEN_KEY, token.refreshToken, {});
     }
   }
 
@@ -47,6 +46,10 @@ axiosInstanceForCSR.interceptors.response.use(
     if (['A008', 'A011', 'A012', 'A013'].includes(error?.response?.data?.code)) {
       cookies.remove(REFRESH_TOKEN_KEY);
       globalThis?.localStorage.clear();
+
+      window.alert('로그인이 필요합니다.');
+
+      return;
     }
     console.log('csr axios error : ', error);
     window.alert(error?.response?.data?.message ?? error?.message);

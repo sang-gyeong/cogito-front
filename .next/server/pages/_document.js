@@ -93,6 +93,7 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_0__["default"] {
           crossOrigin: "anonymous"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("body", {
+        id: "page-top",
         children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx(next_document__WEBPACK_IMPORTED_MODULE_0__.Main, {}), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx(next_document__WEBPACK_IMPORTED_MODULE_0__.NextScript, {}), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
           src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js",
           crossOrigin: "anonymous",
@@ -104,15 +105,6 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_0__["default"] {
         }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
           src: "https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js",
           crossOrigin: "anonymous",
-          async: true
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
-          src: "vendor/jquery/jquery.min.js",
-          async: true
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
-          src: "vendor/bootstrap/js/bootstrap.bundle.min.js",
-          async: true
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
-          src: "vendor/jquery-easing/jquery.easing.min.js",
           async: true
         })]
       })]

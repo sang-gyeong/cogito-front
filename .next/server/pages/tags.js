@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9752);
 /* harmony import */ var _src_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3618);
 /* harmony import */ var _src_queries_useTagsQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8231);
-/* harmony import */ var _src_components_templates_TagTemplate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9585);
+/* harmony import */ var _src_components_templates_TagTemplate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6866);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_src_components_Layout__WEBPACK_IMPORTED_MODULE_0__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__, _src_api__WEBPACK_IMPORTED_MODULE_2__, _src_queries_useTagsQuery__WEBPACK_IMPORTED_MODULE_3__, _src_components_templates_TagTemplate__WEBPACK_IMPORTED_MODULE_4__]);
@@ -53,7 +53,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 9698:
+/***/ 2484:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -62,12 +62,12 @@ __webpack_require__.d(__webpack_exports__, {
   "Z": () => (/* binding */ TagItem)
 });
 
-// EXTERNAL MODULE: external "react-bootstrap/Badge"
-var Badge_ = __webpack_require__(7790);
-var Badge_default = /*#__PURE__*/__webpack_require__.n(Badge_);
-;// CONCATENATED MODULE: external "react-bootstrap/Button"
-const Button_namespaceObject = require("react-bootstrap/Button");
-var Button_default = /*#__PURE__*/__webpack_require__.n(Button_namespaceObject);
+;// CONCATENATED MODULE: external "react-bootstrap/Badge"
+const Badge_namespaceObject = require("react-bootstrap/Badge");
+var Badge_default = /*#__PURE__*/__webpack_require__.n(Badge_namespaceObject);
+// EXTERNAL MODULE: external "react-bootstrap/Button"
+var Button_ = __webpack_require__(1937);
+var Button_default = /*#__PURE__*/__webpack_require__.n(Button_);
 ;// CONCATENATED MODULE: external "react-bootstrap/Card"
 const Card_namespaceObject = require("react-bootstrap/Card");
 var Card_default = /*#__PURE__*/__webpack_require__.n(Card_namespaceObject);
@@ -146,7 +146,7 @@ const Content = styled_components__WEBPACK_IMPORTED_MODULE_0___default().p.withC
 
 /***/ }),
 
-/***/ 9585:
+/***/ 6866:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -158,7 +158,7 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(358);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _queries_useTagsQuery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8231);
-/* harmony import */ var _TagItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9698);
+/* harmony import */ var _TagItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2484);
 /* harmony import */ var _TitleSection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9778);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
@@ -275,10 +275,31 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
+/***/ 4957:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/head.js");
+
+/***/ }),
+
 /***/ 4014:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/i18n/normalize-locale-path.js");
+
+/***/ }),
+
+/***/ 744:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-config-context.js");
+
+/***/ }),
+
+/***/ 5843:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/image-config.js");
 
 /***/ }),
 
@@ -450,10 +471,10 @@ module.exports = require("react-bootstrap");
 
 /***/ }),
 
-/***/ 7790:
+/***/ 1937:
 /***/ ((module) => {
 
-module.exports = require("react-bootstrap/Badge");
+module.exports = require("react-bootstrap/Button");
 
 /***/ }),
 
@@ -506,7 +527,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676,664,786,991], () => (__webpack_exec__(735)));
+var __webpack_exports__ = __webpack_require__.X(0, [676,61,786,991], () => (__webpack_exec__(735)));
 module.exports = __webpack_exports__;
 
 })();

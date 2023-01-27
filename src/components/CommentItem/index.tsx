@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {dateFormatter} from '../../utils/date';
+import profileDefaultImage from 'public/img/undraw_profile.svg';
 import {getScoreImage} from '../../utils/score';
 
 export default function CommentItem({comment}: {comment: Comment}) {
@@ -14,12 +14,11 @@ export default function CommentItem({comment}: {comment: Comment}) {
       <CommentWrapper>{comment.content}</CommentWrapper>
 
       <ProfileWrapper>
-        <Image alt="profileImg" src={comment.profileImgUrl}></Image>
-        <span>
-          {/* {getScoreImage(comment.score)} {comment.author.nickname} */}
-          {comment.nickname}
-        </span>
-        <Date>{dateFormatter(comment.createdAt)}</Date>
+        <ProfileImage>
+          <Image src={comment.profileImgUrl ?? profileDefaultImage} alt="profile-image" width={30} height={30} />
+          <ScoreImage>{getScoreImage(comment.score)}</ScoreImage>
+        </ProfileImage>
+        {comment.nickname}
       </ProfileWrapper>
     </Wrapper>
   );
@@ -53,15 +52,6 @@ const CommentWrapper = styled.div`
   width: 60%;
 `;
 
-const ProfileWrapper = styled.div`
-  width: 40%;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: flex-end;
-`;
-
 const Date = styled.p`
   color: gray;
   font-size: 1.3rem;
@@ -70,4 +60,27 @@ const Date = styled.p`
 const Button = styled.button`
   background-color: #f2f2f2;
   border: 1px solid gray;
+`;
+
+export const ProfileImage = styled.div`
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  box-shadow: px 0px 1px gray;
+  position: relative;
+`;
+
+const ScoreImage = styled.span`
+  position: absolute;
+  right: -8px;
+  bottom: -3px;
+`;
+
+const ProfileWrapper = styled.div`
+  width: 40%;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-end;
 `;

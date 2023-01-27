@@ -1,8 +1,8 @@
 import {axiosInstanceForCSR} from './index';
 
 interface tokenResponse {
-  accessToken: string;
-  refreshToken: string;
+  token: {accessToken: string; refreshToken: string};
+  registered: boolean;
 }
 
 export const getAccessToken = (host: string, authToken: string): Promise<tokenResponse> =>

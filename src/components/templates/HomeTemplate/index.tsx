@@ -1,11 +1,11 @@
 import usePostsQuery from '../../../queries/usePostsQuery';
 import PostListItem from '../../PostListItem';
 import styled from 'styled-components';
-import {Button, ButtonGroup, Pagination, ToggleButton} from 'react-bootstrap';
-import TitleSection from '../../TitleSection';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
+import {media} from '../../../utils/mediaQuery';
+import SideWrapper from '../../Common/SideWrapper';
 
 export default function HomeTemplate() {
   const router = useRouter();
@@ -34,65 +34,72 @@ export default function HomeTemplate() {
     return <>Loading...</>;
   }
 
-  const {posts} = data;
+  const {posts, total} = data;
 
   return (
     <Wrapper>
-      <QuestionsWrapper>
-        <Row>All Questions</Row>
-        <Filter>
-          <UL>
-            {radios.map(radio => (
-              <div key={radio.value}>
-                <FilterButton
-                  type="radio"
-                  name="tab"
-                  value={radio.value}
-                  id={'tabmenu' + radio.value}
-                  checked={radio.value === radioValue}
-                  onChange={e => setRadioValue(e.target.value)}></FilterButton>
-                <FilterLabel htmlFor={'tabmenu' + radio.value}>{radio.name}</FilterLabel>
-              </div>
-            ))}
-          </UL>
-        </Filter>
-        <div>
-          {/* @TODO: key는 유니크한 id값으로 대체 */}
-          <BoardListWrapper>
-            {posts && posts.map((post, idx) => <PostListItem key={idx} post={post} query={query} />)}
-          </BoardListWrapper>
-
-          <div className="row">
-            <div className="col-sm-12 col-md-5">
-              <div className="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                Showing 1 to 10 of 57 entries
-              </div>
+      <Row>All Questions</Row>
+      <Filter>
+        <UL>
+          {radios.map(radio => (
+            <div key={radio.value}>
+              <FilterButton
+                type="radio"
+                name="tab"
+                value={radio.value}
+                id={'tabmenu' + radio.value}
+                checked={radio.value === radioValue}
+                onChange={e => setRadioValue(e.target.value)}></FilterButton>
+              <FilterLabel htmlFor={'tabmenu' + radio.value}>{radio.name}</FilterLabel>
             </div>
-            <div className="col-sm-12 col-md-7">
-              <div className="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                <ul className="pagination">
-                  {['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => (
-                    <li
-                      key={label}
-                      className={`paginate_button page-item ${page === index ? 'active' : ''}`}
-                      onClick={() => {
-                        router.push({pathname: '/questions', query: {...router.query, page: index}});
-                      }}>
-                      <a href="#" aria-controls="dataTable" data-dt-idx={index} tabIndex={index} className="page-link">
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          ))}
+        </UL>
+      </Filter>
+      <div>
+        {/* @TODO: key는 유니크한 id값으로 대체 */}
+        <BoardListWrapper>
+          {posts.length ? (
+            posts.map((post, idx) => <PostListItem key={idx} post={post} query={query} />)
+          ) : (
+            <EmptyResult>검색 결과가 없습니다</EmptyResult>
+          )}
+        </BoardListWrapper>
+
+        <div className="row">
+          <div className="col-sm-12 col-md-5">
+            <div className="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+              Showing 1 to 10 of {total} entries
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-7">
+            <div className="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+              <ul className="pagination">
+                {['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => (
+                  <li
+                    key={label}
+                    className={`paginate_button page-item ${page === index ? 'active' : ''}`}
+                    onClick={() => {
+                      router.push({pathname: '/questions', query: {...router.query, page: index}});
+                    }}>
+                    <a href="#" aria-controls="dataTable" data-dt-idx={index} tabIndex={index} className="page-link">
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      </QuestionsWrapper>
-      <SideWrapper></SideWrapper>
+      </div>
     </Wrapper>
   );
 }
+
+const EmptyResult = styled.div`
+  margin: 50px;
+  width: 100%;
+  text-align: center;
+`;
 
 const FilterButton = styled.input``;
 
@@ -121,27 +128,15 @@ const Filter = styled(Row)`
   min-height: 44px;
 `;
 
-const SideWrapper = styled.div`
-  background-color: #eef1f7;
-
-  height: 100vh;
-  width: 350px;
-  min-width: 350px;
-`;
-
 const Wrapper = styled.div`
-  display: flex;
-`;
-
-const QuestionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 100%;
 `;
 
 const BoardListWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 `;

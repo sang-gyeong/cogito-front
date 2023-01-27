@@ -5,8 +5,6 @@ import {setLocalStorageItem} from '../../src/utils/storage';
 import moment from 'moment';
 import cookies from 'react-cookies';
 import {REFRESH_TOKEN_KEY} from '../../src/constants/key';
-import {useSetRecoilState} from 'recoil';
-import {userState} from '../../src/atoms/user';
 
 export default function AuthPage() {
   const router = useRouter();
@@ -28,12 +26,19 @@ export default function AuthPage() {
       return;
     }
 
-    const {accessToken, refreshToken} = data;
+    const {
+      token: {accessToken, refreshToken},
+      registered,
+    } = data;
 
     cookies.save(REFRESH_TOKEN_KEY, refreshToken, {});
 
     setLocalStorageItem('accessToken', accessToken);
     setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
+
+    if (!registered) {
+      router.replace('/my');
+    }
 
     router.replace('/');
   };
