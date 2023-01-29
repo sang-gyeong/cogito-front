@@ -7,11 +7,11 @@
   "/logout": "pages/logout.html",
   "/my": "pages/my.html",
   "/new": "pages/new.html",
-  "/": "pages/index.js",
-  "/login": "pages/login.js",
-  "/users": "pages/users.js",
-  "/tags": "pages/tags.js",
-  "/questions/[id]": "pages/questions/[id].js",
   "/questions": "pages/questions.js",
+  "/questions/[id]": "pages/questions/[id].js",
+  "/": "pages/index.js",
+  "/tags": "pages/tags.js",
+  "/users": "pages/users.js",
+  "/login": "pages/login.js",
   "/404": "pages/404.html"
 }

@@ -17,7 +17,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_ind
 _index__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.get */ .D2.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
-const reissueToken = () => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.get */ .D2.get('/auth/reissue').then(response => response?.data);
+const reissueToken = () => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/auth/reissue').then(response => response?.data);
 const logout = () => _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.post */ .D2.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
