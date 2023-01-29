@@ -15,19 +15,19 @@ export default function AuthPage() {
       return;
     }
 
-    const {accessToken, registered} = await getAccessToken(host, authToken);
+    const data = await getAccessToken(host, authToken);
 
-    if (!accessToken) {
+    if (!data) {
       window.alert('로그인에 실패하였습니다.\n잠시 후에 다시 시도해주세요');
       router.replace('/login');
 
       return;
     }
 
-    setLocalStorageItem('accessToken', accessToken);
+    setLocalStorageItem('accessToken', data.accessToken);
     setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
 
-    if (!registered) {
+    if (!data.registered) {
       router.replace('/my');
     }
 

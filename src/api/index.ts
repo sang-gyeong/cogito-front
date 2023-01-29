@@ -15,10 +15,10 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
 
   // 토큰이 만료되었고, refreshToken 이 저장되어 있을 때
   if (moment(expiresAt).diff(moment()) < 0) {
-    const {accessToken} = await reissueToken();
+    const data = await reissueToken();
 
-    if (accessToken) {
-      setLocalStorageItem('accessToken', accessToken);
+    if (data) {
+      setLocalStorageItem('accessToken', data.accessToken);
       setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
     }
   }
