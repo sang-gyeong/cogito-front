@@ -3,8 +3,6 @@ import {useEffect} from 'react';
 import {useRouter} from 'next/router';
 import {setLocalStorageItem} from '../../src/utils/storage';
 import moment from 'moment';
-import cookies from 'react-cookies';
-import {REFRESH_TOKEN_KEY} from '../../src/constants/key';
 
 export default function AuthPage() {
   const router = useRouter();
@@ -17,21 +15,14 @@ export default function AuthPage() {
       return;
     }
 
-    const data = await getAccessToken(host, authToken);
+    const {accessToken, registered} = await getAccessToken(host, authToken);
 
-    if (!data) {
+    if (!accessToken) {
       window.alert('로그인에 실패하였습니다.\n잠시 후에 다시 시도해주세요');
       router.replace('/login');
 
       return;
     }
-
-    const {
-      token: {accessToken, refreshToken},
-      registered,
-    } = data;
-
-    cookies.save(REFRESH_TOKEN_KEY, refreshToken, {});
 
     setLocalStorageItem('accessToken', accessToken);
     setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
