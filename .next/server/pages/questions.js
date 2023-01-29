@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
 /* harmony export */ });
 /* harmony import */ var _src_components_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3991);
-/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6866);
+/* harmony import */ var _src_components_templates_HomeTemplate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6095);
 /* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9752);
 /* harmony import */ var _src_queries_usePostsQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5500);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
@@ -251,7 +251,7 @@ const ProfileImage = external_styled_components_default().div.withConfig({
 
 /***/ }),
 
-/***/ 6866:
+/***/ 6095:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -734,7 +734,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676,61,786,991,18], () => (__webpack_exec__(9721)));
+var __webpack_exports__ = __webpack_require__.X(0, [676,61,618,991,18], () => (__webpack_exec__(9721)));
 module.exports = __webpack_exports__;
 
 })();

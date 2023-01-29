@@ -13,10 +13,10 @@ export default function NewPage() {
   useEffect(() => {
     const isLoggedIn = user.userId;
 
-    if (!isLoggedIn) {
-      window.alert('로그인이 필요합니다');
-      router.back();
-    }
+    // if (!isLoggedIn) {
+    //   window.alert('로그인이 필요합니다');
+    //   router.back();
+    // }
   }, []);
 
   return <NewTemplate />;
