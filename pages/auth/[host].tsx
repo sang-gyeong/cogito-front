@@ -33,9 +33,6 @@ export default function AuthPage() {
   useEffect(() => {
     if (host && authToken) {
       loadAccessToken(host, authToken);
-    } else {
-      window.alert('잘못된 접근입니다.');
-      router.replace('/');
     }
   });
 
