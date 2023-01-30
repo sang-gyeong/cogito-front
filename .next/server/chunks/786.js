@@ -71,7 +71,6 @@ const requestReissueToken = async _accessToken => {
     const {
       accessToken
     } = await (0,_auth__WEBPACK_IMPORTED_MODULE_2__/* .reissueToken */ ._J)(_accessToken);
-    console.log('accessToken : ', accessToken);
     (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .setLocalStorageItem */ .D$)('accessToken', accessToken);
     (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .setLocalStorageItem */ .D$)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
   } catch (e) {
@@ -84,8 +83,6 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
   const expiresAt = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true).format('yyyy-MM-DD HH:mm:ss'));
 
   const _accessToken = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('accessToken', '');
-
-  console.log(expiresAt, moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true).format('yyyy-MM-DD HH:mm:ss'));
 
   if (request.headers && moment__WEBPACK_IMPORTED_MODULE_1___default()(expiresAt).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true), 'minutes') <= 20) {
     await requestReissueToken(_accessToken);

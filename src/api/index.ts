@@ -15,7 +15,6 @@ const axiosInstanceForCSR = axios.create({
 const requestReissueToken = async (_accessToken: string | null) => {
   try {
     const {accessToken} = await reissueToken(_accessToken);
-    console.log('accessToken : ', accessToken);
 
     setLocalStorageItem('accessToken', accessToken);
     setLocalStorageItem('expiresAt', moment().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
@@ -28,8 +27,6 @@ const requestReissueToken = async (_accessToken: string | null) => {
 axiosInstanceForCSR.interceptors.request.use(async request => {
   const expiresAt = getLocalStorageItem('expiresAt', moment().utc(true).format('yyyy-MM-DD HH:mm:ss'));
   const _accessToken = getLocalStorageItem('accessToken', '');
-
-  console.log(expiresAt, moment().utc(true).format('yyyy-MM-DD HH:mm:ss'));
 
   if (request.headers && moment(expiresAt).diff(moment().utc(true), 'minutes') <= 20) {
     await requestReissueToken(_accessToken);
