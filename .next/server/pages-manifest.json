@@ -8,10 +8,10 @@
   "/new": "pages/new.html",
   "/_error": "pages/_error.js",
   "/": "pages/index.js",
-  "/login": "pages/login.js",
   "/questions": "pages/questions.js",
-  "/tags": "pages/tags.js",
   "/questions/[id]": "pages/questions/[id].js",
+  "/tags": "pages/tags.js",
+  "/login": "pages/login.js",
   "/users": "pages/users.js",
   "/404": "pages/404.html"
 }
