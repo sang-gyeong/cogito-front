@@ -1,11 +1,11 @@
 export const getLocalStorageItem = (key: string, defaultValue: string) => {
   const localStorage = globalThis?.localStorage;
 
-  if (!localStorage) {
+  if (!localStorage || localStorage.getItem(key) === null || localStorage.getItem(key) === 'undefined') {
     return defaultValue;
   }
 
-  return localStorage.getItem(key) ?? defaultValue;
+  return localStorage.getItem(key);
 };
 
 export const setLocalStorageItem = (key: string, value: string) => {

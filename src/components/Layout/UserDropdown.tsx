@@ -72,7 +72,6 @@ export default function UserDropdown() {
 
         {isLoggedIn ? (
           <>
-            {' '}
             <li className="nav-item dropdown no-arrow mx-1">
               <a
                 className="nav-link dropdown-toggle"

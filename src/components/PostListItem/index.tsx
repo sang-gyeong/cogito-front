@@ -8,12 +8,11 @@ import profileDefaultImage from 'public/img/undraw_profile.svg';
 import TagItem from '../Common/Tag';
 
 export default function PostListItem({post, query}: {post: Post.ListItem; query: string}) {
-  const {postId, title, content, tags, nickname, profileImgUrl, score, commentCnt, createdAt} = post;
+  const {postId, title, content, likeCnt, tags, nickname, profileImgUrl, score, commentCnt, createdAt} = post;
 
   const statusList = [
-    {label: 'views', value: 0},
     {label: 'answers', value: commentCnt},
-    {label: 'votes', value: 0},
+    {label: 'likes', value: likeCnt},
   ];
 
   return (

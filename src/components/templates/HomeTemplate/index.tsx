@@ -24,11 +24,7 @@ export default function HomeTemplate() {
   const {data, isLoading} = usePostsQuery({query, page});
   const [radioValue, setRadioValue] = useState('1');
 
-  const radios = [
-    {name: '정확도순', value: '1'},
-    {name: '최신순', value: '2'},
-    {name: '조회순', value: '3'},
-  ];
+  const radios = [{name: '정확도순', value: '1'}];
 
   if (isLoading || !data) {
     return <>Loading...</>;

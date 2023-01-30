@@ -3,29 +3,33 @@ import moment from 'moment';
 import {getLocalStorageItem, setLocalStorageItem} from '../utils/storage';
 import {reissueToken} from './auth';
 import cookies from 'react-cookies';
+import mem from 'mem';
 
 const axiosInstanceForCSR = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
   timeout: 3000,
   withCredentials: true,
-  headers: {
-    'Content-type': 'application/json',
-  },
+  headers: {},
 });
 
+const requestReissueToken = async (_accessToken: string | null) => {
+  try {
+    const {accessToken} = await reissueToken(_accessToken);
+
+    setLocalStorageItem('accessToken', accessToken);
+    setLocalStorageItem('expiresAt', moment().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
+  } catch (e) {
+    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('expiresAt');
+  }
+};
+
 axiosInstanceForCSR.interceptors.request.use(async request => {
-  const expiresAt = getLocalStorageItem('expiresAt', moment().format('yyyy-MM-DD HH:mm:ss'));
+  const expiresAt = getLocalStorageItem('expiresAt', moment().utc(true).format('yyyy-MM-DD HH:mm:ss'));
   const _accessToken = getLocalStorageItem('accessToken', '');
 
-  if (request.headers && moment(expiresAt).diff(moment(), 'minutes') <= 20) {
-    request.headers['Authorization'] = `Bearer ${_accessToken}`;
-
-    const data = await reissueToken();
-
-    if (data) {
-      setLocalStorageItem('accessToken', data.accessToken);
-      setLocalStorageItem('expiresAt', moment().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
-    }
+  if (request.headers && moment(expiresAt).diff(moment().utc(true), 'minutes') <= 20) {
+    await requestReissueToken(_accessToken);
   }
 
   const accessToken = getLocalStorageItem('accessToken', '');
@@ -40,6 +44,11 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
 axiosInstanceForCSR.interceptors.response.use(
   response => response,
   error => {
+    if ('A008') {
+      window.alert('로그인이 필요합니다');
+
+      return;
+    }
     if (['A011', 'A012'].includes(error?.response?.data?.code)) {
       cookies.remove('refreshToken');
 
