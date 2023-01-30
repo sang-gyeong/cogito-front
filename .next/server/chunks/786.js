@@ -12,21 +12,30 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */   "hP": () => (/* binding */ getAccessToken),
 /* harmony export */   "kS": () => (/* binding */ logout)
 /* harmony export */ });
+/* harmony import */ var _utils_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5637);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9648);
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3618);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([axios__WEBPACK_IMPORTED_MODULE_0__, _index__WEBPACK_IMPORTED_MODULE_1__]);
 ([axios__WEBPACK_IMPORTED_MODULE_0__, _index__WEBPACK_IMPORTED_MODULE_1__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
-const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.get */ .D2.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
-const reissueToken = accessToken => axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/auth/reissue', {}, {
-  headers: {
-    timeout: 3000,
-    withCredentials: true,
-    Authorization: `Bearer ${accessToken}`
+
+const axiosInstance = axios__WEBPACK_IMPORTED_MODULE_0__["default"].create({
+  baseURL: `${"https://dev.cogito.shop"}/api`,
+  timeout: 3000,
+  withCredentials: true
+});
+axiosInstance.interceptors.request.use(async request => {
+  const accessToken = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_2__/* .getLocalStorageItem */ .le)('accessToken', '');
+
+  if (request.headers && accessToken) {
+    request.headers['Authorization'] = `Bearer ${accessToken}`;
   }
-}).then(response => {
-  console.log('===');
+
+  return request;
+});
+const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.get */ .D2.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
+const reissueToken = () => axiosInstance.post('/auth/reissue').then(response => {
   return response?.data;
 });
 const logout = () => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.post */ .D2.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
@@ -66,11 +75,11 @@ const axiosInstanceForCSR = axios__WEBPACK_IMPORTED_MODULE_0__["default"].create
   headers: {}
 });
 
-const requestReissueToken = async _accessToken => {
+const requestReissueToken = async () => {
   try {
     const {
       accessToken
-    } = await (0,_auth__WEBPACK_IMPORTED_MODULE_2__/* .reissueToken */ ._J)(_accessToken);
+    } = await (0,_auth__WEBPACK_IMPORTED_MODULE_2__/* .reissueToken */ ._J)();
     (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .setLocalStorageItem */ .D$)('accessToken', accessToken);
     (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .setLocalStorageItem */ .D$)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
   } catch (e) {
@@ -82,10 +91,8 @@ const requestReissueToken = async _accessToken => {
 axiosInstanceForCSR.interceptors.request.use(async request => {
   const expiresAt = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true).format('yyyy-MM-DD HH:mm:ss'));
 
-  const _accessToken = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('accessToken', '');
-
   if (request.headers && moment__WEBPACK_IMPORTED_MODULE_1___default()(expiresAt).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true), 'minutes') <= 20) {
-    await requestReissueToken(_accessToken);
+    await requestReissueToken();
   }
 
   const accessToken = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('accessToken', '');
