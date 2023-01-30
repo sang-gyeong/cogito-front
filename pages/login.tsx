@@ -5,14 +5,12 @@ import {GetServerSideProps} from 'next';
 
 const KAKAO_LOGIN_URL = 'https://kauth.kakao.com/oauth/authorize';
 const GITHUB_LOGIN_URL = 'https://github.com/login/oauth/authorize';
-const KAKAO_REDIRECT_URI = `${process.env.NEXT_PUBLIC_API_URL}/auth/kakao`;
-const GITHUB_REDIRECT_URI = `${process.env.NEXT_PUBLIC_API_URL}/auth/github`;
 
 export default function LoginPage() {
   const clickKakaoLogin = () => {
     window.location.href =
       KAKAO_LOGIN_URL +
-      `?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+      `?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&response_type=code`;
   };
 
   const clickGithubLogin = () => {

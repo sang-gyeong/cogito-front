@@ -2,16 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/auth/[host]": "pages/auth/[host].html",
-  "/error/[code]": "pages/error/[code].html",
-  "/logout": "pages/logout.html",
-  "/new": "pages/new.html",
-  "/my": "pages/my.html",
-  "/questions/[id]": "pages/questions/[id].js",
-  "/users": "pages/users.js",
-  "/tags": "pages/tags.js",
-  "/": "pages/index.js",
-  "/questions": "pages/questions.js",
-  "/login": "pages/login.js",
-  "/404": "pages/404.html"
+  "/questions": "pages/questions.js"
 }

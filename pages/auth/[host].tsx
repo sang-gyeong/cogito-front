@@ -11,10 +11,6 @@ export default function AuthPage() {
   const authToken = router.query?.code as string;
 
   const loadAccessToken = async (host: string, authToken: string) => {
-    if (!host || !authToken) {
-      return;
-    }
-
     const data = await getAccessToken(host, authToken);
 
     if (!data) {
@@ -25,9 +21,9 @@ export default function AuthPage() {
     }
 
     setLocalStorageItem('accessToken', data.accessToken);
-    setLocalStorageItem('expiresAt', moment().add(30, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
+    setLocalStorageItem('expiresAt', moment().add(60, 'minutes').format('yyyy-MM-DD HH:mm:ss'));
 
-    if (!data.registered) {
+    if (data.registered === false) {
       router.replace('/my');
     }
 
@@ -37,6 +33,9 @@ export default function AuthPage() {
   useEffect(() => {
     if (host && authToken) {
       loadAccessToken(host, authToken);
+    } else {
+      window.alert('잘못된 접근입니다.');
+      router.replace('/');
     }
   });
 

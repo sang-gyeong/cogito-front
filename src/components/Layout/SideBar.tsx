@@ -28,7 +28,7 @@ export default function SideBar() {
       <ButtonWrapper>
         <Link href="/new">
           <Button variant="primary" href="#">
-            {isShowNav ? '+ 새 질문 생성하기' : '질문하기'}
+            질문하기
           </Button>
         </Link>
       </ButtonWrapper>

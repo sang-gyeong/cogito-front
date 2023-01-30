@@ -4,6 +4,8 @@ import {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {userState} from '../../atoms/user';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
+import {logout} from '../../api/auth';
+import cookies from 'react-cookies';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -13,6 +15,20 @@ export default function UserDropdown() {
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
+  };
+
+  const requestLogout = async () => {
+    await logout();
+  };
+
+  const onClickLogout = () => {
+    requestLogout();
+
+    // @TODO: 서버측에서 정의해준 토큰명으로 변경
+    cookies.remove('refreshToken');
+    localStorage.removeItem('accessToken');
+
+    window.location.reload();
   };
 
   return (
@@ -142,12 +158,15 @@ export default function UserDropdown() {
                   </a>
                 </Link>
 
-                <Link href="/logout">
-                  <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
-                    로그아웃
-                  </a>
-                </Link>
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  onClick={onClickLogout}
+                  data-toggle="modal"
+                  data-target="#logoutModal">
+                  <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+                  로그아웃
+                </a>
               </div>
             </li>
           </>
