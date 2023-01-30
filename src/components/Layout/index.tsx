@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {ReactNode, useEffect} from 'react';
 import {useFetchUserData} from '../../hooks/useFetchUserData';
 import Footer from './Footer';
 import SideBar from './SideBar';

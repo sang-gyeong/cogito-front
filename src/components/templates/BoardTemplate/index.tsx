@@ -13,6 +13,7 @@ import CommentItem from '../../CommentItem';
 import TagItem from '../../Common/Tag';
 import Image from 'next/image';
 import RBButton from 'react-bootstrap/Button';
+import {QueryClient} from '@tanstack/react-query';
 
 const contentStyle = {
   fontSize: '0.95rem',
@@ -20,65 +21,6 @@ const contentStyle = {
   lineHeight: '1.4rem',
   padding: '0.5rem',
 };
-
-const dummyCommentResponse = [
-  {
-    commentId: 1,
-    content:
-      '답변입니다 답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다',
-    selected: 1,
-    likeCnt: 3,
-    userId: 13,
-    nickname: 'summer_이상경',
-    score: 30,
-    profileImgUrl: '',
-    createdAt: '2021-03-25 20:35:10',
-    children: [
-      {
-        commentId: 1,
-        content:
-          '답변입니다 답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다',
-        selected: 1,
-        likeCnt: 3,
-        userId: 13,
-        nickname: 'summer_이상경',
-        score: 30,
-        profileImgUrl: '',
-        createdAt: '2021-03-25 20:35:10',
-        children: [],
-        isMe: false,
-      },
-      {
-        commentId: 1,
-        content:
-          '답변입니다 답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다답변입니다',
-        selected: 1,
-        likeCnt: 3,
-        userId: 13,
-        nickname: 'summer_이상경',
-        score: 30,
-        profileImgUrl: '',
-        createdAt: '2021-03-25 20:35:10',
-        children: [],
-        isMe: true,
-      },
-    ],
-    isMe: false,
-  },
-  {
-    commentId: 2,
-    content: '답변2입니다 제가 알려드리죠',
-    selected: 1,
-    likeCnt: 3,
-    userId: 13,
-    nickname: 'summer_이상경',
-    score: 30,
-    profileImgUrl: '',
-    createdAt: '2021-03-25 20:35:10',
-    children: [],
-    isMe: true,
-  },
-];
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
   ssr: false,
@@ -99,7 +41,7 @@ const MarkdownPreview = dynamic(() => import('@uiw/react-markdown-preview'), {
 });
 
 export default function BoardTemplate({id}: {id: number}) {
-  const {data} = useBoardQuery(id);
+  const {data, refetch} = useBoardQuery(id);
   const [value, setValue] = useState<string | undefined>('');
 
   const setShowModal = useSetRecoilState(modalShowState);
@@ -119,20 +61,33 @@ export default function BoardTemplate({id}: {id: number}) {
   const clickHandler = async (isLike: boolean) => {
     const response = isLike ? await likePost(id) : await dislikePost(id);
 
-    console.log('response : ', response);
+    refetch();
   };
 
-  const commentScoreHandler = async (isLike: boolean) => {
-    const response = isLike ? await likeComment(id) : await dislikeComment(id);
+  const commentScoreHandler = async (isLike: boolean, commentId: number) => {
+    const response = isLike ? await likeComment(commentId) : await dislikeComment(commentId);
 
-    console.log('response : ', response);
+    refetch();
   };
 
   if (!data) {
     return <>Loading</>;
   }
 
-  const {commentResponses, content, createdAt, files, isMe, nickname, postId, profileImgUrl, score, tags, title} = data;
+  const {
+    commentResponses,
+    content,
+    createdAt,
+    files,
+    likeCnt,
+    isMe,
+    nickname,
+    postId,
+    profileImgUrl,
+    score,
+    tags,
+    title,
+  } = data;
 
   const onClickModifyPost = () => {};
 
@@ -197,8 +152,8 @@ export default function BoardTemplate({id}: {id: number}) {
       <MiddleWrapper>
         <ScoreWrapper>
           <button onClick={() => clickHandler(true)}>▲</button>
-          <span> 0 </span>
-          <button onClick={() => clickHandler(true)}>▼</button>
+          <span> {likeCnt} </span>
+          <button onClick={() => clickHandler(false)}>▼</button>
         </ScoreWrapper>
         <ContentWrapper>
           <MarkdownPreview
@@ -231,9 +186,9 @@ export default function BoardTemplate({id}: {id: number}) {
             {commentResponses.map((comment, idx) => (
               <Comment key={idx}>
                 <ScoreWrapper>
-                  <button onClick={() => commentScoreHandler(true)}>▲</button>
+                  <button onClick={() => commentScoreHandler(true, comment.commentId)}>▲</button>
                   <span> 0 </span>
-                  <button onClick={() => commentScoreHandler(true)}>▼</button>
+                  <button onClick={() => commentScoreHandler(false, comment.commentId)}>▼</button>
                 </ScoreWrapper>
                 <CommentContentWrapper>
                   <MarkdownPreview

@@ -12,6 +12,7 @@ declare namespace Post {
     nickname: string;
     profileImgUrl: string;
     score: number;
+    likeCnt: number;
     commentCnt: number;
     createdAt: string;
   }
@@ -22,6 +23,7 @@ declare namespace Post {
     content: string;
     tags: string[];
     files: string[];
+    likeCnt: number;
     nickname: string;
     profileImgUrl: string;
     score: number;
