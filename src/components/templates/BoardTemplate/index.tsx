@@ -59,13 +59,22 @@ export default function BoardTemplate({id}: {id: number}) {
   };
 
   const clickHandler = async (isLike: boolean) => {
-    const response = isLike ? await likePost(id) : await dislikePost(id);
+    if (isMe) {
+      window.alert(`자기 자신의 글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
+      return;
+    }
+    isLike ? await likePost(id) : await dislikePost(id);
 
     refetch();
   };
 
-  const commentScoreHandler = async (isLike: boolean, commentId: number) => {
-    const response = isLike ? await likeComment(commentId) : await dislikeComment(commentId);
+  const commentScoreHandler = async (isLike: boolean, comment: Comment) => {
+    if (comment.isMe) {
+      window.alert(`자기 자신의 댓글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
+      return;
+    }
+
+    isLike ? await likeComment(comment.commentId) : await dislikeComment(comment.commentId);
 
     refetch();
   };
@@ -186,9 +195,9 @@ export default function BoardTemplate({id}: {id: number}) {
             {commentResponses.map((comment, idx) => (
               <Comment key={idx}>
                 <ScoreWrapper>
-                  <button onClick={() => commentScoreHandler(true, comment.commentId)}>▲</button>
+                  <button onClick={() => commentScoreHandler(true, comment)}>▲</button>
                   <span> 0 </span>
-                  <button onClick={() => commentScoreHandler(false, comment.commentId)}>▼</button>
+                  <button onClick={() => commentScoreHandler(false, comment)}>▼</button>
                 </ScoreWrapper>
                 <CommentContentWrapper>
                   <MarkdownPreview

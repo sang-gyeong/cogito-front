@@ -91,7 +91,7 @@ const requestReissueToken = async () => {
 axiosInstanceForCSR.interceptors.request.use(async request => {
   const expiresAt = (0,_utils_storage__WEBPACK_IMPORTED_MODULE_4__/* .getLocalStorageItem */ .le)('expiresAt', moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true).format('yyyy-MM-DD HH:mm:ss'));
 
-  if (request.headers && moment__WEBPACK_IMPORTED_MODULE_1___default()(expiresAt).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()().utc(true), 'minutes') <= 20) {
+  if (request.headers && moment__WEBPACK_IMPORTED_MODULE_1___default()(expiresAt).diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(), 'minutes') <= 20) {
     await requestReissueToken();
   }
 
@@ -104,12 +104,9 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
   return request;
 });
 axiosInstanceForCSR.interceptors.response.use(response => response, error => {
-  if (true) {
+  if (error?.response?.data?.code === 'A008') {
     window.alert('로그인이 필요합니다');
-    return;
-  }
-
-  if (['A011', 'A012'].includes(error?.response?.data?.code)) {
+  } else if (['A011', 'A012'].includes(error?.response?.data?.code)) {
     react_cookies__WEBPACK_IMPORTED_MODULE_3___default().remove('refreshToken');
     window.alert('토큰이 만료되어 로그아웃 되었습니다. 다시 로그인 해주세요.');
     return;

@@ -236,12 +236,22 @@ function BoardTemplate({
   };
 
   const clickHandler = async isLike => {
-    const response = isLike ? await (0,_api_post__WEBPACK_IMPORTED_MODULE_7__/* .likePost */ .n9)(id) : await (0,_api_post__WEBPACK_IMPORTED_MODULE_7__/* .dislikePost */ .Bh)(id);
+    if (isMe) {
+      window.alert(`자기 자신의 글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
+      return;
+    }
+
+    isLike ? await (0,_api_post__WEBPACK_IMPORTED_MODULE_7__/* .likePost */ .n9)(id) : await (0,_api_post__WEBPACK_IMPORTED_MODULE_7__/* .dislikePost */ .Bh)(id);
     refetch();
   };
 
-  const commentScoreHandler = async (isLike, commentId) => {
-    const response = isLike ? await (0,_api_comment__WEBPACK_IMPORTED_MODULE_5__/* .likeComment */ .xG)(commentId) : await (0,_api_comment__WEBPACK_IMPORTED_MODULE_5__/* .dislikeComment */ .x4)(commentId);
+  const commentScoreHandler = async (isLike, comment) => {
+    if (comment.isMe) {
+      window.alert(`자기 자신의 댓글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
+      return;
+    }
+
+    isLike ? await (0,_api_comment__WEBPACK_IMPORTED_MODULE_5__/* .likeComment */ .xG)(comment.commentId) : await (0,_api_comment__WEBPACK_IMPORTED_MODULE_5__/* .dislikeComment */ .x4)(comment.commentId);
     refetch();
   };
 
@@ -375,12 +385,12 @@ function BoardTemplate({
         }), commentResponses.map((comment, idx) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(Comment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(ScoreWrapper, {
             children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("button", {
-              onClick: () => commentScoreHandler(true, comment.commentId),
+              onClick: () => commentScoreHandler(true, comment),
               children: "\u25B2"
             }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("span", {
               children: " 0 "
             }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("button", {
-              onClick: () => commentScoreHandler(false, comment.commentId),
+              onClick: () => commentScoreHandler(false, comment),
               children: "\u25BC"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(CommentContentWrapper, {
@@ -612,7 +622,7 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
-/***/ 4957:
+/***/ 5429:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/head.js");
