@@ -44,6 +44,8 @@ axiosInstanceForCSR.interceptors.response.use(
   error => {
     if (error?.response?.data?.code === 'A008') {
       window.alert('로그인이 필요합니다');
+
+      return;
     } else if (['A011', 'A012'].includes(error?.response?.data?.code)) {
       cookies.remove('refreshToken');
 

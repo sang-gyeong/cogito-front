@@ -51,14 +51,6 @@ export default function SideBar() {
         <Link href="#">
           <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
             <i className="fa-fw"></i>
-            <span className="material-symbols-outlined">bookmarks</span>
-            <span className="label">Tags</span>
-          </Tab>
-        </Link>
-
-        <Link href="#">
-          <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
-            <i className="fa-fw"></i>
             <span className="material-symbols-outlined">group</span>
             <span className="label">Users</span>
           </Tab>

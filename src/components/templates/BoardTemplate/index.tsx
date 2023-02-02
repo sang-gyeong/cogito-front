@@ -13,6 +13,7 @@ import CommentItem from '../../CommentItem';
 import TagItem from '../../Common/Tag';
 import Image from 'next/image';
 import RBButton from 'react-bootstrap/Button';
+import AutoHeightImage from '../../Common/AutoHeightImage';
 import {QueryClient} from '@tanstack/react-query';
 
 const contentStyle = {
@@ -170,12 +171,18 @@ export default function BoardTemplate({id}: {id: number}) {
             style={{backgroundColor: 'transparent', marginBottom: '2rem', ...contentStyle}}
           />
 
+          <FilesWrapper>
+            {files.map(file => (
+              <AutoHeightImage key={file} src={file} alt="upload-img" />
+            ))}
+          </FilesWrapper>
           <TagWrapper>
             {tags.map((tag, idx) => (
               // @TODO: tagId
               <TagItem key={idx} tag={tag} />
             ))}
           </TagWrapper>
+
           <BottomWrapper>
             <ProfileWrapper>
               <ProfileImage>
@@ -196,7 +203,7 @@ export default function BoardTemplate({id}: {id: number}) {
               <Comment key={idx}>
                 <ScoreWrapper>
                   <button onClick={() => commentScoreHandler(true, comment)}>▲</button>
-                  <span> 0 </span>
+                  <span> {comment.likeCnt} </span>
                   <button onClick={() => commentScoreHandler(false, comment)}>▼</button>
                 </ScoreWrapper>
                 <CommentContentWrapper>
@@ -220,10 +227,15 @@ export default function BoardTemplate({id}: {id: number}) {
                   <BottomWrapper>
                     <ProfileWrapper>
                       <ProfileImage>
-                        <Image src={profileImgUrl ?? profileDefaultImage} alt="profile-image" width={30} height={30} />
-                        <ScoreImage>{getScoreImage(score)}</ScoreImage>
+                        <Image
+                          src={comment.profileImgUrl ?? profileDefaultImage}
+                          alt="profile-image"
+                          width={30}
+                          height={30}
+                        />
+                        <ScoreImage>{getScoreImage(comment.score)}</ScoreImage>
                       </ProfileImage>
-                      {nickname}
+                      {comment.nickname}
                     </ProfileWrapper>
                     |<CreatedAt>{comment.createdAt}</CreatedAt>
                   </BottomWrapper>
@@ -264,6 +276,8 @@ export default function BoardTemplate({id}: {id: number}) {
     </Wrapper>
   );
 }
+
+const FilesWrapper = styled.div``;
 
 const EmptyView = styled.div`
   border: 1px solid lightslategray;
