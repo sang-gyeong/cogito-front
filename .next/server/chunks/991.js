@@ -10,18 +10,29 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$L": () => (/* binding */ getMyData)
 /* harmony export */ });
-/* unused harmony exports getUserDataById, modifyUserData */
+/* unused harmony exports getUserDataById, modifyUserData, getUsers */
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3618);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_index__WEBPACK_IMPORTED_MODULE_0__]);
 _index__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
+// 마이 프로필 조회
 const getMyData = () => {
   return _index__WEBPACK_IMPORTED_MODULE_0__/* .axiosInstanceForCSR.get */ .D2.get(`/users/me`).then(response => {
     return response?.data;
   });
-};
-const getUserDataById = userId => axiosInstanceForCSR.get(`/users/${userId}`).then(response => response?.data);
-const modifyUserData = (userId, body) => axiosInstanceForCSR.patch(`/users/${userId}`, body).then(response => response?.data);
+}; // 유저 프로필 조회
+
+const getUserDataById = userId => axiosInstanceForCSR.get(`/users/${userId}`).then(response => response?.data); // 유저 프로필 수정
+
+const modifyUserData = (userId, body) => axiosInstanceForCSR.patch(`/users/${userId}`, body).then(response => response?.data); // 유저 순위 조회
+
+const getUsers = (page, size, query) => axiosInstanceForCSR.get(`/users`, {
+  params: {
+    query,
+    page,
+    size
+  }
+}).then(response => response?.data);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -325,25 +336,9 @@ function SideBar() {
           })]
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
       className: "nav-item",
-      children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
-        href: "#",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(Tab, {
-          className: "nav-link",
-          href: "#",
-          onClick: () => alert('아직 개발중인 페이지입니다!'),
-          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("i", {
-            className: "fa-fw"
-          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("span", {
-            className: "material-symbols-outlined",
-            children: "bookmarks"
-          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("span", {
-            className: "label",
-            children: "Tags"
-          })]
-        })
-      }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
         href: "#",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(Tab, {
           className: "nav-link",
@@ -359,7 +354,7 @@ function SideBar() {
             children: "Users"
           })]
         })
-      })]
+      })
     }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("hr", {
       className: "sidebar-divider"
     }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {

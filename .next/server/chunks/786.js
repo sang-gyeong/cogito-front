@@ -106,6 +106,7 @@ axiosInstanceForCSR.interceptors.request.use(async request => {
 axiosInstanceForCSR.interceptors.response.use(response => response, error => {
   if (error?.response?.data?.code === 'A008') {
     window.alert('로그인이 필요합니다');
+    return;
   } else if (['A011', 'A012'].includes(error?.response?.data?.code)) {
     react_cookies__WEBPACK_IMPORTED_MODULE_3___default().remove('refreshToken');
     window.alert('토큰이 만료되어 로그아웃 되었습니다. 다시 로그인 해주세요.');

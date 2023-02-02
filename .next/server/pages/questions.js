@@ -283,6 +283,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+const CONTENTS_COUNT_PER_PAGE = 1;
+const MAX_COUNT_PER_PAGINATION = 5;
 function HomeTemplate() {
   const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
   const {
@@ -313,7 +315,7 @@ function HomeTemplate() {
     1: setRadioValue
   } = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)('1');
   const radios = [{
-    name: '정확도순',
+    name: '최신순',
     value: '1'
   }];
 
@@ -327,6 +329,11 @@ function HomeTemplate() {
     posts,
     total
   } = data;
+  const max = Math.floor(total / CONTENTS_COUNT_PER_PAGE);
+  const pagination = Array.from({
+    length: max
+  }, (_, i) => i + 1);
+  console.log(pagination);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(Wrapper, {
     children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Row, {
       children: "All Questions"
@@ -351,28 +358,29 @@ function HomeTemplate() {
         children: posts.length ? posts.map((post, idx) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(_PostListItem__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP, {
           post: post,
           query: query
-        }, idx)) : /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(EmptyResult, {
-          children: "\uAC80\uC0C9 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4"
+        }, idx)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(EmptyResult, {
+          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Icon, {
+            children: "\uD83E\uDDD0"
+          }), " ", /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("br", {}), "\uAC80\uC0C9 \uACB0\uACFC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4"]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "row",
-        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
-          className: "col-sm-12 col-md-5",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "dataTables_info",
-            id: "dataTable_info",
-            role: "status",
-            "aria-live": "polite",
-            children: ["Showing 1 to 10 of ", total, " entries"]
-          })
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
+      }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx(Pagination, {
+        children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
           className: "col-sm-12 col-md-7",
           children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("div", {
             className: "dataTables_paginate paging_simple_numbers",
             id: "dataTable_paginate",
-            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("ul", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("ul", {
               className: "pagination",
-              children: ['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
+              children: [page !== 0 && /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
+                className: "paginate_button page-item",
+                children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
+                  href: "#",
+                  "aria-controls": "dataTable",
+                  className: "page-link",
+                  onClick: () => setPage(page - 1),
+                  children: "\u25C0"
+                })
+              }), pagination.map((label, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
                 className: `paginate_button page-item ${page === index ? 'active' : ''}`,
                 onClick: () => {
                   router.push({
@@ -390,45 +398,62 @@ function HomeTemplate() {
                   className: "page-link",
                   children: label
                 })
-              }, label))
+              }, label)), page !== max - 1 && /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
+                className: "paginate_button page-item",
+                children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
+                  href: "#",
+                  "aria-controls": "dataTable",
+                  className: "page-link",
+                  onClick: () => setPage(page + 1),
+                  children: "\u25B6"
+                })
+              })]
             })
           })
-        })]
+        })
       })]
     })]
   });
 }
+const Pagination = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
+  displayName: "HomeTemplate__Pagination",
+  componentId: "sc-1gz0pha-0"
+})(["width:fit-content;margin:0 auto;margin-top:20px;"]);
 const EmptyResult = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__EmptyResult",
-  componentId: "sc-1gz0pha-0"
-})(["margin:50px;width:100%;text-align:center;"]);
+  componentId: "sc-1gz0pha-1"
+})(["margin:40px auto;width:100%;text-align:center;"]);
+const Icon = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
+  displayName: "HomeTemplate__Icon",
+  componentId: "sc-1gz0pha-2"
+})(["font-size:5rem;"]);
 const FilterButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default().input.withConfig({
   displayName: "HomeTemplate__FilterButton",
-  componentId: "sc-1gz0pha-1"
+  componentId: "sc-1gz0pha-3"
 })([""]);
 const FilterLabel = styled_components__WEBPACK_IMPORTED_MODULE_2___default().label.withConfig({
   displayName: "HomeTemplate__FilterLabel",
-  componentId: "sc-1gz0pha-2"
+  componentId: "sc-1gz0pha-4"
 })([""]);
 const UL = styled_components__WEBPACK_IMPORTED_MODULE_2___default().ul.withConfig({
   displayName: "HomeTemplate__UL",
-  componentId: "sc-1gz0pha-3"
+  componentId: "sc-1gz0pha-5"
 })(["display:flex;align-items:center;padding:0;margin:0;list-style:none;"]);
 const Row = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__Row",
-  componentId: "sc-1gz0pha-4"
+  componentId: "sc-1gz0pha-6"
 })(["width:100%;min-height:69px;border-bottom:1px solid rgba(0,0,0,0.175);display:flex;align-items:center;color:black;font-size:1.4rem;padding:0 16px;"]);
 const Filter = styled_components__WEBPACK_IMPORTED_MODULE_2___default()(Row).withConfig({
   displayName: "HomeTemplate__Filter",
-  componentId: "sc-1gz0pha-5"
+  componentId: "sc-1gz0pha-7"
 })(["min-height:44px;"]);
 const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__Wrapper",
-  componentId: "sc-1gz0pha-6"
+  componentId: "sc-1gz0pha-8"
 })(["display:flex;flex-direction:column;width:100%;min-width:100%;"]);
 const BoardListWrapper = styled_components__WEBPACK_IMPORTED_MODULE_2___default().div.withConfig({
   displayName: "HomeTemplate__BoardListWrapper",
-  componentId: "sc-1gz0pha-7"
+  componentId: "sc-1gz0pha-9"
 })(["width:100%;display:flex;flex-direction:column;"]);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });

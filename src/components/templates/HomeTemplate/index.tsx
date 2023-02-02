@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
-import {media} from '../../../utils/mediaQuery';
-import SideWrapper from '../../Common/SideWrapper';
+
+const CONTENTS_COUNT_PER_PAGE = 1;
+const MAX_COUNT_PER_PAGINATION = 5;
 
 export default function HomeTemplate() {
   const router = useRouter();
@@ -24,13 +25,18 @@ export default function HomeTemplate() {
   const {data, isLoading} = usePostsQuery({query, page});
   const [radioValue, setRadioValue] = useState('1');
 
-  const radios = [{name: '정확도순', value: '1'}];
+  const radios = [{name: '최신순', value: '1'}];
 
   if (isLoading || !data) {
     return <>Loading...</>;
   }
 
   const {posts, total} = data;
+
+  const max = Math.floor(total / CONTENTS_COUNT_PER_PAGE);
+  const pagination = Array.from({length: max}, (_, i) => i + 1);
+
+  console.log(pagination);
 
   return (
     <Wrapper>
@@ -57,20 +63,25 @@ export default function HomeTemplate() {
           {posts.length ? (
             posts.map((post, idx) => <PostListItem key={idx} post={post} query={query} />)
           ) : (
-            <EmptyResult>검색 결과가 없습니다</EmptyResult>
+            <EmptyResult>
+              <Icon>🧐</Icon> <br />
+              검색 결과가 없습니다
+            </EmptyResult>
           )}
         </BoardListWrapper>
 
-        <div className="row">
-          <div className="col-sm-12 col-md-5">
-            <div className="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-              Showing 1 to 10 of {total} entries
-            </div>
-          </div>
+        <Pagination>
           <div className="col-sm-12 col-md-7">
             <div className="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
               <ul className="pagination">
-                {['Previous', 1, 2, 3, 4, 5, 6, 'Next'].map((label, index) => (
+                {page !== 0 && (
+                  <li className="paginate_button page-item">
+                    <a href="#" aria-controls="dataTable" className="page-link" onClick={() => setPage(page - 1)}>
+                      ◀
+                    </a>
+                  </li>
+                )}
+                {pagination.map((label, index) => (
                   <li
                     key={label}
                     className={`paginate_button page-item ${page === index ? 'active' : ''}`}
@@ -82,19 +93,36 @@ export default function HomeTemplate() {
                     </a>
                   </li>
                 ))}
+                {page !== max - 1 && (
+                  <li className="paginate_button page-item">
+                    <a href="#" aria-controls="dataTable" className="page-link" onClick={() => setPage(page + 1)}>
+                      ▶
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
-        </div>
+        </Pagination>
       </div>
     </Wrapper>
   );
 }
 
+const Pagination = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 20px;
+`;
+
 const EmptyResult = styled.div`
-  margin: 50px;
+  margin: 40px auto;
   width: 100%;
   text-align: center;
+`;
+
+const Icon = styled.div`
+  font-size: 5rem;
 `;
 
 const FilterButton = styled.input``;
