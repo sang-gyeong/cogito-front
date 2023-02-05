@@ -227,18 +227,24 @@ function PostListItem({
   }];
   return /*#__PURE__*/(0,jsx_runtime_.jsxs)(Wrapper, {
     children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ContentWrapper, {
-      children: [/*#__PURE__*/jsx_runtime_.jsx((link_default()), {
-        href: `/questions/${postId}`,
-        passHref: true,
-        children: /*#__PURE__*/jsx_runtime_.jsx(Title, {
-          children: highlightIncludedText(title, query)
-        })
-      }), /*#__PURE__*/jsx_runtime_.jsx(Content, {
-        children: highlightIncludedText(content, query)
-      }), /*#__PURE__*/jsx_runtime_.jsx(TagWrapper, {
-        children: tags.map((tag, idx) => /*#__PURE__*/jsx_runtime_.jsx(Tag/* default */.Z, {
-          tag: tag
-        }, idx))
+      children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)("div", {
+        children: [/*#__PURE__*/jsx_runtime_.jsx((link_default()), {
+          href: `/questions/${postId}`,
+          passHref: true,
+          children: /*#__PURE__*/jsx_runtime_.jsx(Title, {
+            children: highlightIncludedText(title, query)
+          })
+        }), /*#__PURE__*/jsx_runtime_.jsx((link_default()), {
+          href: `/questions/${postId}`,
+          passHref: true,
+          children: /*#__PURE__*/jsx_runtime_.jsx(Content, {
+            children: highlightIncludedText(content, query)
+          })
+        }), /*#__PURE__*/jsx_runtime_.jsx(TagWrapper, {
+          children: tags.map((tag, idx) => /*#__PURE__*/jsx_runtime_.jsx(Tag/* default */.Z, {
+            tag: tag
+          }, idx))
+        })]
       }), /*#__PURE__*/(0,jsx_runtime_.jsxs)(BottomWrapper, {
         children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ProfileWrapper, {
           children: [/*#__PURE__*/(0,jsx_runtime_.jsxs)(ProfileImage, {
@@ -279,19 +285,19 @@ const StatusLabel = external_styled_components_default().span.withConfig({
 const StatusItem = external_styled_components_default().span.withConfig({
   displayName: "PostListItem__StatusItem",
   componentId: "sc-1e1x6a4-3"
-})(["text-align:center;margin-bottom:8px;"]);
+})(["text-align:center;"]);
 const Wrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__Wrapper",
   componentId: "sc-1e1x6a4-4"
-})(["width:100%;border-bottom:1px solid lightgray;padding:18px 0 18px 30px;display:flex;min-height:180px;", "{padding:16px 0 16px 24px;}"], mediaQuery/* media.mobile */.B.mobile);
+})(["width:100%;border-bottom:1px solid lightgray;padding:20px 0 18px 30px;display:flex;min-height:190px;", "{padding:20px 0 16px 24px;}"], mediaQuery/* media.mobile */.B.mobile);
 const ContentWrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__ContentWrapper",
   componentId: "sc-1e1x6a4-5"
-})(["display:flex;flex-direction:column;width:100%;font-size:0.9rem;color:#6f7d95;padding-right:32px;", "{padding-right:24px;}"], mediaQuery/* media.tablet */.B.tablet);
+})(["display:flex;flex-direction:column;width:100%;font-size:0.9rem;color:#6f7d95;justify-content:space-between;padding-right:8px;", "{padding-right:12px;}"], mediaQuery/* media.tablet */.B.tablet);
 const StatusWrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__StatusWrapper",
   componentId: "sc-1e1x6a4-6"
-})(["display:flex;gap:24px;align-items:center;padding:0 16px;", "{flex-direction:column;gap:4px;}"], mediaQuery/* media.tablet */.B.tablet);
+})(["display:flex;gap:24px;align-items:center;padding:0 16px;", "{flex-direction:column;gap:16px;}"], mediaQuery/* media.tablet */.B.tablet);
 const Title = external_styled_components_default().a.withConfig({
   displayName: "PostListItem__Title",
   componentId: "sc-1e1x6a4-7"
@@ -299,15 +305,15 @@ const Title = external_styled_components_default().a.withConfig({
 const TagWrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__TagWrapper",
   componentId: "sc-1e1x6a4-8"
-})(["margin-bottom:16px;"]);
-const Content = external_styled_components_default().p.withConfig({
+})(["margin:18px 0;"]);
+const Content = external_styled_components_default().a.withConfig({
   displayName: "PostListItem__Content",
   componentId: "sc-1e1x6a4-9"
 })(["font-size:0.9rem;color:#6f7d95;line-height:1.4rem;min-height:1.6rem;max-height:2.8rem;text-overflow:ellipsis;word-wrap:break-word;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-bottom:12px;margin-top:6px;"]);
 const BottomWrapper = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__BottomWrapper",
   componentId: "sc-1e1x6a4-10"
-})(["display:flex;gap:10px;align-items:center;justify-content:flex-end;font-size:0.88rem;flex-wrap:wrap;"]);
+})(["display:flex;gap:10px;align-items:center;justify-content:flex-end;font-size:0.85rem;flex-wrap:wrap;"]);
 const CreatedAt = external_styled_components_default().span.withConfig({
   displayName: "PostListItem__CreatedAt",
   componentId: "sc-1e1x6a4-11"
@@ -319,7 +325,7 @@ const ProfileWrapper = external_styled_components_default().div.withConfig({
 const ProfileImage = external_styled_components_default().div.withConfig({
   displayName: "PostListItem__ProfileImage",
   componentId: "sc-1e1x6a4-13"
-})(["border-radius:50%;width:30px;height:30px;position:relative;margin-right:4px;"]);
+})(["border-radius:50%;width:27px;height:27px;position:relative;margin-right:4px;"]);
 
 /***/ }),
 
@@ -448,7 +454,6 @@ function HomeTemplate() {
               children: [page !== 0 && /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
                 className: "paginate_button page-item",
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
-                  href: "#",
                   "aria-controls": "dataTable",
                   className: "page-link",
                   onClick: () => setPage(page - 1),
@@ -465,7 +470,6 @@ function HomeTemplate() {
                   });
                 },
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
-                  href: "#",
                   "aria-controls": "dataTable",
                   "data-dt-idx": index,
                   tabIndex: index,
@@ -475,7 +479,6 @@ function HomeTemplate() {
               }, label)), page !== max - 1 && /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("li", {
                 className: "paginate_button page-item",
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx("a", {
-                  href: "#",
                   "aria-controls": "dataTable",
                   className: "page-link",
                   onClick: () => setPage(page + 1),
@@ -605,7 +608,7 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
-/***/ 4957:
+/***/ 5429:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/head.js");

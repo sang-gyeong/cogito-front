@@ -53,7 +53,6 @@ __webpack_async_result__();
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "b": () => (/* binding */ modalShowState),
 /* harmony export */   "e": () => (/* binding */ modalState)
 /* harmony export */ });
 /* harmony import */ var recoil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9755);
@@ -63,10 +62,6 @@ __webpack_async_result__();
 
 
 
-const modalShowState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
-  key: 'modalShowState',
-  default: false
-});
 const modalState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
   key: 'modalState',
   default: {

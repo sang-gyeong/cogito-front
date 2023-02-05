@@ -49,7 +49,7 @@ __webpack_async_result__();
 
 const navFoldState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
   key: 'navFoldState',
-  default: false
+  default: true
 });
 
 /***/ }),
@@ -272,19 +272,22 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7518);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _queries_useUserQuery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5863);
-/* harmony import */ var react_icons_md__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4041);
-/* harmony import */ var react_icons_md__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_icons_md__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_icons_fc__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(178);
-/* harmony import */ var react_icons_fc__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_icons_fc__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(567);
-/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_icons_bs__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _hooks_useGetDevice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2901);
-/* harmony import */ var _constants_platform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(8814);
-/* harmony import */ var _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(9244);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_icons_md__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4041);
+/* harmony import */ var react_icons_md__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_icons_md__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react_icons_fc__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(178);
+/* harmony import */ var react_icons_fc__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_icons_fc__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(567);
+/* harmony import */ var react_icons_bs__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_icons_bs__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _hooks_useGetDevice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2901);
+/* harmony import */ var _constants_platform__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(8814);
+/* harmony import */ var _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(9244);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_queries_useUserQuery__WEBPACK_IMPORTED_MODULE_6__]);
 _queries_useUserQuery__WEBPACK_IMPORTED_MODULE_6__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -306,8 +309,8 @@ function SideBar() {
   const {
     refetch
   } = (0,_queries_useUserQuery__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)();
-  const deviceType = (0,_hooks_useGetDevice__WEBPACK_IMPORTED_MODULE_10__/* .useGetDevice */ .H)();
-  const isMini = deviceType === _constants_platform__WEBPACK_IMPORTED_MODULE_11__/* .DEVICE_TYPE.mobile */ .me.mobile || deviceType === _constants_platform__WEBPACK_IMPORTED_MODULE_11__/* .DEVICE_TYPE.tablet */ .me.tablet;
+  const deviceType = (0,_hooks_useGetDevice__WEBPACK_IMPORTED_MODULE_11__/* .useGetDevice */ .H)();
+  const isMini = deviceType === _constants_platform__WEBPACK_IMPORTED_MODULE_12__/* .DEVICE_TYPE.mobile */ .me.mobile || deviceType === _constants_platform__WEBPACK_IMPORTED_MODULE_12__/* .DEVICE_TYPE.tablet */ .me.tablet;
 
   const validateUserState = async () => {
     const {
@@ -331,93 +334,103 @@ function SideBar() {
 
   const onClickFoldButton = () => setIsNavFold(!isNavFold);
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(Wrapper, {
+  const alertHandler = event => {
+    event.preventDefault();
+    alert('아직 개발중인 페이지입니다!');
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_7__.useEffect)(() => {
+    if (deviceType === _constants_platform__WEBPACK_IMPORTED_MODULE_12__/* .DeviceType.desktop */ .Yi.desktop) {
+      setIsNavFold(false);
+    }
+  }, [deviceType]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(Wrapper, {
     className: `navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isNavFold ? 'toggled' : ''}`,
     id: "accordionSidebar",
-    children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
+    children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
       href: "/",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("a", {
+      passHref: true,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)("a", {
         className: "sidebar-brand d-flex align-items-center justify-content-center",
-        href: "#",
-        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("div", {
+        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("div", {
           className: "sidebar-brand-icon rotate-n-15",
-          children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(LogoIcon, {
+          children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(LogoIcon, {
             children: "\uD83D\uDD25"
           })
-        }), !isNavFold && !isMini && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(LogoTitle, {
-          children: ["COGITO ", /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(LogoSup, {
+        }), !isNavFold && !isMini && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(LogoTitle, {
+          children: ["COGITO ", /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(LogoSup, {
             children: "0.1v"
           })]
         })]
       })
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("hr", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("hr", {
       className: "sidebar-divider my-0"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(ButtonWrapper, {
-      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(ButtonWrapper, {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         variant: "primary",
         href: "#",
         onClick: onClickAskButton,
         children: "\uC9C8\uBB38\uD558\uAE30"
       })
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("hr", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("hr", {
       className: "sidebar-divider"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("div", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("div", {
       className: "sidebar-heading",
       children: "\uD398\uC774\uC9C0"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("li", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("li", {
       className: `nav-item ${router.pathname === '/questions' ? 'active' : ''}`,
-      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
         href: "/questions",
         passHref: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(Tab, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(Tab, {
           className: "nav-link",
-          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(IconWrapper, {
+          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(IconWrapper, {
             isNavFold: isNavFold,
-            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(react_icons_md__WEBPACK_IMPORTED_MODULE_7__.MdQuestionAnswer, {})
-          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(TabLabel, {
+            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(react_icons_md__WEBPACK_IMPORTED_MODULE_8__.MdQuestionAnswer, {})
+          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(TabLabel, {
             children: "Questions"
           })]
         })
       })
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("li", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("li", {
       className: `nav-item ${router.pathname === '/users' ? 'active' : ''}`,
-      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx((next_link__WEBPACK_IMPORTED_MODULE_0___default()), {
         href: "#",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(Tab, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(Tab, {
           className: "nav-link",
           href: "#",
-          onClick: () => alert('아직 개발중인 페이지입니다!'),
-          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(IconWrapper, {
+          onClick: alertHandler,
+          children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(IconWrapper, {
             isNavFold: isNavFold,
-            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(react_icons_bs__WEBPACK_IMPORTED_MODULE_9__.BsFillPeopleFill, {})
-          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(TabLabel, {
+            children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(react_icons_bs__WEBPACK_IMPORTED_MODULE_10__.BsFillPeopleFill, {})
+          }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(TabLabel, {
             children: "Users"
           })]
         })
       })
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("hr", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("hr", {
       className: "sidebar-divider"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("div", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("div", {
       className: "sidebar-heading",
       children: "\uAE30\uD0C0\uAE30\uB2A5"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("li", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("li", {
       className: "nav-item",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(Tab, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxs)(Tab, {
         className: "nav-link",
         href: "#",
-        onClick: () => alert('아직 개발중인 페이지입니다!'),
-        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(IconWrapper, {
+        onClick: alertHandler,
+        children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(IconWrapper, {
           isNavFold: isNavFold,
-          children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(react_icons_fc__WEBPACK_IMPORTED_MODULE_8__.FcAbout, {})
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx(TabLabel, {
+          children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(react_icons_fc__WEBPACK_IMPORTED_MODULE_9__.FcAbout, {})
+        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx(TabLabel, {
           children: "\uAE30\uD0C0 \uAE30\uB2A5"
         })]
       })
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("hr", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("hr", {
       className: "sidebar-divider d-none d-md-block"
-    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("div", {
+    }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("div", {
       className: "text-center d-none d-md-inline",
-      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx("button", {
+      children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx("button", {
         className: "rounded-circle border-0",
         id: "sidebarToggle",
         onClick: onClickFoldButton
@@ -432,7 +445,7 @@ const IconWrapper = styled_components__WEBPACK_IMPORTED_MODULE_5___default().div
   isNavFold
 }) => isNavFold ? '1.3rem' : '1rem', ({
   isNavFold
-}) => isNavFold ? '0' : '8px', _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_12__/* .media.tablet */ .B.tablet);
+}) => isNavFold ? '0' : '8px', _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_13__/* .media.tablet */ .B.tablet);
 const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_5___default().ul.withConfig({
   displayName: "SideBar__Wrapper",
   componentId: "sc-ae825e-1"
@@ -448,7 +461,7 @@ const TabLabel = styled_components__WEBPACK_IMPORTED_MODULE_5___default().span.w
 const Tab = styled_components__WEBPACK_IMPORTED_MODULE_5___default().a.withConfig({
   displayName: "SideBar__Tab",
   componentId: "sc-ae825e-4"
-})(["display:flex;flex-direction:row;& > span{position:relative;}", "{display:inline-block;& > span{left:0;}}"], _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_12__/* .media.tablet */ .B.tablet);
+})(["display:flex;flex-direction:row;& > span{position:relative;}", "{display:inline-block;& > span{left:0;}}"], _utils_mediaQuery__WEBPACK_IMPORTED_MODULE_13__/* .media.tablet */ .B.tablet);
 const LogoIcon = styled_components__WEBPACK_IMPORTED_MODULE_5___default().span.withConfig({
   displayName: "SideBar__LogoIcon",
   componentId: "sc-ae825e-5"
@@ -538,7 +551,6 @@ function UserDropdown() {
         children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("a", {
           onClick: () => setIsSearchOpen(!isSearchOpen),
           className: "nav-link dropdown-toggle",
-          href: "#",
           id: "searchDropdown",
           role: "button",
           "data-toggle": "dropdown",
@@ -559,7 +571,6 @@ function UserDropdown() {
           className: "nav-item dropdown no-arrow mx-1",
           children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("a", {
             className: "nav-link dropdown-toggle",
-            href: "#",
             id: "alertsDropdown",
             role: "button",
             "data-toggle": "dropdown",
@@ -576,7 +587,6 @@ function UserDropdown() {
               children: "Alerts Center"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
               className: "dropdown-item d-flex align-items-center",
-              href: "#",
               children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
                 className: "mr-3",
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
@@ -596,7 +606,6 @@ function UserDropdown() {
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
               className: "dropdown-item d-flex align-items-center",
-              href: "#",
               children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
                 className: "mr-3",
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
@@ -613,7 +622,6 @@ function UserDropdown() {
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
               className: "dropdown-item d-flex align-items-center",
-              href: "#",
               children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
                 className: "mr-3",
                 children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("div", {
@@ -630,7 +638,6 @@ function UserDropdown() {
               })]
             }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("a", {
               className: "dropdown-item text-center small text-gray-500",
-              href: "#",
               children: "Show All Alerts"
             })]
           })]
@@ -641,7 +648,6 @@ function UserDropdown() {
           onClick: clickHandler,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
             className: "nav-link dropdown-toggle",
-            href: "#",
             id: "userDropdown",
             role: "button",
             "data-toggle": "dropdown",
@@ -662,16 +668,15 @@ function UserDropdown() {
             "aria-labelledby": "userDropdown",
             children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
               href: "/my",
+              passHref: true,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
                 className: "dropdown-item",
-                href: "#",
                 children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx("i", {
                   className: "fas fa-user fa-sm fa-fw mr-2 text-gray-400"
                 }), "\uB9C8\uC774\uD398\uC774\uC9C0"]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("a", {
               className: "dropdown-item",
-              href: "#",
               onClick: onClickLogout,
               "data-toggle": "modal",
               "data-target": "#logoutModal",
@@ -802,10 +807,10 @@ const Main = styled_components__WEBPACK_IMPORTED_MODULE_0___default().div.withCo
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Yi": () => (/* binding */ DeviceType),
 /* harmony export */   "me": () => (/* binding */ DEVICE_TYPE),
 /* harmony export */   "sO": () => (/* binding */ BREAK_POINT)
 /* harmony export */ });
-/* unused harmony export DeviceType */
 let DeviceType;
 
 (function (DeviceType) {
@@ -845,7 +850,7 @@ function useGetDevice() {
   const {
     0: currentDevice,
     1: setCurrentDevice
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_constants_platform__WEBPACK_IMPORTED_MODULE_1__/* .DEVICE_TYPE.desktop */ .me.desktop);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_constants_platform__WEBPACK_IMPORTED_MODULE_1__/* .DEVICE_TYPE.mobile */ .me.mobile);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     window.addEventListener('load', detectWindowSize);
     window.addEventListener('resize', detectWindowSize);

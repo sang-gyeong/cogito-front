@@ -19,16 +19,20 @@ export default function PostListItem({post, query}: {post: Post.ListItem; query:
   return (
     <Wrapper>
       <ContentWrapper>
-        <Link href={`/questions/${postId}`} passHref>
-          <Title>{highlightIncludedText(title, query)}</Title>
-        </Link>
-        <Content>{highlightIncludedText(content, query)}</Content>
-        <TagWrapper>
-          {/* @TODO: key값 tagId값으로 교체, 태그 클릭시 이동 */}
-          {tags.map((tag, idx) => (
-            <TagItem key={idx} tag={tag} />
-          ))}
-        </TagWrapper>
+        <div>
+          <Link href={`/questions/${postId}`} passHref>
+            <Title>{highlightIncludedText(title, query)}</Title>
+          </Link>
+          <Link href={`/questions/${postId}`} passHref>
+            <Content>{highlightIncludedText(content, query)}</Content>
+          </Link>
+          <TagWrapper>
+            {/* @TODO: key값 tagId값으로 교체, 태그 클릭시 이동 */}
+            {tags.map((tag, idx) => (
+              <TagItem key={idx} tag={tag} />
+            ))}
+          </TagWrapper>
+        </div>
         <BottomWrapper>
           <ProfileWrapper>
             <ProfileImage>
@@ -83,18 +87,17 @@ export const StatusLabel = styled.span`
 
 export const StatusItem = styled.span`
   text-align: center;
-  margin-bottom: 8px;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   border-bottom: 1px solid lightgray;
-  padding: 18px 0 18px 30px;
+  padding: 20px 0 18px 30px;
   display: flex;
-  min-height: 180px;
+  min-height: 190px;
 
   ${media.mobile} {
-    padding: 16px 0 16px 24px;
+    padding: 20px 0 16px 24px;
   }
 `;
 
@@ -104,10 +107,11 @@ export const ContentWrapper = styled.div`
   width: 100%;
   font-size: 0.9rem;
   color: #6f7d95;
-  padding-right: 32px;
+  justify-content: space-between;
+  padding-right: 8px;
 
   ${media.tablet} {
-    padding-right: 24px;
+    padding-right: 12px;
   }
 `;
 
@@ -119,7 +123,7 @@ export const StatusWrapper = styled.div`
 
   ${media.tablet} {
     flex-direction: column;
-    gap: 4px;
+    gap: 16px;
   }
 `;
 
@@ -130,10 +134,10 @@ export const Title = styled.a`
 `;
 
 export const TagWrapper = styled.div`
-  margin-bottom: 16px;
+  margin: 18px 0;
 `;
 
-export const Content = styled.p`
+export const Content = styled.a`
   font-size: 0.9rem;
   color: #6f7d95;
   line-height: 1.4rem;
@@ -154,7 +158,7 @@ export const BottomWrapper = styled.div`
   gap: 10px;
   align-items: center;
   justify-content: flex-end;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   flex-wrap: wrap;
 `;
 
@@ -172,8 +176,8 @@ export const ProfileWrapper = styled.div`
 
 export const ProfileImage = styled.div`
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   position: relative;
   margin-right: 4px;
 `;

@@ -116,7 +116,6 @@ __webpack_async_result__();
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "b": () => (/* binding */ modalShowState),
 /* harmony export */   "e": () => (/* binding */ modalState)
 /* harmony export */ });
 /* harmony import */ var recoil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9755);
@@ -126,10 +125,6 @@ __webpack_async_result__();
 
 
 
-const modalShowState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
-  key: 'modalShowState',
-  default: false
-});
 const modalState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
   key: 'modalState',
   default: {
@@ -158,6 +153,12 @@ const modalState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
 /* harmony import */ var _atoms_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2754);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -166,18 +167,21 @@ const modalState = (0,recoil__WEBPACK_IMPORTED_MODULE_0__.atom)({
 
 
 function Modal() {
-  const [showModal, setShowModal] = (0,recoil__WEBPACK_IMPORTED_MODULE_2__.useRecoilState)(_atoms_modal__WEBPACK_IMPORTED_MODULE_3__/* .modalShowState */ .b);
+  const [_modalState, setModalState] = (0,recoil__WEBPACK_IMPORTED_MODULE_2__.useRecoilState)(_atoms_modal__WEBPACK_IMPORTED_MODULE_3__/* .modalState */ .e);
   const {
+    isShow,
     title,
     component,
     closeCallBack,
     config
-  } = (0,recoil__WEBPACK_IMPORTED_MODULE_2__.useRecoilValue)(_atoms_modal__WEBPACK_IMPORTED_MODULE_3__/* .modalState */ .e);
+  } = _modalState;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     return () => closeCallBack();
-  }, [showModal, closeCallBack]);
+  }, [closeCallBack]);
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => setModalState(_objectSpread(_objectSpread({}, _modalState), {}, {
+    isShow: false
+  }));
 
   const modalConfig = {
     size: config.size ?? 'lg',
@@ -187,7 +191,7 @@ function Modal() {
   return /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal, {
       size: modalConfig.size,
-      show: showModal,
+      show: isShow,
       onHide: handleClose,
       centered: modalConfig.centered,
       children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.Header, {
