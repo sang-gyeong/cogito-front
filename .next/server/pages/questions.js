@@ -605,7 +605,7 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
-/***/ 4957:
+/***/ 5429:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/head.js");

@@ -501,7 +501,7 @@ var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] 
 
 var _react = _interop_require_wildcard(__webpack_require__(6689));
 
-var _head = _interop_require_default(__webpack_require__(4957));
+var _head = _interop_require_default(__webpack_require__(5429));
 
 var _imageConfig = __webpack_require__(5843);
 
@@ -1194,7 +1194,7 @@ var _object_without_properties_loose = (__webpack_require__(7273)/* ["default"] 
 
 var _react = _interop_require_default(__webpack_require__(6689));
 
-var _router = __webpack_require__(5781);
+var _router = __webpack_require__(4957);
 
 var _addLocale = __webpack_require__(7995);
 
@@ -2355,7 +2355,7 @@ if ((typeof exports.default === 'function' || typeof exports.default === 'object
 
 /***/ }),
 
-/***/ 5781:
+/***/ 4957:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
