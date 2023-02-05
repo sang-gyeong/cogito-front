@@ -8,6 +8,7 @@ export const modalShowState = atom({
 export const modalState = atom({
   key: 'modalState',
   default: {
+    isShow: false,
     component: <></>,
     closeCallBack: () => {},
     config: {},

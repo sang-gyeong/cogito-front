@@ -43,8 +43,8 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
 `;
 
@@ -64,8 +64,8 @@ const Button = styled.button`
 
 export const ProfileImage = styled.div`
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   box-shadow: px 0px 1px gray;
   position: relative;
 `;
@@ -81,6 +81,6 @@ const ProfileWrapper = styled.div`
   min-width: 200px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   justify-content: flex-end;
 `;

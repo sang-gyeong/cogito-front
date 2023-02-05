@@ -1,12 +1,14 @@
-import {axiosInstanceForCSR, axiosInstanceForSSR} from './index';
+import {axiosInstanceForCSR} from './index';
 
-interface CommentParams {
+export const createComment = ({
+  postId,
+  parentId,
+  content,
+}: {
   postId: number;
   parentId: number | null;
   content: string;
-}
-
-export const createComment = (postId: number, parentId: number | null, content: string): Promise<{}> =>
+}): Promise<{}> =>
   axiosInstanceForCSR.post<{}>(`/comments`, {postId, parentId, content}).then(response => response?.data);
 
 export const modifyComment = (id: number, content: string): Promise<{}> =>

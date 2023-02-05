@@ -71,8 +71,8 @@ export default function SideBar() {
       <hr className="sidebar-divider" />
       <div className="sidebar-heading">페이지</div>
       <li className={`nav-item ${router.pathname === '/questions' ? 'active' : ''}`}>
-        <Link href="/questions">
-          <Tab className="nav-link" href="#">
+        <Link href="/questions" passHref>
+          <Tab className="nav-link">
             <IconWrapper isNavFold={isNavFold}>
               <MdQuestionAnswer />
             </IconWrapper>

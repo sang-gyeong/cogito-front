@@ -1,18 +1,15 @@
-import dynamic from 'next/dynamic';
-import {useState} from 'react';
-import Skeleton from 'react-loading-skeleton';
 import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
-import {createComment, deleteComment, dislikeComment, likeComment} from '../../../api/comment';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
 import {deletePostById, dislikePost, likePost} from '../../../api/post';
-import {modalShowState, modalState} from '../../../atoms/modal';
+import {modalState} from '../../../atoms/modal';
 import useBoardQuery from '../../../queries/usePostQuery';
 import {getScoreImage} from '../../../utils/score';
 import TagItem from '../../Common/Tag';
 import Image from 'next/image';
-import RBButton from 'react-bootstrap/Button';
 import AutoHeightImage from '../../Common/AutoHeightImage';
+import BoardComments from './BoardComments';
+import {MarkdownPreview} from '../../../libs/MDEditor';
 
 const contentStyle = {
   fontSize: '0.95rem',
@@ -21,40 +18,18 @@ const contentStyle = {
   padding: '0.5rem',
 };
 
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
-  ssr: false,
-  loading: () => (
-    <>
-      <Skeleton height={100} />
-    </>
-  ),
-});
-
-const MarkdownPreview = dynamic(() => import('@uiw/react-markdown-preview'), {
-  ssr: false,
-  loading: () => (
-    <>
-      <Skeleton count={4} />
-    </>
-  ),
-});
-
 export default function BoardTemplate({id}: {id: number}) {
   const {data, refetch} = useBoardQuery(id);
-  const [value, setValue] = useState<string | undefined>('');
-
-  const setShowModal = useSetRecoilState(modalShowState);
   const setModalState = useSetRecoilState(modalState);
 
   const handleModal = () => {
     setModalState({
+      isShow: true,
       component: <div>신고사유 선택하기</div>,
       title: '신고하기',
       closeCallBack: () => console.log('tada!!'),
       config: {size: 'lg', closeButton: true, centered: false},
     });
-
-    setShowModal(true);
   };
 
   const clickHandler = async (isLike: boolean) => {
@@ -63,17 +38,6 @@ export default function BoardTemplate({id}: {id: number}) {
       return;
     }
     isLike ? await likePost(id) : await dislikePost(id);
-
-    refetch();
-  };
-
-  const commentScoreHandler = async (isLike: boolean, comment: Comment) => {
-    if (comment.isMe) {
-      window.alert(`자기 자신의 댓글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
-      return;
-    }
-
-    isLike ? await likeComment(comment.commentId) : await dislikeComment(comment.commentId);
 
     refetch();
   };
@@ -99,35 +63,10 @@ export default function BoardTemplate({id}: {id: number}) {
 
   const onClickModifyPost = () => {};
 
-  const onClickModifyComment = () => {};
-
   const onClickDeletePost = async () => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       await deletePostById(postId);
     }
-  };
-
-  const fetchCreateComment = async () => {
-    if (!value) {
-      alert('댓글을 입력해주세요.');
-    }
-    await createComment(postId, null, value ?? '');
-    refetch();
-  };
-
-  const fetchDeleteComment = async (commentId: number) => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      await deleteComment(commentId);
-      refetch();
-    }
-  };
-
-  const onClickDeleteComment = (commentId: number) => {
-    fetchDeleteComment(commentId);
-  };
-
-  const onClickCreateComment = () => {
-    fetchCreateComment();
   };
 
   return (
@@ -136,9 +75,7 @@ export default function BoardTemplate({id}: {id: number}) {
         <Title>{title}</Title>
 
         <SubTitleArea>
-          <SubText>
-            {createdAt ?? '2023-01-26 03:22:49'} | {'3,203 viewed'}
-          </SubText>
+          <SubText>{createdAt ?? '2023-01-26 03:22:49'}</SubText>
           <ButtonWrapper>
             {isMe ? (
               <>
@@ -166,7 +103,7 @@ export default function BoardTemplate({id}: {id: number}) {
 
           <FilesWrapper>
             {files.map(file => (
-              <AutoHeightImage key={file} src={file} alt="upload-img" />
+              <AutoHeightImage key={file} src={file} alt="upload-img" placeholder="blur" blurDataURL={file} />
             ))}
           </FilesWrapper>
           <TagWrapper>
@@ -188,84 +125,7 @@ export default function BoardTemplate({id}: {id: number}) {
         </ContentWrapper>
       </MiddleWrapper>
 
-      <CommentWrapper>
-        {commentResponses.length > 0 ? (
-          <>
-            <SubTitle>🔥 {commentResponses.length}개의 답변이 달렸습니다</SubTitle>
-            {commentResponses.map((comment, idx) => (
-              <Comment key={idx}>
-                <ScoreWrapper>
-                  <button onClick={() => commentScoreHandler(true, comment)}>▲</button>
-                  <span> {comment.likeCnt} </span>
-                  <button onClick={() => commentScoreHandler(false, comment)}>▼</button>
-                </ScoreWrapper>
-                <CommentContentWrapper>
-                  <MarkdownPreview
-                    source={comment.content}
-                    style={{backgroundColor: 'transparent', marginBottom: '2rem', ...contentStyle}}
-                  />
-
-                  <CommentButtonWrapper>
-                    <ButtonWrapper>
-                      {comment.isMe ? (
-                        <>
-                          <Button>수정</Button>
-                          <Button onClick={() => onClickDeleteComment(comment.commentId)}>삭제</Button>
-                        </>
-                      ) : (
-                        <Button onClick={handleModal}>신고</Button>
-                      )}
-                    </ButtonWrapper>
-                  </CommentButtonWrapper>
-                  <BottomWrapper>
-                    <ProfileWrapper>
-                      <ProfileImage>
-                        <Image
-                          src={comment.profileImgUrl ?? profileDefaultImage}
-                          alt="profile-image"
-                          width={30}
-                          height={30}
-                        />
-                        <ScoreImage>{getScoreImage(comment.score)}</ScoreImage>
-                      </ProfileImage>
-                      {comment.nickname}
-                    </ProfileWrapper>
-                    |<CreatedAt>{comment.createdAt}</CreatedAt>
-                  </BottomWrapper>
-                </CommentContentWrapper>
-              </Comment>
-            ))}
-          </>
-        ) : (
-          <EmptyView>작성된 댓글이 없습니다</EmptyView>
-        )}
-
-        {!isMe && (
-          <div style={{marginTop: '32px'}}>
-            <SubTitle>🔥 나의 답변</SubTitle>
-            <MDEditor
-              style={{
-                width: '100%',
-                marginTop: '20px',
-              }}
-              preview="edit"
-              value={value}
-              onChange={setValue}
-              previewOptions={{}}
-            />
-            <MarkdownPreview
-              source={value}
-              style={{backgroundColor: 'transparent', fontSize: '0.98rem', marginBottom: '2rem'}}
-            />
-
-            <span style={{textAlign: 'right'}}>
-              <RBButton variant="primary" onClick={onClickCreateComment}>
-                답변 제출하기
-              </RBButton>
-            </span>
-          </div>
-        )}
-      </CommentWrapper>
+      <BoardComments isMe={isMe} postId={postId} commentResponses={commentResponses} />
     </Wrapper>
   );
 }
@@ -276,16 +136,6 @@ const FilesWrapper = styled.div`
   gap: 12px;
 `;
 
-const EmptyView = styled.div`
-  border: 1px solid lightslategray;
-  width: 100%;
-  color: lightslategray;
-  border-radius: 10px;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.85rem;
-`;
-
 const Button = styled.button`
   border: none;
   background-color: transparent;
@@ -293,41 +143,10 @@ const Button = styled.button`
   color: black;
 `;
 
-const CommentButtonWrapper = styled.div`
-  width: 100%;
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 4px;
   text-align: right;
-`;
-
-const CommentContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-top: 1px solid lightgray;
-  padding: 0.5rem 0 1rem 0;
-`;
-
-const SubTitle = styled.h5`
-  font-weight: 600;
-  font-size: 1.3rem;
-`;
-
-const Comment = styled.div`
-  display: flex;
-`;
-
-const CommentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 100px;
 `;
 
 const Wrapper = styled.div`
@@ -389,10 +208,10 @@ const ContentWrapper = styled.div`
   height: 100%;
 `;
 
-export const ProfileImage = styled.div`
+const ProfileImage = styled.div`
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   box-shadow: px 0px 1px gray;
   position: relative;
   margin-right: 8px;
@@ -408,15 +227,13 @@ const ProfileWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 5px;
+  gap: 4px;
 `;
 
-export const BottomWrapper = styled.div`
+const BottomWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: flex-end;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
 `;
-
-export const CreatedAt = styled.span``;

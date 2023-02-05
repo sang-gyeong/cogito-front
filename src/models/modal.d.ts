@@ -1,4 +1,5 @@
 declare interface ModalProps {
+  isShow: boolean;
   title: string;
   component: ReactElement;
   config: {
