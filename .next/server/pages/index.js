@@ -66,7 +66,7 @@ module.exports = require("next/dist/shared/lib/head-manager-context.js");
 
 /***/ }),
 
-/***/ 5429:
+/***/ 4957:
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/head.js");
@@ -269,6 +269,27 @@ module.exports = require("react-cookies");
 
 /***/ }),
 
+/***/ 567:
+/***/ ((module) => {
+
+module.exports = require("react-icons/bs");
+
+/***/ }),
+
+/***/ 178:
+/***/ ((module) => {
+
+module.exports = require("react-icons/fc");
+
+/***/ }),
+
+/***/ 4041:
+/***/ ((module) => {
+
+module.exports = require("react-icons/md");
+
+/***/ }),
+
 /***/ 997:
 /***/ ((module) => {
 
@@ -287,6 +308,13 @@ module.exports = require("recoil");
 /***/ ((module) => {
 
 module.exports = require("styled-components");
+
+/***/ }),
+
+/***/ 9752:
+/***/ ((module) => {
+
+module.exports = import("@tanstack/react-query");;
 
 /***/ }),
 

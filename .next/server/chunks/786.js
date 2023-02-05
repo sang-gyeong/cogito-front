@@ -34,11 +34,11 @@ axiosInstance.interceptors.request.use(async request => {
 
   return request;
 });
-const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.get */ .D2.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
+const getAccessToken = (host, authToken) => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.get */ .D.get(`/auth/${host}/login/token?code=${authToken}`).then(response => response?.data);
 const reissueToken = () => axiosInstance.post('/auth/reissue').then(response => {
   return response?.data;
 });
-const logout = () => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.post */ .D2.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
+const logout = () => _index__WEBPACK_IMPORTED_MODULE_1__/* .axiosInstanceForCSR.post */ .D.post('/auth/logout').then(() => console.log('로그아웃 되었습니다.'));
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 
@@ -49,10 +49,8 @@ __webpack_async_result__();
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "D2": () => (/* binding */ axiosInstanceForCSR),
-/* harmony export */   "NJ": () => (/* binding */ getTags),
-/* harmony export */   "Rf": () => (/* binding */ getUsers),
-/* harmony export */   "We": () => (/* binding */ axiosInstanceForSSR)
+/* harmony export */   "D": () => (/* binding */ axiosInstanceForCSR),
+/* harmony export */   "W": () => (/* binding */ axiosInstanceForSSR)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9648);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2245);
@@ -129,8 +127,6 @@ axiosInstanceForSSR.interceptors.response.use(response => response, error => {
   throw new Error(error);
 });
 
-const getTags = () => axiosInstanceForCSR.get(`/tags`).then(response => response?.data);
-const getUsers = () => axiosInstanceForCSR.get(`/users`).then(response => response?.data);
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
 

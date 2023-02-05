@@ -83,13 +83,13 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_0__["default"] {
           href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,1,0",
           crossOrigin: "anonymous"
         }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("link", {
+          href: "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i",
+          rel: "stylesheet",
+          crossOrigin: "anonymous"
+        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("link", {
           rel: "stylesheet",
           href: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css",
           integrity: "sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi",
-          crossOrigin: "anonymous"
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("link", {
-          href: "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i",
-          rel: "stylesheet",
           crossOrigin: "anonymous"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("body", {
@@ -100,10 +100,6 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_0__["default"] {
           async: true
         }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
           src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
-          crossOrigin: "anonymous",
-          async: true
-        }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx("script", {
-          src: "https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js",
           crossOrigin: "anonymous",
           async: true
         })]
