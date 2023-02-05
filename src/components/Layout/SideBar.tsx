@@ -5,12 +5,12 @@ import {useRecoilState} from 'recoil';
 import {navFoldState} from '../../atoms/nav';
 import styled from 'styled-components';
 import useUserQuery, {QUERY_KEY} from '../../queries/useUserQuery';
-import {MouseEvent} from 'react';
+import {MouseEvent, useEffect} from 'react';
 import {MdQuestionAnswer} from 'react-icons/md';
 import {FcAbout} from 'react-icons/fc';
 import {BsFillPeopleFill} from 'react-icons/bs';
 import {useGetDevice} from '../../hooks/useGetDevice';
-import {DEVICE_TYPE} from '../../constants/platform';
+import {DeviceType, DEVICE_TYPE} from '../../constants/platform';
 import {media} from '../../utils/mediaQuery';
 
 export default function SideBar() {
@@ -41,13 +41,25 @@ export default function SideBar() {
 
   const onClickFoldButton = () => setIsNavFold(!isNavFold);
 
+  const alertHandler = (event: MouseEvent) => {
+    event.preventDefault();
+
+    alert('아직 개발중인 페이지입니다!');
+  };
+
+  useEffect(() => {
+    if (deviceType === DeviceType.desktop) {
+      setIsNavFold(false);
+    }
+  }, [deviceType]);
+
   return (
     <Wrapper
       className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isNavFold ? 'toggled' : ''}`}
       id="accordionSidebar">
       {/* 로고 */}
-      <Link href="/">
-        <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+      <Link href="/" passHref>
+        <a className="sidebar-brand d-flex align-items-center justify-content-center">
           <div className="sidebar-brand-icon rotate-n-15">
             <LogoIcon>🔥</LogoIcon>
           </div>
@@ -83,7 +95,7 @@ export default function SideBar() {
 
       <li className={`nav-item ${router.pathname === '/users' ? 'active' : ''}`}>
         <Link href="#">
-          <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
+          <Tab className="nav-link" href="#" onClick={alertHandler}>
             <IconWrapper isNavFold={isNavFold}>
               <BsFillPeopleFill />
             </IconWrapper>
@@ -95,7 +107,7 @@ export default function SideBar() {
       <hr className="sidebar-divider" />
       <div className="sidebar-heading">기타기능</div>
       <li className="nav-item">
-        <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
+        <Tab className="nav-link" href="#" onClick={alertHandler}>
           <IconWrapper isNavFold={isNavFold}>
             <FcAbout />
           </IconWrapper>

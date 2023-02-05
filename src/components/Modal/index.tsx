@@ -1,17 +1,17 @@
 import {useEffect} from 'react';
 import {Modal as BSModal, Button} from 'react-bootstrap';
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {modalShowState, modalState} from '../../atoms/modal';
+import {useRecoilState} from 'recoil';
+import {modalState} from '../../atoms/modal';
 
 export default function Modal() {
-  const [showModal, setShowModal] = useRecoilState(modalShowState);
-  const {title, component, closeCallBack, config} = useRecoilValue(modalState);
+  const [_modalState, setModalState] = useRecoilState(modalState);
+  const {isShow, title, component, closeCallBack, config} = _modalState;
 
   useEffect(() => {
     return () => closeCallBack();
-  }, [showModal, closeCallBack]);
+  }, [closeCallBack]);
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => setModalState({..._modalState, isShow: false});
 
   const modalConfig: ModalProps['config'] = {
     size: config.size ?? 'lg',
@@ -21,7 +21,7 @@ export default function Modal() {
 
   return (
     <>
-      <BSModal size={modalConfig.size} show={showModal} onHide={handleClose} centered={modalConfig.centered}>
+      <BSModal size={modalConfig.size} show={isShow} onHide={handleClose} centered={modalConfig.centered}>
         <BSModal.Header closeButton={modalConfig.closeButton}>
           <BSModal.Title>{title}</BSModal.Title>
         </BSModal.Header>

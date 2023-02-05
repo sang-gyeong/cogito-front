@@ -2,5 +2,5 @@ import {atom} from 'recoil';
 
 export const navFoldState = atom({
   key: 'navFoldState',
-  default: false,
+  default: true,
 });

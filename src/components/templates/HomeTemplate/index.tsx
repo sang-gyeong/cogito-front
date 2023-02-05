@@ -76,7 +76,7 @@ export default function HomeTemplate() {
               <ul className="pagination">
                 {page !== 0 && (
                   <li className="paginate_button page-item">
-                    <a href="#" aria-controls="dataTable" className="page-link" onClick={() => setPage(page - 1)}>
+                    <a aria-controls="dataTable" className="page-link" onClick={() => setPage(page - 1)}>
                       ◀
                     </a>
                   </li>
@@ -88,14 +88,14 @@ export default function HomeTemplate() {
                     onClick={() => {
                       router.push({pathname: '/questions', query: {...router.query, page: index}});
                     }}>
-                    <a href="#" aria-controls="dataTable" data-dt-idx={index} tabIndex={index} className="page-link">
+                    <a aria-controls="dataTable" data-dt-idx={index} tabIndex={index} className="page-link">
                       {label}
                     </a>
                   </li>
                 ))}
                 {page !== max - 1 && (
                   <li className="paginate_button page-item">
-                    <a href="#" aria-controls="dataTable" className="page-link" onClick={() => setPage(page + 1)}>
+                    <a aria-controls="dataTable" className="page-link" onClick={() => setPage(page + 1)}>
                       ▶
                     </a>
                   </li>

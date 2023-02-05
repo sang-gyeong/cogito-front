@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {BREAK_POINT, DeviceType, DEVICE_TYPE} from '../constants/platform';
 
 export function useGetDevice() {
-  const [currentDevice, setCurrentDevice] = useState<DeviceType>(DEVICE_TYPE.desktop);
+  const [currentDevice, setCurrentDevice] = useState<DeviceType>(DEVICE_TYPE.mobile);
 
   useEffect(() => {
     window.addEventListener('load', detectWindowSize);

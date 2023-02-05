@@ -39,7 +39,6 @@ export default function UserDropdown() {
           <a
             onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="nav-link dropdown-toggle"
-            href="#"
             id="searchDropdown"
             role="button"
             data-toggle="dropdown"
@@ -60,7 +59,6 @@ export default function UserDropdown() {
             <li className="nav-item dropdown no-arrow mx-1">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="alertsDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -73,7 +71,7 @@ export default function UserDropdown() {
                 className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
                 <h6 className="dropdown-header">Alerts Center</h6>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center">
                   <div className="mr-3">
                     <div className="icon-circle bg-primary">
                       <i className="fas fa-file-alt text-white" />
@@ -84,7 +82,7 @@ export default function UserDropdown() {
                     <span className="font-weight-bold">A new monthly report is ready to download!</span>
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center">
                   <div className="mr-3">
                     <div className="icon-circle bg-success">
                       <i className="fas fa-donate text-white" />
@@ -95,7 +93,7 @@ export default function UserDropdown() {
                     $290.29 has been deposited into your account!
                   </div>
                 </a>
-                <a className="dropdown-item d-flex align-items-center" href="#">
+                <a className="dropdown-item d-flex align-items-center">
                   <div className="mr-3">
                     <div className="icon-circle bg-warning">
                       <i className="fas fa-exclamation-triangle text-white" />
@@ -106,9 +104,7 @@ export default function UserDropdown() {
                     Spending Alert: We ve noticed unusually high spending for your account.
                   </div>
                 </a>
-                <a className="dropdown-item text-center small text-gray-500" href="#">
-                  Show All Alerts
-                </a>
+                <a className="dropdown-item text-center small text-gray-500">Show All Alerts</a>
               </div>
             </li>
             <div className="topbar-divider d-none d-sm-block" />
@@ -116,7 +112,6 @@ export default function UserDropdown() {
             <li className={`nav-item dropdown no-arrow ${isOpen ? ' show' : ''}`} onClick={clickHandler}>
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="userDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -135,19 +130,14 @@ export default function UserDropdown() {
               <div
                 className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${isOpen ? ' show' : ''}`}
                 aria-labelledby="userDropdown">
-                <Link href="/my">
-                  <a className="dropdown-item" href="#">
+                <Link href="/my" passHref>
+                  <a className="dropdown-item">
                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                     마이페이지
                   </a>
                 </Link>
 
-                <a
-                  className="dropdown-item"
-                  href="#"
-                  onClick={onClickLogout}
-                  data-toggle="modal"
-                  data-target="#logoutModal">
+                <a className="dropdown-item" onClick={onClickLogout} data-toggle="modal" data-target="#logoutModal">
                   <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
                   로그아웃
                 </a>
