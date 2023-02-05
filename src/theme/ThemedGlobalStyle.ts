@@ -16,6 +16,7 @@ ${reset}
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     /* Hide scrollbar for Chrome, Safari and Opera */
+    overscroll-behavior-y: none;
     &::-webkit-scrollbar {
       display: none;
     }

@@ -77,8 +77,3 @@ axiosInstanceForSSR.interceptors.response.use(
 );
 
 export {axiosInstanceForCSR, axiosInstanceForSSR};
-
-export const getTags = (): Promise<Tag[]> => axiosInstanceForCSR.get<Tag[]>(`/tags`).then(response => response?.data);
-
-export const getUsers = (): Promise<User[]> =>
-  axiosInstanceForCSR.get<User[]>(`/users`).then(response => response?.data);

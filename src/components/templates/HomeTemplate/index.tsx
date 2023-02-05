@@ -112,7 +112,7 @@ export default function HomeTemplate() {
 const Pagination = styled.div`
   width: fit-content;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 const EmptyResult = styled.div`

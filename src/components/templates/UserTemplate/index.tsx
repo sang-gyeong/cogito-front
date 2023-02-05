@@ -1,16 +1,12 @@
 import useUsersQuery from '../../../queries/useUsersQuery';
-import UserItem from '../../UserItem';
 import styled from 'styled-components';
-import {Pagination} from 'react-bootstrap';
-import SideBar from '../../Layout/SideBar';
-import TitleSection from '../../TitleSection';
 
 export default function UserTemplate() {
-  const {data: users, isLoading} = useUsersQuery();
+  // const {data: users, isLoading} = useUsersQuery();
 
-  if (isLoading || !users) {
-    return <>Loading...</>;
-  }
+  // if (isLoading || !users) {
+  //   return <>Loading...</>;
+  // }
 
   return (
     <Wrapper>

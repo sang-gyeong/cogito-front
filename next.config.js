@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     remotePatterns: [{protocol: 'https', hostname: '**'}],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   env: {
     BASE_URL: process.env.BASE_URL,

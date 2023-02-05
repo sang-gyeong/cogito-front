@@ -1,5 +1,4 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
-
 import dynamic from 'next/dynamic';
 import {ChangeEvent, useEffect, useState} from 'react';
 import {Button} from 'react-bootstrap';
@@ -35,21 +34,6 @@ const MarkdownPreview = dynamic(() => import('@uiw/react-markdown-preview'), {
   ),
 });
 
-// const source = `
-// # MarkdownPreview
-// ## MarkdownPreview
-// ### MarkdownPreview
-
-// > todo: React component preview markdown text.
-
-// \`테스트\`입니다
-
-// \`\`\`jsx
-// const test = "test"
-// const test2 = "test2"
-// \`\`\`
-// `;
-
 export default function NewPage() {
   const router = useRouter();
   const [value, setValue] = useState<string | undefined>('');
@@ -65,11 +49,10 @@ export default function NewPage() {
 
     const file = e.target.files;
 
-    console.log('files');
-
     if (!file) return null;
 
-    // Firebase storage에 files이란 폴더를 만들고 그 안에 업로드할 이미지의 이름으로 이미지를 저장한다는 의미. (timestamp 추가)
+    // Firebase storage에 files이란 폴더를 만들고 그 안에 업로드할 이미지의 이름으로 이미지를 저장
+    // @TODO: 파일명에 timestamp 추가
     const storageRef = ref(storage, `files/${file[0].name}`);
     const uploadTask = uploadBytesResumable(storageRef, file[0]);
 

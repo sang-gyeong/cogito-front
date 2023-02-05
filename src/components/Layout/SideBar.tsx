@@ -1,89 +1,129 @@
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import {Button} from 'react-bootstrap';
 import {useRecoilState} from 'recoil';
+import {navFoldState} from '../../atoms/nav';
 import styled from 'styled-components';
-import {navShowState} from '../../atoms/nav';
+import useUserQuery, {QUERY_KEY} from '../../queries/useUserQuery';
+import {MouseEvent} from 'react';
+import {MdQuestionAnswer} from 'react-icons/md';
+import {FcAbout} from 'react-icons/fc';
+import {BsFillPeopleFill} from 'react-icons/bs';
+import {useGetDevice} from '../../hooks/useGetDevice';
+import {DEVICE_TYPE} from '../../constants/platform';
+import {media} from '../../utils/mediaQuery';
 
 export default function SideBar() {
-  const [isShowNav, setIsShowNav] = useRecoilState(navShowState);
+  const router = useRouter();
+  const [isNavFold, setIsNavFold] = useRecoilState<boolean>(navFoldState);
+  const {refetch} = useUserQuery();
+  const deviceType = useGetDevice();
+
+  const isMini = deviceType === DEVICE_TYPE.mobile || deviceType === DEVICE_TYPE.tablet;
+
+  const validateUserState = async () => {
+    const {data: user} = await refetch({queryKey: [QUERY_KEY]});
+
+    const isLoggedIn = user?.userId;
+
+    if (isLoggedIn) {
+      router.push('/new');
+    } else {
+      window.alert('로그인이 필요합니다');
+    }
+  };
+
+  const onClickAskButton = (event: MouseEvent) => {
+    event.preventDefault();
+
+    validateUserState();
+  };
+
+  const onClickFoldButton = () => setIsNavFold(!isNavFold);
 
   return (
-    <ul
-      className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isShowNav ? '' : 'toggled'}`}
+    <Wrapper
+      className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isNavFold ? 'toggled' : ''}`}
       id="accordionSidebar">
+      {/* 로고 */}
       <Link href="/">
         <a className="sidebar-brand d-flex align-items-center justify-content-center" href="#">
           <div className="sidebar-brand-icon rotate-n-15">
             <LogoIcon>🔥</LogoIcon>
           </div>
-          {isShowNav && (
-            <LogoTitle className="">
+          {!isNavFold && !isMini && (
+            <LogoTitle>
               COGITO <LogoSup>0.1v</LogoSup>
             </LogoTitle>
           )}
         </a>
       </Link>
-      {/* Divider */}
+
+      {/* 질문하기 버튼 */}
       <hr className="sidebar-divider my-0" />
       <ButtonWrapper>
-        <Link href="/new">
-          <Button variant="primary" href="#">
-            질문하기
-          </Button>
-        </Link>
+        <Button variant="primary" href="#" onClick={onClickAskButton}>
+          질문하기
+        </Button>
       </ButtonWrapper>
-      {/* Divider */}
+
+      {/* 페이지 영역 (questions, users, 기타기능) */}
       <hr className="sidebar-divider" />
-      {/* Heading */}
       <div className="sidebar-heading">페이지</div>
-      {/* Nav Item - Pages Collapse Menu */}
-      <li className="nav-item active">
+      <li className={`nav-item ${router.pathname === '/questions' ? 'active' : ''}`}>
         <Link href="/questions">
           <Tab className="nav-link" href="#">
-            <i className="fa-fw"></i>
-            <span className="material-symbols-outlined">live_help</span>
-            <span className="label">Questions</span>
+            <IconWrapper isNavFold={isNavFold}>
+              <MdQuestionAnswer />
+            </IconWrapper>
+            <TabLabel>Questions</TabLabel>
           </Tab>
         </Link>
       </li>
-      {/* Nav Item - Utilities Collapse Menu */}
-      <li className="nav-item">
+
+      <li className={`nav-item ${router.pathname === '/users' ? 'active' : ''}`}>
         <Link href="#">
           <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
-            <i className="fa-fw"></i>
-            <span className="material-symbols-outlined">group</span>
-            <span className="label">Users</span>
+            <IconWrapper isNavFold={isNavFold}>
+              <BsFillPeopleFill />
+            </IconWrapper>
+            <TabLabel>Users</TabLabel>
           </Tab>
         </Link>
       </li>
-      {/* Divider */}
+
       <hr className="sidebar-divider" />
-      {/* Heading */}
       <div className="sidebar-heading">기타기능</div>
-      {/* Nav Item - Pages Collapse Menu */}
       <li className="nav-item">
         <Tab className="nav-link" href="#" onClick={() => alert('아직 개발중인 페이지입니다!')}>
-          <i className="fa-fw"></i>
-          <span className="material-symbols-outlined">add_circle</span>
-          <span className="label">기타 기능 (미오픈)</span>
+          <IconWrapper isNavFold={isNavFold}>
+            <FcAbout />
+          </IconWrapper>
+          <TabLabel>기타 기능</TabLabel>
         </Tab>
       </li>
-      {/* Divider */}
+
+      {/* 접기 버튼 */}
       <hr className="sidebar-divider d-none d-md-block" />
-      {/* Sidebar Toggler (Sidebar) */}
       <div className="text-center d-none d-md-inline">
-        <button className="rounded-circle border-0" id="sidebarToggle" onClick={() => setIsShowNav(!isShowNav)} />
+        <button className="rounded-circle border-0" id="sidebarToggle" onClick={onClickFoldButton} />
       </div>
-    </ul>
+    </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
-  max-width: 370px;
-  width: 40%;
-  background-color: beige;
-  padding-left: 30px;
+const IconWrapper = styled.div<{isNavFold: boolean}>`
+  font-size: ${({isNavFold}) => (isNavFold ? '1.3rem' : '1rem')};
+  display: inline-block;
+  padding-right: ${({isNavFold}) => (isNavFold ? '0' : '8px')};
+
+  ${media.tablet} {
+    font-size: 1.3rem;
+    padding-right: 0;
+  }
 `;
+
+const Wrapper = styled.ul``;
 
 const ButtonWrapper = styled.div`
   height: 116px;
@@ -105,14 +145,24 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const TabLabel = styled.span`
+  white-space: nowrap;
+`;
+
 const Tab = styled.a`
   display: flex;
-  align-items: center;
+  flex-direction: row;
 
-  & > .label {
+  & > span {
     position: relative;
-    bottom: 2px;
-    left: 5px;
+  }
+
+  ${media.tablet} {
+    display: inline-block;
+
+    & > span {
+      left: 0;
+    }
   }
 `;
 
@@ -122,7 +172,7 @@ const LogoIcon = styled.span`
 
 const LogoTitle = styled.div`
   margin-left: 0.5rem;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
 `;
 

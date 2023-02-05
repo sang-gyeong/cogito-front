@@ -6,13 +6,14 @@ import {media} from '../../utils/mediaQuery';
 import Image from 'next/image';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
 import TagItem from '../Common/Tag';
+import {AiOutlineLike, AiOutlineComment} from 'react-icons/ai';
 
 export default function PostListItem({post, query}: {post: Post.ListItem; query: string}) {
   const {postId, title, content, likeCnt, tags, nickname, profileImgUrl, score, commentCnt, createdAt} = post;
 
   const statusList = [
-    {label: 'answers', value: commentCnt},
-    {label: 'likes', value: likeCnt},
+    {label: <AiOutlineComment />, value: commentCnt},
+    {label: <AiOutlineLike />, value: likeCnt},
   ];
 
   return (
@@ -40,10 +41,10 @@ export default function PostListItem({post, query}: {post: Post.ListItem; query:
         </BottomWrapper>
       </ContentWrapper>
       <StatusWrapper>
-        {statusList.map(status => (
-          <StatusItem key={status.label}>
+        {statusList.map((status, idx) => (
+          <StatusItem key={idx}>
             <Status>{status.value}</Status>
-            <StatusLabel>{status.label}</StatusLabel>
+            {status.label}
           </StatusItem>
         ))}
       </StatusWrapper>
@@ -64,11 +65,12 @@ export const Status = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightgray;
+  border: 1px solid #bcbfc6;
+  font-weight: 300;
 
   ${media.tablet} {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 `;
 
@@ -76,22 +78,23 @@ export const StatusLabel = styled.span`
   font-size: 0.75rem;
 
   ${media.tablet} {
-    display: none;
   }
 `;
 
 export const StatusItem = styled.span`
   text-align: center;
+  margin-bottom: 8px;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   border-bottom: 1px solid lightgray;
-  padding: 18px 30px;
+  padding: 18px 0 18px 30px;
   display: flex;
   min-height: 180px;
+
   ${media.mobile} {
-    padding: 16px 24px;
+    padding: 16px 0 16px 24px;
   }
 `;
 
@@ -102,12 +105,17 @@ export const ContentWrapper = styled.div`
   font-size: 0.9rem;
   color: #6f7d95;
   padding-right: 32px;
+
+  ${media.tablet} {
+    padding-right: 24px;
+  }
 `;
 
 export const StatusWrapper = styled.div`
   display: flex;
   gap: 24px;
   align-items: center;
+  padding: 0 16px;
 
   ${media.tablet} {
     flex-direction: column;
@@ -122,7 +130,7 @@ export const Title = styled.a`
 `;
 
 export const TagWrapper = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 `;
 
 export const Content = styled.p`
@@ -138,6 +146,7 @@ export const Content = styled.p`
   -webkit-line-clamp: 2; /* 라인수 */
   -webkit-box-orient: vertical;
   margin-bottom: 12px;
+  margin-top: 6px;
 `;
 
 export const BottomWrapper = styled.div`
@@ -146,16 +155,19 @@ export const BottomWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   font-size: 0.88rem;
+  flex-wrap: wrap;
 `;
 
-export const CreatedAt = styled.span``;
+export const CreatedAt = styled.span`
+  /* white-space: nowrap; */
+`;
 
 export const ProfileWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  width: 180px;
   justify-content: flex-end;
+  white-space: nowrap;
 `;
 
 export const ProfileImage = styled.div`

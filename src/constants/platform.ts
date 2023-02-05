@@ -1,11 +1,20 @@
+export enum DeviceType {
+  mobile = 'MOBILE',
+  tablet = 'TABLET',
+  laptop = 'LAPTOP',
+  desktop = 'DESKTOP',
+}
+
 export const BREAK_POINT = {
-  MOBILE: 767,
-  TABLET: 1024,
-  DESKTOP: 1439,
+  MOBILE: 576,
+  TABLET: 768,
+  LAPTOP: 992,
+  DESKTOP: 1200,
 } as const;
 
 export const DEVICE_TYPE = {
-  mobile: 'MOBILE',
-  tablet: 'TABLET',
-  desktop: 'DESKTOP',
+  mobile: DeviceType.mobile,
+  tablet: DeviceType.tablet,
+  laptop: DeviceType.laptop,
+  desktop: DeviceType.desktop,
 } as const;

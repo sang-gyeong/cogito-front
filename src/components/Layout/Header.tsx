@@ -1,21 +1,28 @@
-import {useRecoilState, useSetRecoilState} from 'recoil';
-import {navShowState} from '../../atoms/nav';
-import SearchInput from './SearchInput';
+import {useRecoilState} from 'recoil';
+import styled from 'styled-components';
+import {navFoldState} from '../../atoms/nav';
+import SearchInput from '../Common/SearchInput';
 import UserDropdown from './UserDropdown';
 
 export default function Header() {
-  const [isShowNav, setNavShowState] = useRecoilState(navShowState);
+  const [isNavFold, setIsNavFold] = useRecoilState(navFoldState);
+
+  const SideBarToggleButton = () => (
+    <button
+      id="sidebarToggleTop"
+      className="btn btn-link d-md-none rounded-circle mr-3"
+      onClick={() => setIsNavFold(!isNavFold)}>
+      <i className="fa fa-bars" />
+    </button>
+  );
 
   return (
-    <nav className="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
-      <button
-        id="sidebarToggleTop"
-        className="btn btn-link d-md-none rounded-circle mr-3"
-        onClick={() => setNavShowState(!isShowNav)}>
-        <i className="fa fa-bars" />
-      </button>
-      <SearchInput />
+    <Wrapper className="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+      <SideBarToggleButton />
+      <SearchInput className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" />
       <UserDropdown />
-    </nav>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.header``;

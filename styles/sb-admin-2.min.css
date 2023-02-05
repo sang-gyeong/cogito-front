@@ -8953,17 +8953,7 @@ body {
 a:focus {
   outline: 0;
 }
-#wrapper {
-  display: flex;
-}
-#wrapper #content-wrapper {
-  background-color: #f8f9fc;
-  width: 100%;
-  overflow-x: hidden;
-}
-#wrapper #content-wrapper #content {
-  flex: 1 0 auto;
-}
+
 .container,
 .container-fluid,
 .container-lg,
@@ -9383,7 +9373,6 @@ a:focus {
   color: #303d62;
 }
 
-
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
   color: #b7b9cc;
 }
@@ -9411,6 +9400,8 @@ a:focus {
 }
 .sidebar .nav-item.active .nav-link {
   font-weight: 700;
+  color: gold;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .sidebar .nav-item .collapse {
   position: absolute;
@@ -9520,8 +9511,9 @@ a:focus {
 .sidebar .sidebar-heading {
   text-align: center;
   padding: 0 1rem;
-  font-weight: 800;
-  font-size: 0.65rem;
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding-bottom: 0.3rem;
 }
 .sidebar .sidebar-card {
   display: flex;
@@ -10263,3 +10255,9 @@ footer.sticky-footer .copyright {
 .sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/* #page-top {
+  overscroll-behavior-y: none;
+  height: 100%;
+  overflow: hidden;
+} */

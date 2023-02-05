@@ -2,12 +2,11 @@ import {useRouter} from 'next/router';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import styled from 'styled-components';
 
-export default function SearchInput() {
+export default function SearchInput({className = ''}: {className?: string}) {
   const router = useRouter();
   const [query, setQuery] = useState((router.query?.query ?? '') as string);
 
   const handleChange = (event: ChangeEvent) => {
-    console.log((event.target as HTMLInputElement).value);
     setQuery((event.target as HTMLInputElement).value);
   };
 
@@ -26,9 +25,7 @@ export default function SearchInput() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <form onSubmit={handleSubmit} className={className}>
       <div className="input-group">
         <Input
           value={query}

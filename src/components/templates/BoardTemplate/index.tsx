@@ -9,12 +9,10 @@ import {deletePostById, dislikePost, likePost} from '../../../api/post';
 import {modalShowState, modalState} from '../../../atoms/modal';
 import useBoardQuery from '../../../queries/usePostQuery';
 import {getScoreImage} from '../../../utils/score';
-import CommentItem from '../../CommentItem';
 import TagItem from '../../Common/Tag';
 import Image from 'next/image';
 import RBButton from 'react-bootstrap/Button';
 import AutoHeightImage from '../../Common/AutoHeightImage';
-import {QueryClient} from '@tanstack/react-query';
 
 const contentStyle = {
   fontSize: '0.95rem',
@@ -113,20 +111,14 @@ export default function BoardTemplate({id}: {id: number}) {
     if (!value) {
       alert('댓글을 입력해주세요.');
     }
-    const result = await createComment(postId, null, value ?? '');
-
-    if (result) {
-      window.location.reload();
-    }
+    await createComment(postId, null, value ?? '');
+    refetch();
   };
 
   const fetchDeleteComment = async (commentId: number) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
-      const result = await deleteComment(commentId);
-
-      if (result) {
-        window.location.reload();
-      }
+      await deleteComment(commentId);
+      refetch();
     }
   };
 
@@ -142,6 +134,7 @@ export default function BoardTemplate({id}: {id: number}) {
     <Wrapper>
       <div>
         <Title>{title}</Title>
+
         <SubTitleArea>
           <SubText>
             {createdAt ?? '2023-01-26 03:22:49'} | {'3,203 viewed'}
@@ -277,7 +270,11 @@ export default function BoardTemplate({id}: {id: number}) {
   );
 }
 
-const FilesWrapper = styled.div``;
+const FilesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 const EmptyView = styled.div`
   border: 1px solid lightslategray;

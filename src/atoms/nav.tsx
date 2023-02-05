@@ -1,6 +1,6 @@
 import {atom} from 'recoil';
 
-export const navShowState = atom({
-  key: 'navShowState',
+export const navFoldState = atom({
+  key: 'navFoldState',
   default: false,
 });

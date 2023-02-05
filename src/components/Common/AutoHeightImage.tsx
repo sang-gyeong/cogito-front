@@ -1,6 +1,5 @@
-import React, {memo} from 'react';
+import React from 'react';
 import Image, {ImageProps} from 'next/image';
-import equal from 'fast-deep-equal';
 import styled from 'styled-components';
 
 export default function AutoHeightImage({...props}: ImageProps): React.ReactElement {
@@ -13,6 +12,7 @@ export default function AutoHeightImage({...props}: ImageProps): React.ReactElem
 
 export const AutoHeightImageWrapper = styled.div`
   width: 100%;
+
   & > span {
     position: unset !important;
     & .autoImage {

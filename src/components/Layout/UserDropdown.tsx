@@ -1,17 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {useState} from 'react';
-import {useRecoilValue} from 'recoil';
-import {userState} from '../../atoms/user';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
 import {logout} from '../../api/auth';
 import cookies from 'react-cookies';
+import SearchInput from '../Common/SearchInput';
+import useUserQuery from '../../queries/useUserQuery';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const userData = useRecoilValue(userState);
-  const isLoggedIn = !!userData?.nickname;
+  const {data: user} = useUserQuery();
+  const isLoggedIn = !!user?.nickname;
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
@@ -51,22 +51,7 @@ export default function UserDropdown() {
           <div
             className={`dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in ${isSearchOpen ? 'show' : ''}`}
             aria-labelledby="searchDropdown">
-            <form className="form-inline mr-auto w-100 navbar-search">
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control bg-light border-0 small"
-                  placeholder="Search for..."
-                  aria-label="Search"
-                  aria-describedby="basic-addon2"
-                />
-                <div className="input-group-append">
-                  <button className="btn btn-primary" type="button">
-                    <i className="fas fa-search fa-sm" />
-                  </button>
-                </div>
-              </div>
-            </form>
+            <SearchInput className="form-inline mr-auto w-100 navbar-search" />
           </div>
         </li>
 
@@ -137,7 +122,7 @@ export default function UserDropdown() {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded={isOpen}>
-                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{userData.nickname}</span>
+                <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user.nickname}</span>
                 <Image
                   className="img-profile rounded-circle"
                   src={profileDefaultImage}

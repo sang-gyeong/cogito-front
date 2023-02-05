@@ -1,4 +1,4 @@
-import {axiosInstanceForCSR} from './index';
+import {axiosInstanceForCSR, axiosInstanceForSSR} from './index';
 
 interface Body {
   nickname: string;
@@ -22,7 +22,7 @@ export const modifyUserData = (userId: number, body: Body): Promise<User> =>
   axiosInstanceForCSR.patch<User>(`/users/${userId}`, body).then(response => response?.data);
 
 // 유저 순위 조회
-export const getUsers = (page: number, size: number, query: string): Promise<{users: User[]; total: number}> =>
-  axiosInstanceForCSR
+export const getUsers = (query: string, page: number, size: number): Promise<{users: User[]; total: number}> =>
+  axiosInstanceForSSR
     .get<{users: User[]; total: number}>(`/users`, {params: {query, page, size}})
     .then(response => response?.data);
