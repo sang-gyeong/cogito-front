@@ -15,18 +15,21 @@ export default function UsersTemplate() {
   const [radioValue, setRadioValue] = useState('1');
   const [query, setQuery] = useState((router.query?.query ?? '') as string);
   const [page, setPage] = useState(router.query?.page ? Number(router.query?.page) : 0);
+  const [size, setSize] = useState(router.query?.size ? Number(router.query?.size) : 15);
 
   const radios = [{name: '랭킹순', value: '1'}];
 
   useEffect(() => {
     const _query = (router.query?.query ?? '') as string;
     const _page = router.query?.page ? Number(router.query?.page) : 0;
+    const _size = router.query?.size ? Number(router.query?.page) : 15;
 
     setQuery(_query);
     setPage(_page);
+    setSize(_size);
   }, [router.query]);
 
-  const {data, isLoading} = useUsersQuery({query, page});
+  const {data, isLoading} = useUsersQuery({query, page, size});
 
   if (isLoading || !data) {
     return <>Loading...</>;
