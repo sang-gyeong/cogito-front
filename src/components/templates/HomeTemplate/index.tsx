@@ -6,23 +6,26 @@ import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 
 const CONTENTS_COUNT_PER_PAGE = 1;
-const MAX_COUNT_PER_PAGINATION = 5;
+const MAX_COUNT_PER_PAGINATION = 15;
 
 export default function HomeTemplate() {
   const router = useRouter();
 
   const [query, setQuery] = useState((router.query?.query ?? '') as string);
   const [page, setPage] = useState(router.query?.page ? Number(router.query?.page) : 0);
+  const [size, setSize] = useState(router.query?.size ? Number(router.query?.size) : MAX_COUNT_PER_PAGINATION);
 
   useEffect(() => {
     const _query = (router.query?.query ?? '') as string;
     const _page = router.query?.page ? Number(router.query?.page) : 0;
+    const _size = router.query?.size ? Number(router.query?.size) : MAX_COUNT_PER_PAGINATION;
 
     setQuery(_query);
     setPage(_page);
+    setSize(_size);
   }, [router.query]);
 
-  const {data, isLoading} = usePostsQuery({query, page});
+  const {data, isLoading} = usePostsQuery({query, page, size});
   const [radioValue, setRadioValue] = useState('1');
 
   const radios = [{name: '최신순', value: '1'}];

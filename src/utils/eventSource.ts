@@ -1,4 +1,4 @@
-export const eventSource = new EventSource('//localhost:8000/sse', {
+export const eventSource = new EventSource('//dev.cogito.shop/api/notifications/subscribe', {
   withCredentials: true,
 });
 

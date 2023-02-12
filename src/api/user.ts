@@ -22,7 +22,15 @@ export const modifyUserData = (userId: number, body: Body): Promise<User> =>
   axiosInstanceForCSR.patch<User>(`/users/${userId}`, body).then(response => response?.data);
 
 // 유저 순위 조회
-export const getUsers = ({query, page}: {query: string; page: number}): Promise<{users: User[]; total: number}> =>
+export const getUsers = ({
+  query,
+  page,
+  size,
+}: {
+  query: string;
+  page: number;
+  size: number;
+}): Promise<{users: User[]; total: number}> =>
   axiosInstanceForSSR
-    .get<{users: User[]; total: number}>(`/users`, {params: {query, page}})
+    .get<{users: User[]; total: number}>(`/users`, {params: {query, page, size}})
     .then(response => response?.data);

@@ -7,20 +7,16 @@ import Image from 'next/image';
 import {getScoreImage} from '../../../utils/score';
 import Link from 'next/link';
 import SearchInput from '../../Common/SearchInput';
+import {media} from '../../../utils/mediaQuery';
 
 export default function UsersTemplate() {
   const router = useRouter();
 
   const [radioValue, setRadioValue] = useState('1');
-  const radios = [{name: '랭킹순', value: '1'}];
   const [query, setQuery] = useState((router.query?.query ?? '') as string);
   const [page, setPage] = useState(router.query?.page ? Number(router.query?.page) : 0);
 
-  // introduce: null;
-  // nickname: '이상경_summer';
-  // profileImgUrl: null;
-  // score: 35;
-  // userId: 27;
+  const radios = [{name: '랭킹순', value: '1'}];
 
   useEffect(() => {
     const _query = (router.query?.query ?? '') as string;
@@ -122,11 +118,24 @@ const Wrapper = styled.div`
 `;
 
 const UserListWrapper = styled.div`
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
-  width: 100%;
-  gap: 20px;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+
   padding: 20px;
+
+  ${media.laptop} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  ${media.tablet} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  ${media.mobile} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const FilterButton = styled.input``;

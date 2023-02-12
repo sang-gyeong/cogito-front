@@ -44,6 +44,7 @@ const Wrapper = styled.div`
 
 const Button = styled.div`
   width: 400px;
+  max-width: 80%;
   height: 55px;
   border-radius: 4px;
   display: flex;

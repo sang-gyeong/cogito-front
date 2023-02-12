@@ -23,16 +23,16 @@ export default function UserDropdown() {
 
   const requestLogout = async () => {
     await logout();
-  };
-
-  const onClickLogout = () => {
-    requestLogout();
 
     // @TODO: 서버측에서 정의해준 토큰명으로 변경
     cookies.remove('refreshToken');
     localStorage.removeItem('accessToken');
 
     window.location.reload();
+  };
+
+  const onClickLogout = () => {
+    requestLogout();
   };
 
   const onClickLogin = (e: MouseEvent) => {

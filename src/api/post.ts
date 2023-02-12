@@ -7,8 +7,16 @@ interface Body {
   tags: string[];
 }
 
-export const getPosts = ({query, page}: {query: string; page: number}): Promise<Post.ListItemResponse> => {
-  return axiosInstanceForSSR.get<Post.ListItemResponse>(`/posts`, {params: {query, page}}).then(response => {
+export const getPosts = ({
+  query,
+  page,
+  size,
+}: {
+  query: string;
+  page: number;
+  size: number;
+}): Promise<Post.ListItemResponse> => {
+  return axiosInstanceForSSR.get<Post.ListItemResponse>(`/posts`, {params: {query, page, size}}).then(response => {
     return response?.data;
   });
 };

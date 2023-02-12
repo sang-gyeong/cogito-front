@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {ReactNode, useEffect} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import * as S from './style';
 // utils, atoms, hooks
@@ -20,6 +20,30 @@ export default function Layout({children, hasSide}: {children?: ReactNode; hasSi
   const onClickDimmed = () => {
     setIsNavFold(true);
   };
+
+  useEffect(() => {
+    const eventSource = new EventSource('https://dev.cogito.shop/api/notifications/subscribe', {
+      withCredentials: true,
+    });
+
+    if (typeof EventSource !== 'undefined') {
+      // connection 되면
+      eventSource.onopen = event => {
+        console.log('connection is Open : ', event);
+      };
+
+      eventSource.onmessage = event => {
+        console.log('New Message : ', event.data);
+      };
+
+      // error 나면
+      eventSource.onerror = event => {
+        console.log('Error : ', event);
+      };
+    } else {
+      alert('EventSource 객체를 지원하지 않는 브라우저 입니다.');
+    }
+  }, []);
 
   return (
     <>
