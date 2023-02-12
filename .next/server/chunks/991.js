@@ -140,7 +140,7 @@ const LogoTitle = styled_components__WEBPACK_IMPORTED_MODULE_1___default().div.w
 const LogoSup = styled_components__WEBPACK_IMPORTED_MODULE_1___default().p.withConfig({
   displayName: "Logo__LogoSup",
   componentId: "sc-zsbb1g-4"
-})(["font-size:0.02rem;padding:0;margin:0;"]);
+})(["font-size:0.5rem;padding:0;margin:0;"]);
 
 /***/ }),
 
