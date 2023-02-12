@@ -12,6 +12,9 @@ import Header from './Header';
 import styled from 'styled-components';
 import {media} from '../../utils/mediaQuery';
 
+import {EventSourcePolyfill} from 'event-source-polyfill';
+import {getLocalStorageItem} from '../../utils/storage';
+
 export default function Layout({children, hasSide}: {children?: ReactNode; hasSide: boolean}) {
   useMyQuery();
 
@@ -22,8 +25,14 @@ export default function Layout({children, hasSide}: {children?: ReactNode; hasSi
   };
 
   useEffect(() => {
-    const eventSource = new EventSource('https://dev.cogito.shop/api/notifications/subscribe', {
+    const accessToken = getLocalStorageItem('accessToken', '');
+
+    const eventSource = new EventSourcePolyfill('https://dev.cogito.shop/api/notifications/subscribe', {
       withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-type': 'text/event-stream',
+      },
     });
 
     if (typeof EventSource !== 'undefined') {
