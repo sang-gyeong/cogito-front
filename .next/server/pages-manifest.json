@@ -1,15 +1,16 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
+  "/auth/[host]": "pages/auth/[host].html",
+  "/error/[code]": "pages/error/[code].html",
   "/_document": "pages/_document.js",
-  "/error/[code]": "pages/error/[code].js",
-  "/auth/[host]": "pages/auth/[host].js",
-  "/new": "pages/new.js",
-  "/my": "pages/my.js",
-  "/": "pages/index.js",
+  "/new": "pages/new.html",
+  "/my": "pages/my.html",
+  "/login": "pages/login.js",
   "/questions": "pages/questions.js",
   "/questions/[id]": "pages/questions/[id].js",
   "/user/[id]": "pages/user/[id].js",
   "/users": "pages/users.js",
-  "/login": "pages/login.js"
+  "/": "pages/index.js",
+  "/404": "pages/404.html"
 }
