@@ -74,14 +74,11 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
             async></script>
           {/* <script
-            src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
+            type="text/javascript"
+            src="https://raw.githubusercontent.com/Yaffle/EventSource/master/src/eventsource.js"
             crossOrigin="anonymous"
             async></script> */}
-
-          {/* <script src="vendor/jquery/jquery.min.js" async></script> */}
-          {/* <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" async></script>
-
-          <script src="vendor/jquery-easing/jquery.easing.min.js" async></script> */}
+          <script type="text/javascript" src="/scripts/eventsource.js" async></script>
         </body>
       </Html>
     );

@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import {media} from '../../utils/mediaQuery';
 
 import {EventSourcePolyfill} from 'event-source-polyfill';
+
 import {getLocalStorageItem} from '../../utils/storage';
 
 export default function Layout({children, hasSide}: {children?: ReactNode; hasSide: boolean}) {
@@ -35,23 +36,31 @@ export default function Layout({children, hasSide}: {children?: ReactNode; hasSi
       },
     });
 
-    if (typeof EventSource !== 'undefined') {
-      // connection 되면
-      eventSource.onopen = event => {
-        console.log('connection is Open : ', event);
-      };
+    eventSource.addEventListener('open', () => {
+      console.log(' open !!');
+    });
+    eventSource.addEventListener('sse', (event: any) => {
+      console.log('message!', event);
+      console.log('message2!', event.data);
 
-      eventSource.onmessage = event => {
-        console.log('New Message : ', event.data);
-      };
+      const data = JSON.stringify(event.data);
+      console.log('data : ', data);
+    });
+    // eventSource.addEventListener('error', err => {
+    //   console.log('error : ', err);
+    // });
 
-      // error 나면
-      eventSource.onerror = event => {
-        console.log('Error : ', event);
-      };
-    } else {
-      alert('EventSource 객체를 지원하지 않는 브라우저 입니다.');
-    }
+    eventSource.onopen = () => {
+      console.log('open!');
+    };
+    eventSource.onmessage = message => {
+      console.log('message!', message.data);
+
+      const data = JSON.stringify(message.data);
+      console.log('data : ', data);
+    };
+
+    setTimeout(() => console.log(eventSource), 5000);
   }, []);
 
   return (

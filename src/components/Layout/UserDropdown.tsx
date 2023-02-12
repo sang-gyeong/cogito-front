@@ -9,10 +9,12 @@ import useMyQuery from '../../queries/useMyQuery';
 import LoginModal from '../Modal/loginModal';
 import {useSetRecoilState} from 'recoil';
 import {modalState} from '../../atoms/modal';
+import styled from 'styled-components';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isShowLog, setIsShowLog] = useState<boolean>(false);
   const {data: user} = useMyQuery();
   const isLoggedIn = !!user?.nickname;
   const setModalState = useSetRecoilState(modalState);
@@ -47,6 +49,10 @@ export default function UserDropdown() {
     });
   };
 
+  const onClickShowAlerts = () => {
+    setIsShowLog(!isShowLog);
+  };
+
   return (
     <>
       <ul className="navbar-nav ml-auto">
@@ -77,11 +83,57 @@ export default function UserDropdown() {
                 className="nav-link dropdown-toggle"
                 id="alertsDropdown"
                 role="button"
+                onClick={onClickShowAlerts}
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false">
-                <i className="fas fa-bell fa-fw" />
+                <Bell className="fas fa-bell fa-fw">
+                  <Dot />
+                </Bell>
               </a>
+              <div
+                className={`dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in ${
+                  isShowLog ? 'show' : ''
+                }`}
+                aria-labelledby="alertsDropdown">
+                <h6 className="dropdown-header">Alerts Center</h6>
+                <a className="dropdown-item d-flex align-items-center" href="#">
+                  <div className="mr-3">
+                    <div className="icon-circle bg-primary">
+                      <i className="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small text-gray-500">December 12, 2019</div>
+                    <span className="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a className="dropdown-item d-flex align-items-center" href="#">
+                  <div className="mr-3">
+                    <div className="icon-circle bg-success">
+                      <i className="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a className="dropdown-item d-flex align-items-center" href="#">
+                  <div className="mr-3">
+                    <div className="icon-circle bg-warning">
+                      <i className="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: Weve noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a className="dropdown-item text-center small text-gray-500" href="#">
+                  Show All Alerts
+                </a>
+              </div>
 
               <div
                 className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -171,3 +223,18 @@ export default function UserDropdown() {
     </>
   );
 }
+
+const Bell = styled.i`
+  position: relative;
+`;
+
+const Dot = styled.div`
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: tomato;
+  top: 0;
+  right: 0;
+`;

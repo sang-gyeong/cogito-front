@@ -6,7 +6,6 @@ import cookies from 'react-cookies';
 
 const axiosInstanceForCSR = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
-  timeout: 3000,
   withCredentials: true,
   headers: {},
 });
@@ -61,7 +60,6 @@ axiosInstanceForCSR.interceptors.response.use(
 
 const axiosInstanceForSSR = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
-  timeout: 3000,
   withCredentials: true,
   headers: {
     'Content-type': 'application/json',

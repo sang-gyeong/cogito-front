@@ -7,6 +7,9 @@ const nextConfig = {
   },
   reactStrictMode: false,
   swcMinify: true,
+  httpAgentOptions: {
+    keepAlive: true,
+  },
   env: {
     BASE_URL: process.env.BASE_URL,
   },
