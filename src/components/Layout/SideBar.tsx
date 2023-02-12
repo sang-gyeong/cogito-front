@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {Button} from 'react-bootstrap';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 import {navFoldState} from '../../atoms/nav';
 import styled from 'styled-components';
-import useUserQuery, {QUERY_KEY} from '../../queries/useUserQuery';
+import useMyQuery, {QUERY_KEY} from '../../queries/useMyQuery';
 import {MouseEvent, useEffect} from 'react';
 import {MdQuestionAnswer} from 'react-icons/md';
 import {FcAbout} from 'react-icons/fc';
@@ -12,14 +12,16 @@ import {BsFillPeopleFill} from 'react-icons/bs';
 import {useGetDevice} from '../../hooks/useGetDevice';
 import {DeviceType, DEVICE_TYPE} from '../../constants/platform';
 import {media} from '../../utils/mediaQuery';
+import LoginModal from '../Modal/loginModal';
+import {modalState} from '../../atoms/modal';
+import Logo from '../Common/Logo';
 
 export default function SideBar() {
   const router = useRouter();
   const [isNavFold, setIsNavFold] = useRecoilState<boolean>(navFoldState);
-  const {refetch} = useUserQuery();
+  const {refetch} = useMyQuery();
   const deviceType = useGetDevice();
-
-  const isMini = deviceType === DEVICE_TYPE.mobile || deviceType === DEVICE_TYPE.tablet;
+  const setModalState = useSetRecoilState(modalState);
 
   const validateUserState = async () => {
     const {data: user} = await refetch({queryKey: [QUERY_KEY]});
@@ -30,6 +32,14 @@ export default function SideBar() {
       router.push('/new');
     } else {
       window.alert('로그인이 필요합니다');
+
+      setModalState({
+        isShow: true,
+        component: <LoginModal />,
+        title: '로그인',
+        closeCallBack: () => console.log('tada!!'),
+        config: {size: 'lg', closeButton: true, centered: false},
+      });
     }
   };
 
@@ -39,8 +49,6 @@ export default function SideBar() {
     validateUserState();
   };
 
-  const onClickFoldButton = () => setIsNavFold(!isNavFold);
-
   const alertHandler = (event: MouseEvent) => {
     event.preventDefault();
 
@@ -48,29 +56,22 @@ export default function SideBar() {
   };
 
   useEffect(() => {
-    if (deviceType === DeviceType.desktop) {
+    if (deviceType === DeviceType.desktop || deviceType === DeviceType.laptop) {
       setIsNavFold(false);
+    } else {
+      setIsNavFold(true);
     }
-  }, [deviceType]);
+  }, [deviceType, router.asPath]);
 
   return (
     <Wrapper
       className={`navbar-nav bg-gradient-primary sidebar sidebar-dark accordion ${isNavFold ? 'toggled' : ''}`}
-      id="accordionSidebar">
+      id="accordionSidebar"
+      isNavFold={isNavFold}>
       {/* 로고 */}
-      <Link href="/" passHref>
-        <a className="sidebar-brand d-flex align-items-center justify-content-center">
-          <div className="sidebar-brand-icon rotate-n-15">
-            <LogoIcon>🔥</LogoIcon>
-          </div>
-          {!isNavFold && !isMini && (
-            <LogoTitle>
-              COGITO <LogoSup>0.1v</LogoSup>
-            </LogoTitle>
-          )}
-        </a>
-      </Link>
-
+      <LogoWrapper>
+        <Logo isHeader={false} />
+      </LogoWrapper>
       {/* 질문하기 버튼 */}
       <hr className="sidebar-divider my-0" />
       <ButtonWrapper>
@@ -94,8 +95,8 @@ export default function SideBar() {
       </li>
 
       <li className={`nav-item ${router.pathname === '/users' ? 'active' : ''}`}>
-        <Link href="#">
-          <Tab className="nav-link" href="#" onClick={alertHandler}>
+        <Link href="/users" passHref>
+          <Tab className="nav-link">
             <IconWrapper isNavFold={isNavFold}>
               <BsFillPeopleFill />
             </IconWrapper>
@@ -104,44 +105,53 @@ export default function SideBar() {
         </Link>
       </li>
 
-      <hr className="sidebar-divider" />
+      <hr className="sidebar-divider" style={{margin: '1rem'}} />
       <div className="sidebar-heading">기타기능</div>
       <li className="nav-item">
         <Tab className="nav-link" href="#" onClick={alertHandler}>
           <IconWrapper isNavFold={isNavFold}>
             <FcAbout />
           </IconWrapper>
-          <TabLabel>기타 기능</TabLabel>
+          <TabLabel>코기토에 문의하기 (준비중)</TabLabel>
         </Tab>
       </li>
 
-      {/* 접기 버튼 */}
-      <hr className="sidebar-divider d-none d-md-block" />
-      <div className="text-center d-none d-md-inline">
-        <button className="rounded-circle border-0" id="sidebarToggle" onClick={onClickFoldButton} />
-      </div>
+      {/* <FoldButtonWrapper className="text-center d-md-inline">
+        <FoldButton className="rounded-circle" id="sidebarToggle" onClick={onClickFoldButton} />
+      </FoldButtonWrapper> */}
     </Wrapper>
   );
 }
 
-const IconWrapper = styled.div<{isNavFold: boolean}>`
-  font-size: ${({isNavFold}) => (isNavFold ? '1.3rem' : '1rem')};
-  display: inline-block;
-  padding-right: ${({isNavFold}) => (isNavFold ? '0' : '8px')};
-
-  ${media.tablet} {
-    font-size: 1.3rem;
-    padding-right: 0;
-  }
+const LogoWrapper = styled.div`
+  padding-left: 16px;
 `;
 
-const Wrapper = styled.ul``;
+const IconWrapper = styled.div<{isNavFold: boolean}>`
+  font-size: 1rem;
+  display: inline-block;
+  padding-right: 8px;
+`;
+
+const Wrapper = styled.ul<{isNavFold: boolean}>`
+  position: relative;
+  height: 100%;
+  z-index: 1000;
+  box-shadow: none;
+
+  ${media.tablet} {
+    position: absolute;
+    box-shadow: ${({isNavFold}) => (isNavFold ? 'none' : '1rem 0 1rem rgba(0, 0, 0, 0.07)')};
+  }
+`;
 
 const ButtonWrapper = styled.div`
   height: 116px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #303d62;
+  background-image: linear-gradient(90deg, #303d62 10%, #517495 100%);
 
   & > a {
     background-color: white;
@@ -164,6 +174,7 @@ const TabLabel = styled.span`
 const Tab = styled.a`
   display: flex;
   flex-direction: row;
+  color: #303d62;
 
   & > span {
     position: relative;
@@ -176,19 +187,4 @@ const Tab = styled.a`
       left: 0;
     }
   }
-`;
-
-const LogoIcon = styled.span`
-  font-size: 1.8rem;
-`;
-
-const LogoTitle = styled.div`
-  margin-left: 0.5rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-`;
-
-const LogoSup = styled.sup`
-  font-weight: 400;
-  font-size: 0.01rem;
 `;

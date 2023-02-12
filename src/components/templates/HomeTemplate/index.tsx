@@ -60,7 +60,7 @@ export default function HomeTemplate() {
       <div>
         {/* @TODO: key는 유니크한 id값으로 대체 */}
         <BoardListWrapper>
-          {posts.length ? (
+          {posts && posts.length ? (
             posts.map((post, idx) => <PostListItem key={idx} post={post} query={query} />)
           ) : (
             <EmptyResult>

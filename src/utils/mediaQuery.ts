@@ -6,6 +6,7 @@ export const mediaQuery = (maxWidth: number) => `
 
 export const media = {
   tablet: mediaQuery(BREAK_POINT.TABLET),
+  laptop: mediaQuery(BREAK_POINT.LAPTOP),
   mobile: mediaQuery(BREAK_POINT.MOBILE),
   desktop: mediaQuery(BREAK_POINT.DESKTOP),
 };

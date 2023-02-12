@@ -32,6 +32,12 @@ export default function BoardTemplate({id}: {id: number}) {
     });
   };
 
+  const onClickReport = () => {
+    if (window.confirm('신고하시겠습니까?')) {
+      // 신고하기
+    }
+  };
+
   const clickHandler = async (isLike: boolean) => {
     if (isMe) {
       window.alert(`자기 자신의 글에는 ${isLike ? '추천' : '비추천'}할 수 없습니다`);
@@ -83,7 +89,7 @@ export default function BoardTemplate({id}: {id: number}) {
                 <Button onClick={onClickDeletePost}>삭제</Button>
               </>
             ) : (
-              <Button onClick={handleModal}>신고</Button>
+              <Button onClick={onClickReport}>신고</Button>
             )}
           </ButtonWrapper>
         </SubTitleArea>

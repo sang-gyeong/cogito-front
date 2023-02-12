@@ -1,3 +1,15 @@
+html,
+body,
+#__next,
+#wrapper {
+  height: 100%;
+  background-color: #f8f9fc;
+}
+
+#content {
+  position: relative;
+}
+
 #navbar * {
   font-size: 1.5rem;
 }

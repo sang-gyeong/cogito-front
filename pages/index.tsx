@@ -7,7 +7,7 @@ export default function HomePage() {
 }
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <Layout hasSide={true}>{page}</Layout>;
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {

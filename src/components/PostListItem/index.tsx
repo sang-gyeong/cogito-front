@@ -12,8 +12,8 @@ export default function PostListItem({post, query}: {post: Post.ListItem; query:
   const {postId, title, content, likeCnt, tags, nickname, profileImgUrl, score, commentCnt, createdAt} = post;
 
   const statusList = [
-    {label: <AiOutlineComment />, value: commentCnt},
     {label: <AiOutlineLike />, value: likeCnt},
+    {label: <AiOutlineComment />, value: commentCnt},
   ];
 
   return (

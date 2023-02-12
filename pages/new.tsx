@@ -7,5 +7,5 @@ export default function NewPage() {
 }
 
 NewPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <Layout hasSide={false}>{page}</Layout>;
 };

@@ -14,16 +14,11 @@ const Wrapper = styled.div`
   background-color: #eef1f7;
   min-height: 100vh;
   width: 350px;
-  min-width: 350px;
+  min-width: 30%;
   padding: 100px 0;
   text-align: center;
 
-  ${media.tablet} {
-    width: 270px;
-    min-width: 270px;
-  }
-
-  ${media.mobile} {
+  ${media.laptop} {
     display: none;
   }
 `;

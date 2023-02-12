@@ -1,28 +1,44 @@
-import {useRecoilState} from 'recoil';
 import styled from 'styled-components';
-import {navFoldState} from '../../atoms/nav';
+import SideBarToggleButton from '../Common/SideBarToggleButton';
 import SearchInput from '../Common/SearchInput';
 import UserDropdown from './UserDropdown';
+import {media} from '../../utils/mediaQuery';
+import Logo from '../Common/Logo';
 
 export default function Header() {
-  const [isNavFold, setIsNavFold] = useRecoilState(navFoldState);
-
-  const SideBarToggleButton = () => (
-    <button
-      id="sidebarToggleTop"
-      className="btn btn-link d-md-none rounded-circle mr-3"
-      onClick={() => setIsNavFold(!isNavFold)}>
-      <i className="fa fa-bars" />
-    </button>
-  );
-
   return (
     <Wrapper className="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
       <SideBarToggleButton />
+      <LogoWrapper>
+        <Logo isHeader={true} />
+      </LogoWrapper>
       <SearchInput className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" />
       <UserDropdown />
     </Wrapper>
   );
 }
 
-const Wrapper = styled.header``;
+const LogoWrapper = styled.div`
+  display: none;
+
+  ${media.tablet} {
+    display: block;
+  }
+`;
+
+const Wrapper = styled.header`
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; */
+  padding-right: 4rem;
+  z-index: 900;
+
+  ${media.laptop} {
+    padding-right: 2.5rem;
+  }
+
+  ${media.tablet} {
+    padding-right: 2rem;
+  }
+`;

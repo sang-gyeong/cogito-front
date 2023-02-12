@@ -1,17 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
 import {logout} from '../../api/auth';
 import cookies from 'react-cookies';
 import SearchInput from '../Common/SearchInput';
-import useUserQuery from '../../queries/useUserQuery';
+import useMyQuery from '../../queries/useMyQuery';
+import LoginModal from '../Modal/loginModal';
+import {useSetRecoilState} from 'recoil';
+import {modalState} from '../../atoms/modal';
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const {data: user} = useUserQuery();
+  const {data: user} = useMyQuery();
   const isLoggedIn = !!user?.nickname;
+  const setModalState = useSetRecoilState(modalState);
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
@@ -29,6 +33,18 @@ export default function UserDropdown() {
     localStorage.removeItem('accessToken');
 
     window.location.reload();
+  };
+
+  const onClickLogin = (e: MouseEvent) => {
+    e.preventDefault();
+
+    setModalState({
+      isShow: true,
+      component: <LoginModal />,
+      title: '로그인',
+      closeCallBack: () => console.log('tada!!'),
+      config: {size: 'lg', closeButton: true, centered: false},
+    });
   };
 
   return (
@@ -146,9 +162,9 @@ export default function UserDropdown() {
           </>
         ) : (
           <li className="nav-item">
-            <Link href="/login">
-              <a className="nav-link dark">로그인</a>
-            </Link>
+            <a href="#" className="nav-link dark" onClick={onClickLogin}>
+              로그인
+            </a>
           </li>
         )}
       </ul>

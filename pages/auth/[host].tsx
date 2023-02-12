@@ -15,7 +15,7 @@ export default function AuthPage() {
 
     if (!data) {
       window.alert('로그인에 실패하였습니다.\n잠시 후에 다시 시도해주세요');
-      router.replace('/login');
+      router.replace('/');
 
       return;
     }

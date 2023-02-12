@@ -28,5 +28,5 @@ export const getServerSideProps: GetServerSideProps = async context => {
 };
 
 DetailPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <Layout hasSide={true}>{page}</Layout>;
 };

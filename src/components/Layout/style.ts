@@ -4,12 +4,15 @@ import {media} from '../../utils/mediaQuery';
 // layout
 export const Wrapper = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 export const ContentWrapper = styled.div`
   background-color: #f8f9fc;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
+  height: 100%;
 `;
 
 export const Content = styled.div`
@@ -22,8 +25,12 @@ export const MainWrapper = styled.div`
 
 export const Main = styled.div`
   width: 70%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
+
+  ${media.laptop} {
+    width: 90%;
+  }
 
   ${media.tablet} {
     width: 100%;

@@ -15,14 +15,14 @@ export const getMyData = (): Promise<User> => {
 
 // 유저 프로필 조회
 export const getUserDataById = (userId: number): Promise<User> =>
-  axiosInstanceForCSR.get<User>(`/users/${userId}`).then(response => response?.data);
+  axiosInstanceForSSR.get<User>(`/users/${userId}`).then(response => response?.data);
 
 // 유저 프로필 수정
 export const modifyUserData = (userId: number, body: Body): Promise<User> =>
   axiosInstanceForCSR.patch<User>(`/users/${userId}`, body).then(response => response?.data);
 
 // 유저 순위 조회
-export const getUsers = (query: string, page: number, size: number): Promise<{users: User[]; total: number}> =>
+export const getUsers = ({query, page}: {query: string; page: number}): Promise<{users: User[]; total: number}> =>
   axiosInstanceForSSR
-    .get<{users: User[]; total: number}>(`/users`, {params: {query, page, size}})
+    .get<{users: User[]; total: number}>(`/users`, {params: {query, page}})
     .then(response => response?.data);

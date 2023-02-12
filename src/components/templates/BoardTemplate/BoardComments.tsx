@@ -46,6 +46,12 @@ export default function BoardComments({
     });
   };
 
+  const onClickReport = () => {
+    if (window.confirm('신고하시겠습니까?')) {
+      // 신고하기
+    }
+  };
+
   const commentScoreHandler = (isLike: boolean, comment: Comment) => {
     const {isMe, commentId} = comment;
 
@@ -100,7 +106,7 @@ export default function BoardComments({
                         <Button onClick={() => onClickDeleteComment(comment.commentId)}>삭제</Button>
                       </>
                     ) : (
-                      <Button onClick={handleModal}>신고</Button>
+                      <Button onClick={onClickReport}>신고</Button>
                     )}
                   </ButtonWrapper>
                 </CommentButtonWrapper>

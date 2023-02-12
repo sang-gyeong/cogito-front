@@ -30,7 +30,7 @@ export default function LoginPage() {
   );
 }
 LoginPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <Layout hasSide={false}>{page}</Layout>;
 };
 
 const Wrapper = styled.div`

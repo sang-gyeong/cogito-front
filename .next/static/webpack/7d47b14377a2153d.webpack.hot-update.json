@@ -1,0 +1,1 @@
+{"c":["pages/questions","pages/users","webpack"],"r":["pages/users"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2FUsers%2Fkakaocommerce%2Fproject%2Fcogito-front%2Fpages%2Fusers.tsx&page=%2Fusers!","./pages/users.tsx","./src/components/templates/UsersTemplate/index.tsx","./src/queries/useUsersQuery.ts"]}
