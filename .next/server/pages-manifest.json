@@ -2,5 +2,14 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/questions": "pages/questions.js"
+  "/error/[code]": "pages/error/[code].js",
+  "/auth/[host]": "pages/auth/[host].js",
+  "/new": "pages/new.js",
+  "/my": "pages/my.js",
+  "/": "pages/index.js",
+  "/questions": "pages/questions.js",
+  "/questions/[id]": "pages/questions/[id].js",
+  "/user/[id]": "pages/user/[id].js",
+  "/users": "pages/users.js",
+  "/login": "pages/login.js"
 }
