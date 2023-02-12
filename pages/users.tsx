@@ -21,9 +21,10 @@ UsersPage.getLayout = function getLayout(page: ReactElement) {
 export const getServerSideProps: GetServerSideProps = async context => {
   const query = (context.query?.query ?? '') as string;
   const page = context.query?.page ? Number(context.query?.page) : 0;
+  const size = context.query?.page ? Number(context.query?.size) : 15;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery([QUERY_KEY, query, page], () => getUsers({query, page}));
+  await queryClient.prefetchQuery([QUERY_KEY, query, page, size], () => getUsers({query, page, size}));
 
   return {
     props: {
