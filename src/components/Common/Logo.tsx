@@ -47,7 +47,7 @@ const LogoTitle = styled.div`
 `;
 
 const LogoSup = styled.p`
-  font-size: 0.02rem;
+  font-size: 0.5rem;
   padding: 0;
   margin: 0;
 `;
