@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
+import {MouseEvent, useEffect, useState} from 'react';
 import profileDefaultImage from 'public/img/undraw_profile.svg';
 import {logout} from '../../api/auth';
 import cookies from 'react-cookies';
