@@ -2,7 +2,14 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/auth/[host]": "pages/auth/[host].html",
+  "/error/[code]": "pages/error/[code].html",
+  "/new": "pages/new.html",
+  "/questions": "pages/questions.js",
+  "/user/[id]": "pages/user/[id].js",
   "/": "pages/index.js",
+  "/users": "pages/users.js",
   "/questions/[id]": "pages/questions/[id].js",
-  "/questions": "pages/questions.js"
+  "/login": "pages/login.js",
+  "/404": "pages/404.html"
 }
